@@ -38,7 +38,35 @@
     <!-- Swiper.js CSS (via CDN) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- Compiled Tailwind CSS (Standalone CLI output) -->
+    <!-- Tailwind CSS (CDN Runtime Engine with Custom Theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0A0A0A",
+                        secondary: "#111111",
+                        accent: "#B08D57",
+                        "accent-dark": "#967543",
+                        "neutral-body": "#6B7280",
+                        "neutral-bg": "#F8F9FA",
+                        "neutral-dark": "#0A0A0A",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+                        display: ["Inter", "sans-serif"],
+                    },
+                    letterSpacing: {
+                        widest2: "0.25em",
+                        widest3: "0.35em",
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom & Animation CSS Rules -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ file_exists(public_path('css/app.css')) ? filemtime(public_path('css/app.css')) : time() }}">
 
     <!-- Alpine.js (via CDN) -->

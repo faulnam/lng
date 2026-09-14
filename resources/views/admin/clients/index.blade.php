@@ -47,7 +47,7 @@
                             <td class="py-3 px-4 w-28">
                                 <div class="w-20 h-10 bg-white p-1 border border-neutral-700 flex items-center justify-center">
                                     @if($client->logo)
-                                        <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
+                                        <img src="{{ app_image($client->logo) }}" 
                                              alt="{{ $client->name }}" 
                                              class="max-h-8 max-w-full object-contain">
                                     @else

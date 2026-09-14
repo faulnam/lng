@@ -49,7 +49,7 @@
             <div class="space-y-1">
                 <label class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">Current Image</label>
                 <div class="w-48 h-24 bg-neutral-950 border border-neutral-800 overflow-hidden">
-                    <img src="{{ str_starts_with($heroSlide->image, 'http') ? $heroSlide->image : asset('storage/' . $heroSlide->image) }}" class="w-full h-full object-cover">
+                    <img src="{{ app_image($heroSlide->image, 'images/lng/carrier.jpg') }}" class="w-full h-full object-cover">
                 </div>
             </div>
         @endif

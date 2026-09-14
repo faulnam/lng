@@ -97,7 +97,7 @@
                         <div class="flex items-center gap-3 truncate">
                             <div class="w-10 h-10 bg-neutral-800 overflow-hidden shrink-0">
                                 @if($p->cover_image)
-                                    <img src="{{ str_starts_with($p->cover_image, 'http') ? $p->cover_image : asset('storage/' . $p->cover_image) }}" class="w-full h-full object-cover">
+                                    <img src="{{ app_image($p->cover_image, 'images/lng/carrier.jpg') }}" class="w-full h-full object-cover">
                                 @endif
                             </div>
                             <div class="truncate">

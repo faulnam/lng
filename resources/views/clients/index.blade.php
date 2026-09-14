@@ -75,7 +75,7 @@
                 @forelse($clients as $client)
                     <div class="group border border-neutral-200 p-8 h-36 flex flex-col items-center justify-center hover:border-black transition-all bg-white text-center">
                         @if($client->logo)
-                            <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
+                            <img src="{{ app_image($client->logo) }}" 
                                  alt="{{ $client->name }}" 
                                  title="{{ $client->name }}"
                                  loading="lazy"

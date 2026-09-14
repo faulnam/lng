@@ -105,7 +105,7 @@
                         Current Image
                     </label>
                     <div class="w-32 h-20 bg-neutral-950 border border-neutral-800 overflow-hidden">
-                        <img src="{{ str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}" class="w-full h-full object-cover">
+                        <img src="{{ app_image($service->image, 'images/lng/terminal.jpg') }}" class="w-full h-full object-cover">
                     </div>
                 </div>
             @endif

@@ -120,7 +120,7 @@
                         @else
                             <!-- Single Category Showcase Card -->
                             <div class="relative aspect-[16/9] bg-neutral-900 overflow-hidden border border-neutral-200">
-                                <img src="{{ $service->image ? (str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image)) : '/images/lng/terminal.jpg' }}" 
+                                <img src="{{ app_image($service->image, 'images/lng/terminal.jpg') }}" 
                                      alt="{{ $service->title }}" 
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center p-8 text-center">

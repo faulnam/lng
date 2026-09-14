@@ -45,7 +45,7 @@
                             <td class="py-3 px-4 w-16">
                                 <div class="w-12 h-10 bg-neutral-800 overflow-hidden border border-neutral-700">
                                     @if($award->image)
-                                        <img src="{{ str_starts_with($award->image, 'http') ? $award->image : asset('storage/' . $award->image) }}" alt="{{ $award->title }}" class="w-full h-full object-cover">
+                                        <img src="{{ app_image($award->image, 'images/lng/carrier.jpg') }}" alt="{{ $award->title }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-[9px] text-neutral-500">NO IMG</div>
                                     @endif

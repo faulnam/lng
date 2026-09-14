@@ -294,7 +294,7 @@
                 @forelse($latestPosts as $post)
                     <article class="group bg-white border border-neutral-200 flex flex-col justify-between overflow-hidden">
                         <a href="{{ url('/our-blog/' . $post->slug) }}" class="block overflow-hidden aspect-[16/10] bg-neutral-900">
-                            <img src="{{ $post->cover_image ? (str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image)) : '/images/lng/carrier.jpg' }}" 
+                            <img src="{{ app_image($post->cover_image, 'images/lng/carrier.jpg') }}" 
                                  alt="{{ $post->title }}" 
                                  loading="lazy"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -352,7 +352,7 @@
                         @foreach($clients as $client)
                             <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-48 md:w-56 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
                                 @if($client->logo)
-                                    <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
+                                    <img src="{{ app_image($client->logo) }}" 
                                          alt="{{ $client->name }}" 
                                          title="{{ $client->name }}" 
                                          loading="lazy"
@@ -367,7 +367,7 @@
                         @foreach($clients as $client)
                             <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-48 md:w-56 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
                                 @if($client->logo)
-                                    <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
+                                    <img src="{{ app_image($client->logo) }}" 
                                          alt="{{ $client->name }}" 
                                          title="{{ $client->name }}" 
                                          loading="lazy"
@@ -425,7 +425,7 @@
 
                             <div class="pt-4 border-t border-neutral-100 flex items-center gap-4">
                                 @if($testi->photo)
-                                    <img src="{{ str_starts_with($testi->photo, 'http') ? $testi->photo : asset('storage/' . $testi->photo) }}" 
+                                    <img src="{{ app_image($testi->photo) }}" 
                                          alt="{{ $testi->client_name }}" 
                                          class="w-10 h-10 rounded-full object-cover border border-neutral-200">
                                 @else

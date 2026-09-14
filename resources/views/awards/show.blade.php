@@ -31,7 +31,7 @@
             <!-- Award Image -->
             @if($award->image)
                 <div class="aspect-[16/10] overflow-hidden bg-neutral-900 border border-neutral-200">
-                    <img src="{{ str_starts_with($award->image, 'http') ? $award->image : asset('storage/' . $award->image) }}" 
+                    <img src="{{ app_image($award->image, 'images/lng/carrier.jpg') }}" 
                          alt="{{ $award->title }}" 
                          class="w-full h-full object-cover">
                 </div>

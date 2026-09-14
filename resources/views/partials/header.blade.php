@@ -26,7 +26,7 @@
         </a>
 
         <!-- Desktop Navigation Menu (Strict 5-Item Structure) -->
-        <nav class="hidden lg:flex items-center space-x-8 text-[11px] uppercase tracking-widest font-medium">
+        <nav class="hidden lg:flex items-center gap-8 text-[11px] uppercase tracking-widest font-medium">
             <a href="{{ url('/') }}" 
                class="transition-colors duration-200 hover:text-accent {{ request()->is('/') ? 'text-accent font-semibold' : '' }}">
                 Home

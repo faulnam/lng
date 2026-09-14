@@ -109,7 +109,7 @@
                         Current Cover Image
                     </label>
                     <div class="w-44 h-24 bg-neutral-950 border border-neutral-800 overflow-hidden">
-                        <img src="{{ str_starts_with($blogPost->cover_image, 'http') ? $blogPost->cover_image : asset('storage/' . $blogPost->cover_image) }}" class="w-full h-full object-cover">
+                        <img src="{{ app_image($blogPost->cover_image, 'images/lng/carrier.jpg') }}" class="w-full h-full object-cover">
                     </div>
                 </div>
             @endif

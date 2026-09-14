@@ -99,7 +99,7 @@
                 @forelse($posts as $post)
                     <article class="group bg-white border border-neutral-200 flex flex-col justify-between overflow-hidden hover:border-black transition-all">
                         <a href="{{ url('/our-blog/' . $post->slug) }}" class="block overflow-hidden aspect-[16/10] bg-neutral-900">
-                            <img src="{{ $post->cover_image ? (str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image)) : '/images/lng/carrier.jpg' }}" 
+                            <img src="{{ app_image($post->cover_image, 'images/lng/carrier.jpg') }}" 
                                  alt="{{ $post->title }}" 
                                  loading="lazy"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">

@@ -8,7 +8,7 @@
     <!-- Hero Banner -->
     <section class="relative bg-neutral-900 text-white pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-60 scale-105 transform transition-transform duration-1000" 
-             style="background-image: url('{{ $child->image ? (str_starts_with($child->image, 'http') ? $child->image : asset('storage/' . $child->image)) : '/images/lng/iso_tanks.jpg' }}');">
+             style="background-image: url('{{ app_image($child->image, 'images/lng/iso_tanks.jpg') }}');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85"></div>
 

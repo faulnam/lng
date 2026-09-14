@@ -81,7 +81,7 @@
                 @forelse($awards as $award)
                     <article class="group bg-white border border-neutral-200 flex flex-col justify-between overflow-hidden hover:border-black transition-all">
                         <a href="{{ url('/awards-publications/' . $award->slug) }}" class="block overflow-hidden aspect-[16/11] bg-neutral-900">
-                            <img src="{{ $award->image ? (str_starts_with($award->image, 'http') ? $award->image : asset('storage/' . $award->image)) : 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop' }}" 
+                            <img src="{{ app_image($award->image, 'images/lng/carrier.jpg') }}" 
                                  alt="{{ $award->title }}" 
                                  loading="lazy"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">

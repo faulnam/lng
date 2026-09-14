@@ -8,7 +8,7 @@
     <!-- 1. Hero Cover Header -->
     <section class="relative bg-black text-white pt-36 pb-24 md:pt-48 md:pb-36 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-1000 scale-100" 
-             style="background-image: url('{{ $project->cover_image ? (str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image)) : '/images/lng/carrier.jpg' }}');">
+             style="background-image: url('{{ app_image($project->cover_image, 'images/lng/carrier.jpg') }}');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/40"></div>
 
@@ -118,7 +118,7 @@
             <div class="space-y-6">
                 @if($project->cover_image)
                     <div class="overflow-hidden bg-neutral-900 aspect-[16/9] border border-neutral-200">
-                        <img src="{{ str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image) }}" 
+                        <img src="{{ app_image($project->cover_image, 'images/lng/carrier.jpg') }}" 
                              alt="{{ $project->title }} Main View" 
                              loading="lazy"
                              class="w-full h-full object-cover">
@@ -129,7 +129,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         @foreach($project->images as $image)
                             <div class="overflow-hidden bg-neutral-900 aspect-[4/3] border border-neutral-200 group">
-                                <img src="{{ str_starts_with($image->image_path, 'http') ? $image->image_path : asset('storage/' . $image->image_path) }}" 
+                                <img src="{{ app_image($image->image_path, 'images/lng/terminal.jpg') }}" 
                                      alt="{{ $project->title }} Detail Photo" 
                                      loading="lazy"
                                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">

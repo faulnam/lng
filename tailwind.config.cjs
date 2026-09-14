@@ -1,11 +1,14 @@
+const path = require('path');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./app/**/*.php",
-    "resources/views/**/*.blade.php",
-    "resources/views/**/**/*.blade.php",
+    path.join(__dirname, 'resources/**/*.blade.php'),
+    path.join(__dirname, 'resources/**/*.js'),
+    path.join(__dirname, 'app/**/*.php'),
+    './resources/**/*.blade.php',
+    './resources/**/*.js',
+    './app/**/*.php',
   ],
   theme: {
     extend: {

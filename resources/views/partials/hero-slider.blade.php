@@ -8,7 +8,7 @@
                 <div class="swiper-slide relative flex items-center justify-center">
                     <!-- Slide Background Image -->
                     <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-100" 
-                         style="background-image: url('{{ $slide->image ? (str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image)) : 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1920&auto=format&fit=crop' }}');">
+                         style="background-image: url('{{ app_image($slide->image, 'images/lng/carrier.jpg') }}');">
                     </div>
                     
                     <!-- Dark Gradient Overlay -->

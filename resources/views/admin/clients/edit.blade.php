@@ -34,7 +34,7 @@
             </label>
             <div class="w-32 h-16 bg-white p-2 border border-neutral-700 flex items-center justify-center">
                 @if($client->logo)
-                    <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
+                    <img src="{{ app_image($client->logo) }}" 
                          alt="{{ $client->name }}" 
                          class="max-h-12 max-w-full object-contain">
                 @else

@@ -166,7 +166,7 @@
                     </label>
                     <div class="aspect-[16/10] bg-neutral-950 border border-neutral-800 overflow-hidden">
                         @if($project->cover_image)
-                            <img src="{{ str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image) }}" 
+                            <img src="{{ app_image($project->cover_image, 'images/lng/carrier.jpg') }}" 
                                  alt="Current Cover" 
                                  class="w-full h-full object-cover">
                         @else
@@ -199,7 +199,7 @@
                         @foreach($project->images as $img)
                             <div class="relative bg-neutral-950 border border-neutral-800 overflow-hidden group">
                                 <div class="aspect-[4/3]">
-                                    <img src="{{ str_starts_with($img->image_path, 'http') ? $img->image_path : asset('storage/' . $img->image_path) }}" 
+                                    <img src="{{ app_image($img->image_path, 'images/lng/terminal.jpg') }}" 
                                          alt="Gallery Photo" 
                                          class="w-full h-full object-cover">
                                 </div>

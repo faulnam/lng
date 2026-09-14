@@ -51,7 +51,7 @@
                             <td class="py-3 px-4 w-20">
                                 <div class="w-16 h-10 bg-neutral-800 overflow-hidden border border-neutral-700">
                                     @if($slide->image)
-                                        <img src="{{ str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image) }}" class="w-full h-full object-cover">
+                                        <img src="{{ app_image($slide->image, 'images/lng/carrier.jpg') }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-[9px] text-neutral-500">NO IMG</div>
                                     @endif

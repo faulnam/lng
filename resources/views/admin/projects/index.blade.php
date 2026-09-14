@@ -74,7 +74,7 @@
                             <td class="py-3 px-4 w-16">
                                 <div class="w-12 h-10 bg-neutral-800 overflow-hidden border border-neutral-700">
                                     @if($project->cover_image)
-                                        <img src="{{ str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image) }}" 
+                                        <img src="{{ app_image($project->cover_image, 'images/lng/carrier.jpg') }}" 
                                              alt="{{ $project->title }}" 
                                              class="w-full h-full object-cover">
                                     @else

@@ -4,7 +4,7 @@
    class="group relative block overflow-hidden bg-neutral-900 aspect-[4/3] focus:outline-none">
     
     <!-- Image -->
-    <img src="{{ $project->cover_image ? (str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image)) : 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=800&auto=format&fit=crop' }}" 
+    <img src="{{ app_image($project->cover_image, 'images/lng/carrier.jpg') }}" 
          alt="{{ $project->title }}" 
          loading="lazy"
          class="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105">

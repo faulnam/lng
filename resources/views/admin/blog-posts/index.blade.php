@@ -61,7 +61,7 @@
                             <td class="py-3 px-4 w-16">
                                 <div class="w-12 h-10 bg-neutral-800 overflow-hidden border border-neutral-700">
                                     @if($post->cover_image)
-                                        <img src="{{ str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                        <img src="{{ app_image($post->cover_image, 'images/lng/carrier.jpg') }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-[9px] text-neutral-500">NO IMG</div>
                                     @endif

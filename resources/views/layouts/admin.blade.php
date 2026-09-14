@@ -15,7 +15,35 @@
     <!-- Quill Rich Text Editor CSS (via CDN) -->
     <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 
-    <!-- Compiled Tailwind CSS -->
+    <!-- Tailwind CSS (CDN Runtime Engine with Custom Theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0A0A0A",
+                        secondary: "#111111",
+                        accent: "#B08D57",
+                        "accent-dark": "#967543",
+                        "neutral-body": "#6B7280",
+                        "neutral-bg": "#F8F9FA",
+                        "neutral-dark": "#0A0A0A",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+                        display: ["Inter", "sans-serif"],
+                    },
+                    letterSpacing: {
+                        widest2: "0.25em",
+                        widest3: "0.35em",
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Compiled CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ file_exists(public_path('css/app.css')) ? filemtime(public_path('css/app.css')) : time() }}">
 
     <!-- Alpine.js -->

@@ -39,7 +39,7 @@
                     <!-- Cover Image -->
                     @if($post->cover_image)
                         <div class="aspect-[16/9] overflow-hidden bg-neutral-900 border border-neutral-200">
-                            <img src="{{ str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image) }}" 
+                            <img src="{{ app_image($post->cover_image, 'images/lng/carrier.jpg') }}" 
                                  alt="{{ $post->title }}" 
                                  class="w-full h-full object-cover">
                         </div>

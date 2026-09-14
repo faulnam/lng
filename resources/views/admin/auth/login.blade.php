@@ -12,6 +12,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Tailwind CSS (CDN Runtime Engine with Custom Theme) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0A0A0A",
+                        secondary: "#111111",
+                        accent: "#B08D57",
+                        "accent-dark": "#967543",
+                        "neutral-body": "#6B7280",
+                        "neutral-bg": "#F8F9FA",
+                        "neutral-dark": "#0A0A0A",
+                    },
+                    letterSpacing: {
+                        widest2: "0.25em",
+                        widest3: "0.35em",
+                    },
+                }
+            }
+        }
+    </script>
+
     <!-- Compiled Tailwind CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ file_exists(public_path('css/app.css')) ? filemtime(public_path('css/app.css')) : time() }}">
 </head>
