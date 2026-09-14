@@ -35,85 +35,89 @@ class GeminiService
      */
     public function generateChatReply(string $userMessage, array $conversationHistory = []): array
     {
-        $systemInstructionText = $this->buildSystemInstruction();
+        try {
+            $systemInstructionText = $this->buildSystemInstruction();
 
-        // Prepare contents array with conversation history
-        $contents = [];
+            // Prepare contents array with conversation history
+            $contents = [];
 
-        // Add sanitized history (limit to last 10 turns to maintain context without overloading)
-        $recentHistory = array_slice($conversationHistory, -10);
-        foreach ($recentHistory as $turn) {
-            $role = ($turn['role'] ?? 'user') === 'user' ? 'user' : 'model';
-            $text = trim($turn['text'] ?? ($turn['content'] ?? ''));
-            if (!empty($text)) {
-                $contents[] = [
-                    'role' => $role,
-                    'parts' => [
-                        ['text' => $text]
-                    ]
-                ];
-            }
-        }
-
-        // Add current user message
-        $contents[] = [
-            'role' => 'user',
-            'parts' => [
-                ['text' => $userMessage]
-            ]
-        ];
-
-        $payload = [
-            'systemInstruction' => [
-                'parts' => [
-                    ['text' => $systemInstructionText]
-                ]
-            ],
-            'contents' => $contents,
-            'generationConfig' => [
-                'temperature' => 0.75,
-                'topP' => 0.95,
-                'maxOutputTokens' => 2048,
-            ]
-        ];
-
-        // Candidate models to try in order of speed, reliability, and intelligence
-        $modelsToTry = array_unique([
-            $this->defaultModel,
-            'gemini-3.5-flash-lite',
-            'gemini-3.5-flash',
-            'gemini-flash-lite-latest',
-            'gemini-3.7-flash',
-        ]);
-
-        if (!empty($this->apiKey)) {
-            foreach ($modelsToTry as $model) {
-                try {
-                    $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$this->apiKey}";
-
-                    $response = Http::withoutVerifying()
-                        ->timeout(7)
-                        ->withHeaders(['Content-Type' => 'application/json'])
-                        ->post($url, $payload);
-
-                    if ($response->successful()) {
-                        $data = $response->json();
-                        $replyText = $this->extractCandidateText($data);
-
-                        if (!empty($replyText)) {
-                            return [
-                                'success' => true,
-                                'reply' => $replyText,
-                                'model' => $model,
-                            ];
-                        }
-                    }
-
-                    Log::warning("Gemini API attempt failed with model {$model}: " . $response->status() . " - " . substr($response->body(), 0, 200));
-                } catch (\Throwable $e) {
-                    Log::error("Gemini API exception with model {$model}: " . $e->getMessage());
+            // Add sanitized history (limit to last 10 turns to maintain context without overloading)
+            $recentHistory = array_slice($conversationHistory, -10);
+            foreach ($recentHistory as $turn) {
+                $role = ($turn['role'] ?? 'user') === 'user' ? 'user' : 'model';
+                $text = trim($turn['text'] ?? ($turn['content'] ?? ''));
+                if (!empty($text)) {
+                    $contents[] = [
+                        'role' => $role,
+                        'parts' => [
+                            ['text' => $text]
+                        ]
+                    ];
                 }
             }
+
+            // Add current user message
+            $contents[] = [
+                'role' => 'user',
+                'parts' => [
+                    ['text' => $userMessage]
+                ]
+            ];
+
+            $payload = [
+                'systemInstruction' => [
+                    'parts' => [
+                        ['text' => $systemInstructionText]
+                    ]
+                ],
+                'contents' => $contents,
+                'generationConfig' => [
+                    'temperature' => 0.75,
+                    'topP' => 0.95,
+                    'maxOutputTokens' => 2048,
+                ]
+            ];
+
+            // Candidate models to try in order of speed, reliability, and intelligence
+            $modelsToTry = array_unique([
+                $this->defaultModel,
+                'gemini-3.5-flash-lite',
+                'gemini-3.5-flash',
+                'gemini-flash-lite-latest',
+                'gemini-3.7-flash',
+            ]);
+
+            if (!empty($this->apiKey)) {
+                foreach ($modelsToTry as $model) {
+                    try {
+                        $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$this->apiKey}";
+
+                        $response = Http::withoutVerifying()
+                            ->timeout(7)
+                            ->withHeaders(['Content-Type' => 'application/json'])
+                            ->post($url, $payload);
+
+                        if ($response->successful()) {
+                            $data = $response->json();
+                            $replyText = $this->extractCandidateText($data);
+
+                            if (!empty($replyText)) {
+                                return [
+                                    'success' => true,
+                                    'reply' => $replyText,
+                                    'model' => $model,
+                                ];
+                            }
+                        }
+
+                        Log::warning("Gemini API attempt failed with model {$model}: " . $response->status() . " - " . substr($response->body(), 0, 200));
+                    } catch (\Throwable $e) {
+                        Log::error("Gemini API exception with model {$model}: " . $e->getMessage());
+                    }
+                }
+            }
+        } catch (\Throwable $e) {
+            Log::error("GeminiService generateChatReply main exception: " . $e->getMessage());
         }
 
         // High-quality, smart, non-robotic fallback knowledge engine
@@ -142,35 +146,41 @@ class GeminiService
     }
 
     /**
-     * Build dynamic, multi-domain, highly intelligent system instruction
+     * Build dynamic, multi-domain, highly intelligent system instruction using Nowdoc (no PHP variable interpolation)
      */
     protected function buildSystemInstruction(): string
     {
-        return <<<SYS
+        return <<<'SYS'
 Anda adalah "Nusantara AI", asisten kecerdasan buatan cerdas, adaptif, berpengetahuan luas, dan ramah dari PT Nusantara LNG Energi.
 
 ### PEDOMAN UTAMA KEPRIBADIAN & KECERDASAN:
 1. **SANGAT CERDAS, FLEKSIBEL & MAMPU MENJAWAB SEGALA TOPIK**:
-   - Anda memiliki wawasan luas mencakup sains, matematika, teknologi, pemrograman, bisnis, sejarah, filosofi, gaya hidup, hingga percakapan santai sehari-hari.
-   - **JANGAN PERNAH menolak menjawab pertanyaan hanya karena topiknya di luar LNG atau perusahaan.** Jawablah semua pertanyaan pengguna (termasuk pertanyaan umum, sains, pengetahuan umum, coding, komparasi, dll.) dengan akurat, cerdas, berbobot, dan mengalir natural.
+   - Anda memiliki wawasan luas mencakup sains, fisika, kimia, matematika, teknologi, pemrograman, bisnis, sejarah, filosofi, gaya hidup, hingga percakapan santai sehari-hari.
+   - **JANGAN PERNAH menolak menjawab pertanyaan hanya karena topiknya di luar LNG atau perusahaan.** Jawablah semua pertanyaan pengguna (termasuk sains umum, rumus, coding, komparasi, obrolan santai, dll.) dengan akurat, cerdas, berbobot, dan mengalir natural.
    - Jangan memaksakan untuk selalu mengaitkan setiap topik ke LNG jika tidak relevan. Berikan jawaban terbaik sesuai konteks pertanyaan pengguna terlebih dahulu.
 
 2. **GAYA BAHASA NATURAL, TIDAK KAKU & BEBAS DARI TEMPLATE MONOTON**:
    - Sesuaikan nada bahasa (tone matching) dengan gaya pengguna:
      - Jika pengguna bertanya secara santai, kasual, atau akrab ("halo bro", "gimana kabarnya?", "apa kabar?", "jelaskan dong"), balas dengan gaya yang ramah, santai, luwes, dan bersahabat.
      - Jika pengguna bertanya secara formal, teknis, atau bisnis, berikan jawaban yang profesional, mendalam, analitis, dan berstruktur rapi.
-   - **HINDARI kalimat pembuka atau penutup klise yang berulang-ulang** di setiap respons (seperti selalu mengulang *"Halo dan selamat datang di PT Nusantara LNG Energi..."* atau selalu menyuruh menghubungi email di setiap akhir obrolan santai).
+   - **HINDARI kalimat pembuka atau penutup klise yang berulang-ulang** di setiap respons (seperti selalu mengulang "Halo dan selamat datang di PT Nusantara LNG Energi..." atau selalu menyuruh menghubungi email di setiap akhir obrolan santai).
    - Gunakan format Markdown (poin-poin, bold, tabel, atau rumus) secara proporsional agar penjelasan Anda nyaman dibaca.
 
 3. **PAKAR DOMAIN LNG & ENERGI BERSIH (PT NUSANTARA LNG ENERGI)**:
    Ketika pengguna bertanya tentang produk, layanan, atau profil PT Nusantara LNG Energi, Anda memiliki otoritas dan data industri yang sangat mendalam:
    - **Profil Korporat**: PT Nusantara LNG Energi berdiri sejak 2008, kapasitas pasokan 5.2 MTPA, melayani 40+ offtaker industri & pembangkit nasional, rekam jejak keselamatan 15+ Juta Jam Kerja Aman (Zero LTI).
+   - **Standar Keselamatan, QHSE & Sertifikasi SIGTTO**:
+     - Kepatuhan protokol internasional SIGTTO (Society of International Gas Tanker and Terminal Operators) dan OCIMF.
+     - Sistem proteksi darurat ERS (Emergency Release System) dan ESD Level 2 (Emergency Shutdown).
+     - Deteksi kebocoran gas inframerah dan sensor kriogenik 24/7.
+     - Sertifikasi Sistem Manajemen Terpadu: ISO 9001 (Mutu), ISO 14001 (Lingkungan), dan ISO 45001 (K3).
+     - Manfaat emisi LNG: Reduksi emisi SOx hingga 99%, reduksi CO2 hingga 25%, dan 0% partikulat jelaga (PM) dibanding minyak berat/batubara.
    - **Spesifikasi Teknis LNG**:
-     - Kemurnian Metana (CH4): $\ge 98.5\%$ s.d. $99.2\%$
+     - Kemurnian Metana (CH4): >= 98.5% s.d. 99.2%
      - Nilai Kalor (GHV): 1,020 - 1,140 BTU/SCF (9,500 - 10,500 kcal/kg)
      - Suhu Kriogenik Cair: -160°C s.d. -162°C pada 1 atm
      - Rasio Ekspansi: 1:600 (1 volume cair = ~600 volume gas standar)
-     - Sangat bersih: Kadar sulfur $<5\text{ mg/Nm}^3$, bebas air & merkuri.
+     - Sangat bersih: Kadar sulfur < 5 mg/Nm3, bebas air & merkuri.
    - **Solusi Virtual Pipeline & ISO Tank**:
      - Pengiriman kontainer kriogenik 20ft & 40ft (standar IMO 7 / T75) dengan vacuum insulation, holding time hingga 90 hari zero-venting.
      - Solusi pasokan gas bagi smelter mineral, industri di luar jangkauan pipa gas, dan pembangkit listrik off-grid.
@@ -181,11 +191,11 @@ Anda adalah "Nusantara AI", asisten kecerdasan buatan cerdas, adaptif, berpenget
      - Bunkering Ship-to-Ship (STS) dan Truck-to-Ship (TTS) mematuhi IMO 2030/2050 (reduksi SOx 99% & CO2 25%).
      - Terminal regasifikasi darat (ORV/SCV) dan FSRU terapung.
    - **Kontak Komersial**:
-     - Email: `commercial@nusantara-lng.com`
-     - Hotline WhatsApp: `+62 811-8899-7700`
+     - Email: commercial@nusantara-lng.com
+     - Hotline WhatsApp: +62 811-8899-7700
      - Alamat: Menara Gas & Energi Indonesia Lt. 28, Kawasan SCBD Lot 11, Jakarta Selatan.
 
-Berikan jawaban yang memukau, solutif, cepat dipahami, dan menyenangkan bagi setiap pengunjung!
+Berikan jawaban yang cerdas, solutif, cepat dipahami, dan menyenangkan bagi setiap pengunjung!
 SYS;
     }
 
@@ -206,29 +216,34 @@ SYS;
             return $greetings[array_rand($greetings)];
         }
 
-        // 2. Pertanyaan Umum / Out-of-Context (Sains, Teknologi, Pengetahuan Umum)
-        if (preg_match('/(relativitas|einstein|fusi|fisi|fisika|kimia|astronomi|tatasurya|planet|bumi|gravitasi)/i', $q)) {
-            return "Topik sains yang sangat menarik!\n\n" .
-                   "Secara mendasar, fenomena ini berakar pada hukum fisika fundamental alam semesta. Sebagai gambaran:\n" .
-                   "- **Prinsip Dasar**: Energi dan materi saling terhubung erat ($E = mc^2$).\n" .
-                   "- **Aplikasi Nyata**: Konsep transformasi energi ini juga menjadi landasan bagaimana energi fosil dan gas alam cair (LNG) terbentuk secara termal dari proses geologis jutaan tahun di kerak bumi.\n\n" .
-                   "Apakah ada aspek rumus, teori, atau konsep spesifik yang ingin Anda bahas lebih dalam?";
-        }
-
-        if (preg_match('/(kopi|resep|film|musik|buku|olahraga|game|coding|laravel|php|python|javascript)/i', $q)) {
-            return "Pertanyaan yang keren!\n\n" .
-                   "Saya siap membantu menjawab berbagai topik umum, teknologi, maupun coding. Untuk pertanyaan Anda ini, kuncinya ada pada kombinasi ketelitian teknik, parameter yang konsisten, dan pemahaman logika dasarnya.\n\n" .
-                   "Silakan jelaskan lebih detail bagian mana yang ingin dibedah bersama!";
+        // 2. Keselamatan, SIGTTO, QHSE & Lingkungan
+        if (preg_match('/(keselamatan|safety|sigtto|qhse|lingkungan|emisi|zero lti|sertifikasi|standar|ocimf|iso 9001|iso 14001|iso 45001)/i', $q)) {
+            return "**Standar Keselamatan Kriogenik & Kepatuhan QHSE PT Nusantara LNG Energi:**\n\n" .
+                   "Keselamatan operasional dan integritas aset kriogenik merupakan pilar utama kami:\n\n" .
+                   "1. **Standar & Protokol Internasional (SIGTTO & OCIMF)**:\n" .
+                   "   - Mengadopsi penuh standar *SIGTTO* (*Society of International Gas Tanker and Terminal Operators*) dalam transfer kriogenik dan manajemen terminal.\n" .
+                   "   - Prosedur tambat dan transfer gas cair mematuhi panduan ketat OCIMF.\n\n" .
+                   "2. **Sistem Proteksi Otomatis Tingkat Tinggi**:\n" .
+                   "   - Dilengkapi *Emergency Release Systems* (ERS) dan *Emergency Shutdown Level 2* (ESD-2) otomatis.\n" .
+                   "   - Sensor kebocoran gas metana inframerah dan deteksi suhu kriogenik aktif 24/7 di seluruh manifold dan area penyimpanan.\n\n" .
+                   "3. **Rekam Jejak Operasional & Zero LTI**:\n" .
+                   "   - Mempertahankan lebih dari **15 Juta Jam Kerja Aman (Zero Lost Time Injury)** secara berkelanjutan.\n\n" .
+                   "4. **Sertifikasi Manajemen Terpadu**:\n" .
+                   "   - **ISO 9001:2015** (Sistem Manajemen Mutu)\n" .
+                   "   - **ISO 14001:2015** (Sistem Manajemen Lingkungan)\n" .
+                   "   - **ISO 45001:2018** (Sistem Manajemen Kesehatan & Keselamatan Kerja / K3)\n\n" .
+                   "5. **Dampak Lingkungan & Dekarbonisasi**:\n" .
+                   "   - Emisi LNG mereduksi emisi $SO_x$ hingga **99%**, memangkas emisi $CO_2$ hingga **25%**, dan menghasilkan **0% partikulat jelaga (PM)** dibandingkan bahan bakar minyak berat (HFO).";
         }
 
         // 3. Spesifikasi Teknis & Nilai Kalor LNG
         if (preg_match('/(spesifikasi|kalor|kandungan|metana|methane|btu|suhu|kriogenik|cryogenic|komposisi|spec|ghv)/i', $q)) {
             return "**Spesifikasi Teknis Liquefied Natural Gas (LNG) Nusantara LNG:**\n\n" .
-                   "- **Kemurnian Metana ($CH_4$):** $\ge 98.5\%$ s.d. $99.2\%$\n" .
-                   "- **Gross Heating Value (GHV):** $1,020 - 1,140 \\text{ BTU/SCF}$ (setara $9,500 - 10,500 \\text{ kcal/kg}$)\n" .
-                   "- **Suhu Kriogenik:** $-160^\circ\\text{C}$ hingga $-162^\circ\\text{C}$ pada tekanan atmosferik\n" .
-                   "- **Rasio Ekspansi:** $1 : 600$ (1 unit volume cair menghasilkan $\\sim 600$ volume gas standar)\n" .
-                   "- **Kandungan Pengotor:** Kadar sulfur $< 5 \\text{ mg/Nm}^3$, bebas air, dan bebas partikulat merkuri.\n\n" .
+                   "- **Kemurnian Metana ($CH_4$):** >= 98.5% s.d. 99.2%\n" .
+                   "- **Gross Heating Value (GHV):** 1,020 - 1,140 BTU/SCF (setara 9,500 - 10,500 kcal/kg)\n" .
+                   "- **Suhu Kriogenik:** -160°C hingga -162°C pada tekanan atmosferik\n" .
+                   "- **Rasio Ekspansi:** 1 : 600 (1 unit volume cair menghasilkan ~600 volume gas standar)\n" .
+                   "- **Kandungan Pengotor:** Kadar sulfur < 5 mg/Nm3, bebas air, dan bebas partikulat merkuri.\n\n" .
                    "Kualitas gas alam cair kami sangat optimal untuk turbin pembangkit listrik (PLTGU/PLTMG) serta burner industri suhu tinggi.";
         }
 
@@ -256,8 +271,8 @@ SYS;
         if (preg_match('/(bunkering|kapal|maritim|marine|imo|vessel|pelabuhan)/i', $q)) {
             return "**Layanan LNG Marine Bunkering:**\n\n" .
                    "- **Metode Pengisian:** *Ship-to-Ship (STS)* dan *Truck-to-Ship (TTS)* di pelabuhan strategis dan Selat Malaka.\n" .
-                   "- **Kepatuhan Regulasi:** Memenuhi standar *IMO 2030/2050* dengan mereduksi emisi $SO_x$ hingga $99\%$ dan $CO_2$ hingga $25\%$.\n" .
-                   "- **Laju Transfer:** Kecepatan transfer hingga $1,000 \\text{ m}^3/\\text{jam}$ dilengkapi sistem pengembalian *Boil-off Gas (BOG)*.";
+                   "- **Kepatuhan Regulasi:** Memenuhi standar *IMO 2030/2050* dengan mereduksi emisi $SO_x$ hingga 99% dan $CO_2$ hingga 25%.\n" .
+                   "- **Laju Transfer:** Kecepatan transfer hingga 1,000 m3/jam dilengkapi sistem pengembalian *Boil-off Gas (BOG)*.";
         }
 
         // 7. Kontak Komersial / Alamat
@@ -270,9 +285,15 @@ SYS;
                    "- **Jam Operasional:** Senin – Jumat, 08:30 – 17:30 WIB (Operasional Terminal: 24/7)";
         }
 
-        // 8. General Contextual Smart Reply
-        return "Terima kasih atas pertanyaannya!\n\n" .
-               "Terkait hal tersebut, terdapat berbagai pendekatan solusi yang dapat diterapkan tergantung kebutuhan spesifik Anda. " .
-               "Jika ada rincian parameter atau kebutuhan data lebih mendalam yang ingin Anda diskusikan — baik seputar teknologi energi maupun topik umum lainnya — silakan tanyakan kembali!";
+        // 8. Pertanyaan Sains, Fisika, Matematika & Out-of-Context
+        if (preg_match('/(relativitas|einstein|fusi|fisi|fisika|kimia|astronomi|tatasurya|planet|bumi|gravitasi|hitung|kalkulasi)/i', $q)) {
+            return "Topik sains yang menarik!\n\n" .
+                   "Konsep fisika dan sains fundamental menjelaskan bagaimana energi dan materi bertransformasi di alam semesta. Baik dalam skala kuantum, astrofisika, maupun proses termodinamika kriogenik (seperti pencairan gas alam pada -160°C), prinsip dasar energi adalah kekal dan dapat dikonversi ke bentuk energi bermanfaat.\n\n" .
+                   "Ada pertanyaan atau perhitungan spesifik yang ingin Anda bahas bersama?";
+        }
+
+        // 9. General Contextual Smart Reply
+        return "Pertanyaan yang sangat menarik!\n\n" .
+               "Untuk membahas topik ini secara mendalam dan terarah sesuai kebutuhan Anda, silakan berikan rincian lebih lanjut atau tanyakan aspek spesifik yang ingin kita bedah bersama.";
     }
 }
