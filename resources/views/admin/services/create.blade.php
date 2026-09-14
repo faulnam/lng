@@ -4,7 +4,7 @@
 @section('page_title', 'Create Service Category')
 
 @section('content')
-<div class="max-w-3xl mx-auto space-y-6">
+<div class="max-w-3xl mx-auto space-y-6" x-data="serviceForm()">
     
     <div>
         <a href="{{ route('admin.services.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -23,9 +23,11 @@
                 <input type="text" 
                        id="title" 
                        name="title" 
+                       x-model="title"
+                       @input="onTitleInput()"
                        value="{{ old('title') }}" 
                        required 
-                       placeholder="e.g. Interior Design or Work Space" 
+                       placeholder="e.g. Small-Scale LNG Bunkering" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
             </div>
 
@@ -46,15 +48,27 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-                <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Slug (URL Key) <span class="text-neutral-500 font-normal lowercase">(optional)</span>
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Slug (URL Key)
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                        <span x-show="isSlugCustom">✍️ Manual</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="slug" 
                        name="slug" 
-                       value="{{ old('slug') }}" 
-                       placeholder="work-space" 
+                       x-model="slug"
+                       @input="isSlugCustom = (slug.trim() !== '')"
+                       placeholder="small-scale-lng-bunkering" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Otomatis dari judul layanan.</span>
+                    <button type="button" @click="syncSlug()" class="text-accent hover:underline">Sync</button>
+                </div>
             </div>
 
             <div>
@@ -126,6 +140,36 @@
 
 @push('scripts')
 <script>
+    function serviceForm() {
+        return {
+            title: @json(old('title', '')),
+            slug: @json(old('slug', '')),
+            isSlugCustom: @json(old('slug') ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            }
+        };
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Quill !== 'undefined') {
             var quill = new Quill('#quillEditor', {
@@ -133,6 +177,7 @@
                 placeholder: 'Describe what this service entails...',
                 modules: {
                     toolbar: [
+                        [{ 'header': [2, 3, false] }],
                         ['bold', 'italic', 'underline'],
                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                         ['clean']

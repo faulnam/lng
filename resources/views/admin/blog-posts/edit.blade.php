@@ -4,7 +4,7 @@
 @section('page_title', 'Edit Blog Article')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-6" x-data="blogPostEditForm()">
     
     <div class="flex items-center justify-between">
         <a href="{{ route('admin.blog-posts.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -26,6 +26,8 @@
             <input type="text" 
                    id="title" 
                    name="title" 
+                   x-model="title"
+                   @input="onTitleInput()"
                    value="{{ old('title', $blogPost->title) }}" 
                    required 
                    class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
@@ -33,14 +35,29 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Slug (URL Key)
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Slug (URL Key)
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                        <span x-show="isSlugCustom">✍️ Manual / Saved</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="slug" 
                        name="slug" 
+                       x-model="slug"
+                       @input="isSlugCustom = true"
                        value="{{ old('slug', $blogPost->slug) }}" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Slug URL untuk tautan artikel.</span>
+                    <button type="button" @click="syncSlug()" class="text-accent hover:underline flex items-center gap-1">
+                        Re-sync dari Judul
+                    </button>
+                </div>
             </div>
 
             <div>
@@ -83,11 +100,15 @@
         </div>
 
         <div>
-            <label for="excerpt" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                Article Summary / Excerpt Quote
-            </label>
+            <div class="flex items-center justify-between mb-2">
+                <label for="excerpt" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                    Article Summary / Excerpt Quote
+                </label>
+                <span class="text-[10px] text-neutral-500">Kutipan singkat untuk kartu artikel</span>
+            </div>
             <textarea id="excerpt" 
                       name="excerpt" 
+                      x-model="excerpt"
                       rows="2" 
                       class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors">{{ old('excerpt', $blogPost->excerpt) }}</textarea>
         </div>
@@ -133,26 +154,55 @@
             </label>
         </div>
 
+        <!-- SEO Metadata Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-neutral-800">
             <div>
-                <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    SEO Meta Title
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        SEO Meta Title
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isMetaTitleCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isMetaTitleCustom">✨ Auto-Generated</span>
+                        <span x-show="isMetaTitleCustom">✍️ Manual / Saved</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="meta_title" 
                        name="meta_title" 
+                       x-model="metaTitle"
+                       @input="isMetaTitleCustom = true"
                        value="{{ old('meta_title', $blogPost->meta_title) }}" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Judul meta untuk pencarian Google.</span>
+                    <button type="button" @click="syncMetaTitle()" class="text-accent hover:underline flex items-center gap-1">
+                        Re-sync dari Judul
+                    </button>
+                </div>
             </div>
 
             <div>
-                <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    SEO Meta Description
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        SEO Meta Description
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isMetaDescriptionCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isMetaDescriptionCustom">✨ Auto-Generated</span>
+                        <span x-show="isMetaDescriptionCustom">✍️ Manual / Saved</span>
+                    </span>
+                </div>
                 <textarea id="meta_description" 
                           name="meta_description" 
+                          x-model="metaDescription"
+                          @input="isMetaDescriptionCustom = true"
                           rows="2" 
                           class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors">{{ old('meta_description', $blogPost->meta_description) }}</textarea>
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Ringkasan untuk hasil pencarian Google.</span>
+                    <span :class="metaDescription.length > 160 ? 'text-amber-400 font-semibold' : 'text-neutral-500'" x-text="metaDescription.length + '/160 karakter'"></span>
+                </div>
             </div>
         </div>
 
@@ -171,6 +221,49 @@
 
 @push('scripts')
 <script>
+    function blogPostEditForm() {
+        return {
+            title: @json(old('title', $blogPost->title ?? '')),
+            slug: @json(old('slug', $blogPost->slug ?? '')),
+            excerpt: @json(old('excerpt', $blogPost->excerpt ?? '')),
+            metaTitle: @json(old('meta_title', $blogPost->meta_title ?? '')),
+            metaDescription: @json(old('meta_description', $blogPost->meta_description ?? '')),
+            isSlugCustom: @json(old('slug', $blogPost->slug) ? true : false),
+            isMetaTitleCustom: @json(old('meta_title', $blogPost->meta_title) ? true : false),
+            isMetaDescriptionCustom: @json(old('meta_description', $blogPost->meta_description) ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+                if (!this.isMetaTitleCustom) {
+                    this.metaTitle = this.title;
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            },
+
+            syncMetaTitle() {
+                this.metaTitle = this.title;
+                this.isMetaTitleCustom = false;
+            }
+        };
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Quill !== 'undefined') {
             var quill = new Quill('#quillEditor', {

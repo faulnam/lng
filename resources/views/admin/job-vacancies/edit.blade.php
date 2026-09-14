@@ -4,7 +4,7 @@
 @section('page_title', 'Edit Job Vacancy')
 
 @section('content')
-<div class="max-w-3xl mx-auto space-y-6">
+<div class="max-w-3xl mx-auto space-y-6" x-data="jobVacancyEditForm()">
     
     <div class="flex items-center justify-between">
         <a href="{{ route('admin.job-vacancies.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -24,20 +24,35 @@
                 <input type="text" 
                        id="title" 
                        name="title" 
+                       x-model="title"
+                       @input="onTitleInput()"
                        value="{{ old('title', $jobVacancy->title) }}" 
                        required 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
             </div>
 
             <div>
-                <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Slug (URL Key)
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Slug (URL Key)
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                        <span x-show="isSlugCustom">✍️ Manual / Saved</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="slug" 
                        name="slug" 
+                       x-model="slug"
+                       @input="isSlugCustom = true"
                        value="{{ old('slug', $jobVacancy->slug) }}" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Slug URL posisi pekerjaan.</span>
+                    <button type="button" @click="syncSlug()" class="text-accent hover:underline">Re-sync</button>
+                </div>
             </div>
         </div>
 
@@ -107,3 +122,37 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    function jobVacancyEditForm() {
+        return {
+            title: @json(old('title', $jobVacancy->title ?? '')),
+            slug: @json(old('slug', $jobVacancy->slug ?? '')),
+            isSlugCustom: @json(old('slug', $jobVacancy->slug) ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            }
+        };
+    }
+</script>
+@endpush

@@ -55,6 +55,15 @@ class BlogPostController extends Controller
         }
         $data['slug'] = $slug;
 
+        // Auto-generate SEO Meta Title & Description if empty
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = $data['title'];
+        }
+        if (empty($data['meta_description'])) {
+            $source = !empty($data['excerpt']) ? $data['excerpt'] : (!empty($data['content']) ? strip_tags($data['content']) : '');
+            $data['meta_description'] = Str::limit(trim(preg_replace('/\s+/', ' ', $source)), 155, '');
+        }
+
         if ($request->hasFile('cover_image')) {
             $data['cover_image'] = $request->file('cover_image')->store('blog', 'public');
         }
@@ -82,6 +91,15 @@ class BlogPostController extends Controller
             $data['slug'] = Str::slug($data['slug']);
         } else {
             $data['slug'] = Str::slug($data['title']);
+        }
+
+        // Auto-generate SEO Meta Title & Description if empty
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = $data['title'];
+        }
+        if (empty($data['meta_description'])) {
+            $source = !empty($data['excerpt']) ? $data['excerpt'] : (!empty($data['content']) ? strip_tags($data['content']) : '');
+            $data['meta_description'] = Str::limit(trim(preg_replace('/\s+/', ' ', $source)), 155, '');
         }
 
         if ($request->hasFile('cover_image')) {

@@ -73,6 +73,15 @@ class ProjectController extends Controller
         }
         $data['slug'] = $slug;
 
+        // Auto-generate SEO Meta Title & Description if empty
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = $data['title'];
+        }
+        if (empty($data['meta_description'])) {
+            $rawDesc = !empty($data['description']) ? strip_tags($data['description']) : '';
+            $data['meta_description'] = Str::limit(trim(preg_replace('/\s+/', ' ', $rawDesc)), 155, '');
+        }
+
         // Handle cover image upload
         if ($request->hasFile('cover_image')) {
             $data['cover_image'] = $request->file('cover_image')->store('projects', 'public');
@@ -125,6 +134,15 @@ class ProjectController extends Controller
             $data['slug'] = Str::slug($data['slug']);
         } else {
             $data['slug'] = Str::slug($data['title']);
+        }
+
+        // Auto-generate SEO Meta Title & Description if empty
+        if (empty($data['meta_title'])) {
+            $data['meta_title'] = $data['title'];
+        }
+        if (empty($data['meta_description'])) {
+            $rawDesc = !empty($data['description']) ? strip_tags($data['description']) : '';
+            $data['meta_description'] = Str::limit(trim(preg_replace('/\s+/', ' ', $rawDesc)), 155, '');
         }
 
         // Handle cover image replacement

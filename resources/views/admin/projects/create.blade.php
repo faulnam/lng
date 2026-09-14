@@ -4,7 +4,7 @@
 @section('page_title', 'Create Project')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-6" x-data="projectForm()">
     
     <div class="flex items-center justify-between">
         <a href="{{ route('admin.projects.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -28,23 +28,38 @@
                 <input type="text" 
                        id="title" 
                        name="title" 
-                       value="{{ old('title') }}" 
+                       x-model="title"
+                       @input="onTitleInput()"
                        required 
-                       placeholder="e.g. Burger & Lobster - Plaza Indonesia" 
+                       placeholder="e.g. Bontang LNG Marine Terminal Expansion" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                        Slug (URL Key) <span class="text-neutral-500 font-normal lowercase">(optional, auto-generated)</span>
-                    </label>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                            Slug (URL Key)
+                        </label>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                              :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                            <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                            <span x-show="isSlugCustom">✍️ Manual Override</span>
+                        </span>
+                    </div>
                     <input type="text" 
                            id="slug" 
                            name="slug" 
-                           value="{{ old('slug') }}" 
-                           placeholder="burger-lobster-plaza-indonesia" 
+                           x-model="slug"
+                           @input="isSlugCustom = (slug.trim() !== '')"
+                           placeholder="bontang-lng-marine-terminal-expansion" 
                            class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                    <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                        <span>Terisi otomatis dari judul proyek untuk struktur tautan web.</span>
+                        <button type="button" @click="syncSlug()" class="text-accent hover:underline flex items-center gap-1">
+                            Sync dari Judul
+                        </button>
+                    </div>
                 </div>
 
                 <div>
@@ -78,7 +93,7 @@
                            id="client" 
                            name="client" 
                            value="{{ old('client') }}" 
-                           placeholder="e.g. Boga Group" 
+                           placeholder="e.g. PT Badak NGL / Pertamina" 
                            class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
                 </div>
 
@@ -90,19 +105,19 @@
                            id="location" 
                            name="location" 
                            value="{{ old('location') }}" 
-                           placeholder="e.g. Jakarta, Indonesia" 
+                           placeholder="e.g. East Kalimantan, Indonesia" 
                            class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
                 </div>
 
                 <div>
                     <label for="size" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                        Size (m²)
+                        Capacity / Scale
                     </label>
                     <input type="text" 
                            id="size" 
                            name="size" 
                            value="{{ old('size') }}" 
-                           placeholder="e.g. 758 m²" 
+                           placeholder="e.g. 22.5 MTPA / 4 Storage Tanks" 
                            class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
                 </div>
             </div>
@@ -144,9 +159,12 @@
 
             <!-- Description (Rich Text Editor) -->
             <div>
-                <label class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Project Narrative &amp; Description
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Project Narrative &amp; Technical Scope
+                    </label>
+                    <span class="text-[10px] text-neutral-500">Teks ini juga menjadi sumber auto-generate SEO Meta Description</span>
+                </div>
                 <div id="quillEditor" class="bg-neutral-950 text-white min-h-[160px] border border-neutral-800">
                     {!! old('description') !!}
                 </div>
@@ -212,26 +230,53 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-neutral-800">
                 <div>
-                    <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                        SEO Meta Title
-                    </label>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                            SEO Meta Title
+                        </label>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                              :class="isMetaTitleCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                            <span x-show="!isMetaTitleCustom">✨ Auto-Generated</span>
+                            <span x-show="isMetaTitleCustom">✍️ Manual Override</span>
+                        </span>
+                    </div>
                     <input type="text" 
                            id="meta_title" 
                            name="meta_title" 
-                           value="{{ old('meta_title') }}" 
+                           x-model="metaTitle"
+                           @input="isMetaTitleCustom = (metaTitle.trim() !== '')"
                            placeholder="Defaults to Project Title if empty" 
                            class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                    <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                        <span>Otomatis sinkron dengan Judul Proyek.</span>
+                        <button type="button" @click="syncMetaTitle()" class="text-accent hover:underline flex items-center gap-1">
+                            Sync dari Judul
+                        </button>
+                    </div>
                 </div>
 
                 <div>
-                    <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                        SEO Meta Description
-                    </label>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                            SEO Meta Description
+                        </label>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                              :class="isMetaDescriptionCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                            <span x-show="!isMetaDescriptionCustom">✨ Auto-Generated</span>
+                            <span x-show="isMetaDescriptionCustom">✍️ Manual Override</span>
+                        </span>
+                    </div>
                     <textarea id="meta_description" 
                               name="meta_description" 
+                              x-model="metaDescription"
+                              @input="isMetaDescriptionCustom = (metaDescription.trim() !== '')"
                               rows="2" 
-                              placeholder="Brief summary for search engines (150-160 chars)" 
-                              class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors">{{ old('meta_description') }}</textarea>
+                              placeholder="Otomatis diambil dari deskripsi proyek untuk Google..." 
+                              class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors"></textarea>
+                    <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                        <span>Ringkasan untuk hasil pencarian Google.</span>
+                        <span :class="metaDescription.length > 160 ? 'text-amber-400 font-semibold' : 'text-neutral-500'" x-text="metaDescription.length + '/160 karakter'"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,11 +297,60 @@
 
 @push('scripts')
 <script>
+    function projectForm() {
+        return {
+            title: @json(old('title', '')),
+            slug: @json(old('slug', '')),
+            metaTitle: @json(old('meta_title', '')),
+            metaDescription: @json(old('meta_description', '')),
+            isSlugCustom: @json(old('slug') ? true : false),
+            isMetaTitleCustom: @json(old('meta_title') ? true : false),
+            isMetaDescriptionCustom: @json(old('meta_description') ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+                if (!this.isMetaTitleCustom) {
+                    this.metaTitle = this.title;
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            },
+
+            syncMetaTitle() {
+                this.metaTitle = this.title;
+                this.isMetaTitleCustom = false;
+            },
+
+            updateMetaDescriptionFromText(text) {
+                if (!this.isMetaDescriptionCustom) {
+                    let clean = (text || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+                    this.metaDescription = clean.substring(0, 155);
+                }
+            }
+        };
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Quill !== 'undefined') {
             var quill = new Quill('#quillEditor', {
                 theme: 'snow',
-                placeholder: 'Write the architectural and spatial design story...',
+                placeholder: 'Write the project narrative, operational scope, and technical specs...',
                 modules: {
                     toolbar: [
                         [{ 'header': [2, 3, false] }],
@@ -269,6 +363,14 @@
 
             var form = document.getElementById('projectForm');
             var descriptionInput = document.getElementById('descriptionInput');
+
+            quill.on('text-change', function() {
+                var text = quill.getText();
+                var alpineComponent = document.querySelector('[x-data]')?._x_dataStack?.[0];
+                if (alpineComponent && typeof alpineComponent.updateMetaDescriptionFromText === 'function') {
+                    alpineComponent.updateMetaDescriptionFromText(text);
+                }
+            });
 
             form.addEventListener('submit', function () {
                 descriptionInput.value = quill.root.innerHTML;

@@ -4,7 +4,7 @@
 @section('page_title', 'Edit Award / Publication')
 
 @section('content')
-<div class="max-w-3xl mx-auto space-y-6">
+<div class="max-w-3xl mx-auto space-y-6" x-data="awardEditForm()">
     
     <div class="flex items-center justify-between">
         <a href="{{ route('admin.awards.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -23,6 +23,8 @@
             <input type="text" 
                    id="title" 
                    name="title" 
+                   x-model="title"
+                   @input="onTitleInput()"
                    value="{{ old('title', $award->title) }}" 
                    required 
                    class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
@@ -30,14 +32,27 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Slug (URL Key)
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Slug (URL Key)
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                        <span x-show="isSlugCustom">✍️ Manual / Saved</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="slug" 
                        name="slug" 
+                       x-model="slug"
+                       @input="isSlugCustom = true"
                        value="{{ old('slug', $award->slug) }}" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Slug URL publikasi penghargaan.</span>
+                    <button type="button" @click="syncSlug()" class="text-accent hover:underline">Re-sync</button>
+                </div>
             </div>
 
             <div>
@@ -135,6 +150,36 @@
 
 @push('scripts')
 <script>
+    function awardEditForm() {
+        return {
+            title: @json(old('title', $award->title ?? '')),
+            slug: @json(old('slug', $award->slug ?? '')),
+            isSlugCustom: @json(old('slug', $award->slug) ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            }
+        };
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Quill !== 'undefined') {
             var quill = new Quill('#quillEditor', {
@@ -142,6 +187,7 @@
                 placeholder: 'Describe the accolade and project details...',
                 modules: {
                     toolbar: [
+                        [{ 'header': [2, 3, false] }],
                         ['bold', 'italic', 'underline'],
                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
                         ['link', 'clean']

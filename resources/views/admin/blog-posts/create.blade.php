@@ -4,7 +4,7 @@
 @section('page_title', 'Write Blog Article')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
+<div class="max-w-4xl mx-auto space-y-6" x-data="blogPostForm()">
     
     <div>
         <a href="{{ route('admin.blog-posts.index') }}" class="text-xs text-neutral-400 hover:text-white uppercase tracking-wider flex items-center gap-1">
@@ -22,23 +22,39 @@
             <input type="text" 
                    id="title" 
                    name="title" 
+                   x-model="title"
+                   @input="onTitleInput()"
                    value="{{ old('title') }}" 
                    required 
-                   placeholder="e.g. Designing for the Senses: Materiality in Hospitality Architecture" 
+                   placeholder="e.g. Advancing LNG Bunkering Infrastructure Across the Indonesian Archipelago" 
                    class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    Slug (URL Key) <span class="text-neutral-500 font-normal lowercase">(optional)</span>
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="slug" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        Slug (URL Key)
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isSlugCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isSlugCustom">✨ Auto-Generated</span>
+                        <span x-show="isSlugCustom">✍️ Manual Override</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="slug" 
                        name="slug" 
-                       value="{{ old('slug') }}" 
-                       placeholder="designing-for-the-senses" 
+                       x-model="slug"
+                       @input="isSlugCustom = (slug.trim() !== '')"
+                       placeholder="advancing-lng-bunkering-infrastructure" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Terisi otomatis dari judul artikel untuk tautan ramah SEO.</span>
+                    <button type="button" @click="syncSlug()" class="text-accent hover:underline flex items-center gap-1">
+                        Sync dari Judul
+                    </button>
+                </div>
             </div>
 
             <div>
@@ -81,13 +97,18 @@
         </div>
 
         <div>
-            <label for="excerpt" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                Article Summary / Excerpt Quote
-            </label>
+            <div class="flex items-center justify-between mb-2">
+                <label for="excerpt" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                    Article Summary / Excerpt Quote
+                </label>
+                <span class="text-[10px] text-neutral-500">Kutipan singkat untuk kartu artikel &amp; referensi deskripsi SEO</span>
+            </div>
             <textarea id="excerpt" 
                       name="excerpt" 
+                      x-model="excerpt"
+                      @input="onExcerptInput()"
                       rows="2" 
-                      placeholder="Short introductory summary for card snippets..." 
+                      placeholder="Ringkasan singkat topik artikel..." 
                       class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors">{{ old('excerpt') }}</textarea>
         </div>
 
@@ -119,27 +140,56 @@
             </label>
         </div>
 
+        <!-- SEO Metadata Section -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-neutral-800">
             <div>
-                <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    SEO Meta Title
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="meta_title" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        SEO Meta Title
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isMetaTitleCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isMetaTitleCustom">✨ Auto-Generated</span>
+                        <span x-show="isMetaTitleCustom">✍️ Manual Override</span>
+                    </span>
+                </div>
                 <input type="text" 
                        id="meta_title" 
                        name="meta_title" 
-                       value="{{ old('meta_title') }}" 
+                       x-model="metaTitle"
+                       @input="isMetaTitleCustom = (metaTitle.trim() !== '')"
                        placeholder="Defaults to Article Title if empty" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Otomatis sinkron dengan Judul Artikel.</span>
+                    <button type="button" @click="syncMetaTitle()" class="text-accent hover:underline flex items-center gap-1">
+                        Sync dari Judul
+                    </button>
+                </div>
             </div>
 
             <div>
-                <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
-                    SEO Meta Description
-                </label>
+                <div class="flex items-center justify-between mb-2">
+                    <label for="meta_description" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300">
+                        SEO Meta Description
+                    </label>
+                    <span class="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 border"
+                          :class="isMetaDescriptionCustom ? 'text-neutral-400 bg-neutral-800/60 border-neutral-700' : 'text-accent bg-accent/10 border-accent/20'">
+                        <span x-show="!isMetaDescriptionCustom">✨ Auto-Generated</span>
+                        <span x-show="isMetaDescriptionCustom">✍️ Manual Override</span>
+                    </span>
+                </div>
                 <textarea id="meta_description" 
                           name="meta_description" 
+                          x-model="metaDescription"
+                          @input="isMetaDescriptionCustom = (metaDescription.trim() !== '')"
                           rows="2" 
-                          class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors">{{ old('meta_description') }}</textarea>
+                          placeholder="Otomatis diambil dari excerpt / konten artikel..." 
+                          class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-2.5 focus:outline-none focus:border-white transition-colors"></textarea>
+                <div class="flex items-center justify-between text-[10px] text-neutral-500 mt-1">
+                    <span>Deskripsi untuk mesin pencari Google (150-160 karakter).</span>
+                    <span :class="metaDescription.length > 160 ? 'text-amber-400 font-semibold' : 'text-neutral-500'" x-text="metaDescription.length + '/160 karakter'"></span>
+                </div>
             </div>
         </div>
 
@@ -158,6 +208,63 @@
 
 @push('scripts')
 <script>
+    function blogPostForm() {
+        return {
+            title: @json(old('title', '')),
+            slug: @json(old('slug', '')),
+            excerpt: @json(old('excerpt', '')),
+            metaTitle: @json(old('meta_title', '')),
+            metaDescription: @json(old('meta_description', '')),
+            isSlugCustom: @json(old('slug') ? true : false),
+            isMetaTitleCustom: @json(old('meta_title') ? true : false),
+            isMetaDescriptionCustom: @json(old('meta_description') ? true : false),
+
+            generateSlug(text) {
+                return (text || '')
+                    .toString()
+                    .toLowerCase()
+                    .trim()
+                    .replace(/&/g, '-and-')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/[\s-]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            },
+
+            onTitleInput() {
+                if (!this.isSlugCustom) {
+                    this.slug = this.generateSlug(this.title);
+                }
+                if (!this.isMetaTitleCustom) {
+                    this.metaTitle = this.title;
+                }
+            },
+
+            onExcerptInput() {
+                if (!this.isMetaDescriptionCustom && this.excerpt) {
+                    let clean = this.excerpt.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+                    this.metaDescription = clean.substring(0, 155);
+                }
+            },
+
+            syncSlug() {
+                this.slug = this.generateSlug(this.title);
+                this.isSlugCustom = false;
+            },
+
+            syncMetaTitle() {
+                this.metaTitle = this.title;
+                this.isMetaTitleCustom = false;
+            },
+
+            updateMetaDescriptionFromQuill(text) {
+                if (!this.isMetaDescriptionCustom && (!this.excerpt || this.excerpt.trim() === '')) {
+                    let clean = (text || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+                    this.metaDescription = clean.substring(0, 155);
+                }
+            }
+        };
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof Quill !== 'undefined') {
             var quill = new Quill('#quillEditor', {
@@ -175,6 +282,14 @@
 
             var form = document.getElementById('blogForm');
             var contentInput = document.getElementById('contentInput');
+
+            quill.on('text-change', function() {
+                var text = quill.getText();
+                var alpineComponent = document.querySelector('[x-data]')?._x_dataStack?.[0];
+                if (alpineComponent && typeof alpineComponent.updateMetaDescriptionFromQuill === 'function') {
+                    alpineComponent.updateMetaDescriptionFromQuill(text);
+                }
+            });
 
             form.addEventListener('submit', function () {
                 contentInput.value = quill.root.innerHTML;
