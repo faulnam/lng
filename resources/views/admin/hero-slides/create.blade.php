@@ -25,10 +25,8 @@
                     <option value="about" {{ old('page') === 'about' ? 'selected' : '' }}>About Us</option>
                     <option value="services" {{ old('page') === 'services' ? 'selected' : '' }}>Services</option>
                     <option value="clients" {{ old('page') === 'clients' ? 'selected' : '' }}>Clients</option>
-                    <option value="awards" {{ old('page') === 'awards' ? 'selected' : '' }}>Awards</option>
                     <option value="blog" {{ old('page') === 'blog' ? 'selected' : '' }}>Blog</option>
                     <option value="contact" {{ old('page') === 'contact' ? 'selected' : '' }}>Contact</option>
-                    <option value="career" {{ old('page') === 'career' ? 'selected' : '' }}>Career</option>
                 </select>
             </div>
 

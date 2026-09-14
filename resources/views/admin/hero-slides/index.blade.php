@@ -14,10 +14,8 @@
                 <option value="about" {{ request('page_filter') === 'about' ? 'selected' : '' }}>About Us</option>
                 <option value="services" {{ request('page_filter') === 'services' ? 'selected' : '' }}>Services</option>
                 <option value="clients" {{ request('page_filter') === 'clients' ? 'selected' : '' }}>Clients</option>
-                <option value="awards" {{ request('page_filter') === 'awards' ? 'selected' : '' }}>Awards</option>
                 <option value="blog" {{ request('page_filter') === 'blog' ? 'selected' : '' }}>Blog</option>
                 <option value="contact" {{ request('page_filter') === 'contact' ? 'selected' : '' }}>Contact</option>
-                <option value="career" {{ request('page_filter') === 'career' ? 'selected' : '' }}>Career</option>
             </select>
             <button type="submit" class="px-4 py-2 bg-neutral-800 text-white hover:bg-neutral-700 text-xs font-semibold uppercase tracking-wider">
                 Filter Page

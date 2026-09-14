@@ -17,10 +17,10 @@
         </div>
         <div class="flex-1 cursor-pointer" @click="openChat()">
             <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-black">
-                LNG Energy Assistant
+                Nusantara AI Assistant
             </p>
             <p class="text-xs text-neutral-600 leading-snug mt-1 font-normal">
-                Butuh data spesifikasi LNG, virtual pipeline, atau skema kontrak pasokan? Tanya di sini.
+                Ada pertanyaan seputar LNG, energi, sains, atau topik lainnya? Tanya di sini.
             </p>
         </div>
         <button @click.stop="dismissTeaser()" class="text-neutral-400 hover:text-black text-base p-0.5 leading-none transition-colors" title="Tutup">
@@ -66,7 +66,7 @@
                         NUSANTARA LNG
                     </h3>
                     <p class="text-[9px] tracking-[0.2em] uppercase text-neutral-400 mt-1">
-                        Corporate Energy AI Assistant
+                        Intelligent AI Assistant
                     </p>
                 </div>
             </div>
@@ -99,15 +99,15 @@
             <!-- Welcome Info Card (Minimal Clean) -->
             <div class="bg-neutral-50 p-4 border border-neutral-200 space-y-3">
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Pusat Informasi Energi B2B</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Asisten AI Cerdas &amp; Adaptif</span>
                     <p class="text-xs text-neutral-700 leading-relaxed mt-1">
-                        Selamat datang di <strong>PT Nusantara LNG Energi</strong>. Konsultasikan spesifikasi teknis gas alam cair (LNG), skema kontrak pasokan (FOB/DES), logistik virtual pipeline ISO tank, atau kebutuhan energi industri Anda.
+                        Halo! Saya siap berdiskusi dan menjawab berbagai pertanyaan Anda — mulai dari spesifikasi teknis gas alam cair (LNG), skema pasokan &amp; logistik, hingga topik sains, teknologi, pemrograman, dan konsultasi umum lainnya.
                     </p>
                 </div>
                 
                 <!-- Quick Suggestions Chips (Clean Outline Style) -->
                 <div class="pt-2 border-t border-neutral-200">
-                    <p class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-2">Topik Pertanyaan Populer:</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-2">Topik Populer:</p>
                     <div class="flex flex-col gap-1.5">
                         <template x-for="(sug, index) in suggestions" :key="index">
                             <button @click="sendPredefined(sug.prompt)" 
@@ -126,7 +126,7 @@
                     
                     <!-- Sender & Time Tag -->
                     <div class="flex items-center gap-1.5 mb-1 text-[9px] uppercase tracking-wider text-neutral-400 px-0.5">
-                        <span x-text="msg.role === 'user' ? 'Anda' : 'Nusantara LNG AI'"></span>
+                        <span x-text="msg.role === 'user' ? 'Anda' : 'Nusantara AI'"></span>
                         <span>•</span>
                         <span x-text="msg.time"></span>
                     </div>
@@ -162,7 +162,7 @@
                  class="flex flex-col items-start space-y-1">
                 
                 <div class="text-[9px] uppercase tracking-wider text-neutral-400 px-0.5">
-                    Nusantara LNG AI • Memproses
+                    Nusantara AI • Memproses
                 </div>
 
                 <div class="bg-neutral-50 border border-neutral-200 px-4 py-3 max-w-[90%] flex items-center gap-3">
@@ -191,7 +191,7 @@
                 <div class="flex-1 bg-white border border-neutral-300 focus-within:border-black transition-colors">
                     <input type="text" 
                            x-model="userInput" 
-                           placeholder="Ketik pertanyaan LNG atau konsultasi energi Anda..." 
+                           placeholder="Tanyakan apa saja seputar LNG, energi, sains, atau topik lainnya..." 
                            class="w-full px-3 py-2.5 bg-transparent border-0 text-xs text-black placeholder:text-neutral-400 focus:outline-none"
                            :disabled="isThinking">
                 </div>

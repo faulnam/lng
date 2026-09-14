@@ -26,10 +26,8 @@
                     <option value="about" {{ old('page', $heroSlide->page) === 'about' ? 'selected' : '' }}>About Us</option>
                     <option value="services" {{ old('page', $heroSlide->page) === 'services' ? 'selected' : '' }}>Services</option>
                     <option value="clients" {{ old('page', $heroSlide->page) === 'clients' ? 'selected' : '' }}>Clients</option>
-                    <option value="awards" {{ old('page', $heroSlide->page) === 'awards' ? 'selected' : '' }}>Awards</option>
                     <option value="blog" {{ old('page', $heroSlide->page) === 'blog' ? 'selected' : '' }}>Blog</option>
                     <option value="contact" {{ old('page', $heroSlide->page) === 'contact' ? 'selected' : '' }}>Contact</option>
-                    <option value="career" {{ old('page', $heroSlide->page) === 'career' ? 'selected' : '' }}>Career</option>
                 </select>
             </div>
 

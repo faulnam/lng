@@ -41,26 +41,17 @@
         <!-- Middle Row: 4 Column Navigation & Details -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-14 border-b border-neutral-900 text-xs">
             
-            <!-- Column 1: Energy Newsletter -->
+            <!-- Column 1: Corporate Profile -->
             <div class="space-y-4">
-                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Energy Market Intelligence</h4>
+                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Corporate Profile</h4>
                 <p class="text-neutral-400 text-[11px] leading-relaxed">
-                    Subscribe to our quarterly LNG market reports, offtake updates, and decarbonization briefings.
+                    {{ \App\Models\SiteSetting::get('company_description', 'PT Nusantara LNG Energi is Indonesia’s integrated cryogenic clean energy infrastructure provider, delivering LNG supply, virtual pipelines, and industrial regasification solutions.') }}
                 </p>
-                <form action="{{ url('/newsletter/subscribe') }}" method="POST" class="space-y-3">
-                    @csrf
-                    <div class="flex flex-col space-y-2">
-                        <input type="email" 
-                               name="email" 
-                               required 
-                               placeholder="Corporate Email Address" 
-                               class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors placeholder:text-neutral-600">
-                        <button type="submit" 
-                                class="w-full bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest2 py-3 font-semibold transition-colors">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
+                <div class="pt-2">
+                    <a href="{{ url('/about-us') }}" class="inline-block text-[11px] uppercase tracking-widest font-semibold text-white border-b border-white hover:text-accent hover:border-accent transition-colors pb-0.5">
+                        Company Overview &rarr;
+                    </a>
+                </div>
             </div>
 
             <!-- Column 2: Jakarta Headquarters -->

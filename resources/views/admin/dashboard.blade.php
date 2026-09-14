@@ -26,8 +26,8 @@
         </div>
     </div>
 
-    <!-- 8 Analytical Counter Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    <!-- 5 Analytical Counter Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
         
         <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
             <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Products &amp; Lines</div>
@@ -48,35 +48,17 @@
         </div>
 
         <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
-            <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Accreditations</div>
-            <div class="text-3xl font-bold text-white">{{ $stats['awards'] }}</div>
-            <a href="{{ url('/admin/awards') }}" class="text-[10px] text-accent hover:underline uppercase tracking-wider inline-block">View Awards &rarr;</a>
-        </div>
-
-        <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
             <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Energy Articles</div>
             <div class="text-3xl font-bold text-white">{{ $stats['posts'] }}</div>
             <a href="{{ url('/admin/blog-posts') }}" class="text-[10px] text-accent hover:underline uppercase tracking-wider inline-block">Manage Articles &rarr;</a>
         </div>
 
-        <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
-            <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Job Vacancies</div>
-            <div class="text-3xl font-bold text-white">{{ $stats['vacancies'] }}</div>
-            <a href="{{ url('/admin/job-vacancies') }}" class="text-[10px] text-accent hover:underline uppercase tracking-wider inline-block">Manage Careers &rarr;</a>
-        </div>
-
-        <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
+        <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2 col-span-2 md:col-span-1">
             <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Commercial Inquiries</div>
             <div class="text-3xl font-bold {{ $stats['unread_messages'] > 0 ? 'text-accent' : 'text-white' }}">
                 {{ $stats['unread_messages'] }}
             </div>
             <a href="{{ url('/admin/messages') }}" class="text-[10px] text-accent hover:underline uppercase tracking-wider inline-block">Open Inbox &rarr;</a>
-        </div>
-
-        <div class="bg-neutral-900 border border-neutral-800 p-5 space-y-2">
-            <div class="text-xs uppercase tracking-widest text-neutral-500 font-semibold">Subscribers</div>
-            <div class="text-3xl font-bold text-white">{{ $stats['subscribers'] }}</div>
-            <a href="{{ url('/admin/subscribers') }}" class="text-[10px] text-accent hover:underline uppercase tracking-wider inline-block">View Subscribers &rarr;</a>
         </div>
 
     </div>
