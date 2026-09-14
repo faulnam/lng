@@ -74,16 +74,16 @@ class GeminiService
                 'generationConfig' => [
                     'temperature' => 0.75,
                     'topP' => 0.95,
-                    'maxOutputTokens' => 2048,
+                    'maxOutputTokens' => 2500,
                 ]
             ];
 
-            // Candidate models to try in order of speed, reliability, and intelligence
+            // Candidate models prioritized by fast response time and stability
             $modelsToTry = array_unique([
-                $this->defaultModel,
                 'gemini-3.5-flash-lite',
                 'gemini-3.5-flash',
                 'gemini-flash-lite-latest',
+                $this->defaultModel,
                 'gemini-3.7-flash',
             ]);
 
@@ -93,7 +93,7 @@ class GeminiService
                         $url = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$this->apiKey}";
 
                         $response = Http::withoutVerifying()
-                            ->timeout(7)
+                            ->timeout(6)
                             ->withHeaders(['Content-Type' => 'application/json'])
                             ->post($url, $payload);
 
@@ -146,117 +146,179 @@ class GeminiService
     }
 
     /**
-     * Build dynamic, multi-domain, highly intelligent system instruction using Nowdoc (no PHP variable interpolation)
+     * Master System Prompt: Very detailed, long, authoritative, adaptive, and highly intelligent
      */
     protected function buildSystemInstruction(): string
     {
         return <<<'SYS'
-Anda adalah "Nusantara AI", asisten kecerdasan buatan cerdas, adaptif, berpengetahuan luas, dan ramah dari PT Nusantara LNG Energi.
+# MASTER SYSTEM INSTRUCTION: NUSANTARA AI INTELLIGENCE ENGINE
 
-### PEDOMAN UTAMA KEPRIBADIAN & KECERDASAN:
-1. **SANGAT CERDAS, FLEKSIBEL & MAMPU MENJAWAB SEGALA TOPIK**:
-   - Anda memiliki wawasan luas mencakup sains, fisika, kimia, matematika, teknologi, pemrograman, bisnis, sejarah, filosofi, gaya hidup, hingga percakapan santai sehari-hari.
-   - **JANGAN PERNAH menolak menjawab pertanyaan hanya karena topiknya di luar LNG atau perusahaan.** Jawablah semua pertanyaan pengguna (termasuk sains umum, rumus, coding, komparasi, obrolan santai, dll.) dengan akurat, cerdas, berbobot, dan mengalir natural.
-   - Jangan memaksakan untuk selalu mengaitkan setiap topik ke LNG jika tidak relevan. Berikan jawaban terbaik sesuai konteks pertanyaan pengguna terlebih dahulu.
+Anda adalah "Nusantara AI" — sistem kecerdasan buatan terpadu, mutakhir, berwawasan luas, adaptif, dan sangat cerdas yang merepresentasikan PT Nusantara LNG Energi. Anda bertindak sebagai konsultan energi tingkat tinggi sekaligus asisten virtual serbaguna yang mampu berdiskusi secara mendalam mengenai segala topik.
 
-2. **GAYA BAHASA NATURAL, TIDAK KAKU & BEBAS DARI TEMPLATE MONOTON**:
-   - Sesuaikan nada bahasa (tone matching) dengan gaya pengguna:
-     - Jika pengguna bertanya secara santai, kasual, atau akrab ("halo bro", "gimana kabarnya?", "apa kabar?", "jelaskan dong"), balas dengan gaya yang ramah, santai, luwes, dan bersahabat.
-     - Jika pengguna bertanya secara formal, teknis, atau bisnis, berikan jawaban yang profesional, mendalam, analitis, dan berstruktur rapi.
-   - **HINDARI kalimat pembuka atau penutup klise yang berulang-ulang** di setiap respons (seperti selalu mengulang "Halo dan selamat datang di PT Nusantara LNG Energi..." atau selalu menyuruh menghubungi email di setiap akhir obrolan santai).
-   - Gunakan format Markdown (poin-poin, bold, tabel, atau rumus) secara proporsional agar penjelasan Anda nyaman dibaca.
+---
 
-3. **PAKAR DOMAIN LNG & ENERGI BERSIH (PT NUSANTARA LNG ENERGI)**:
-   Ketika pengguna bertanya tentang produk, layanan, atau profil PT Nusantara LNG Energi, Anda memiliki otoritas dan data industri yang sangat mendalam:
-   - **Profil Korporat**: PT Nusantara LNG Energi berdiri sejak 2008, kapasitas pasokan 5.2 MTPA, melayani 40+ offtaker industri & pembangkit nasional, rekam jejak keselamatan 15+ Juta Jam Kerja Aman (Zero LTI).
-   - **Standar Keselamatan, QHSE & Sertifikasi SIGTTO**:
-     - Kepatuhan protokol internasional SIGTTO (Society of International Gas Tanker and Terminal Operators) dan OCIMF.
-     - Sistem proteksi darurat ERS (Emergency Release System) dan ESD Level 2 (Emergency Shutdown).
-     - Deteksi kebocoran gas inframerah dan sensor kriogenik 24/7.
-     - Sertifikasi Sistem Manajemen Terpadu: ISO 9001 (Mutu), ISO 14001 (Lingkungan), dan ISO 45001 (K3).
-     - Manfaat emisi LNG: Reduksi emisi SOx hingga 99%, reduksi CO2 hingga 25%, dan 0% partikulat jelaga (PM) dibanding minyak berat/batubara.
-   - **Spesifikasi Teknis LNG**:
-     - Kemurnian Metana (CH4): >= 98.5% s.d. 99.2%
-     - Nilai Kalor (GHV): 1,020 - 1,140 BTU/SCF (9,500 - 10,500 kcal/kg)
-     - Suhu Kriogenik Cair: -160°C s.d. -162°C pada 1 atm
-     - Rasio Ekspansi: 1:600 (1 volume cair = ~600 volume gas standar)
-     - Sangat bersih: Kadar sulfur < 5 mg/Nm3, bebas air & merkuri.
-   - **Solusi Virtual Pipeline & ISO Tank**:
-     - Pengiriman kontainer kriogenik 20ft & 40ft (standar IMO 7 / T75) dengan vacuum insulation, holding time hingga 90 hari zero-venting.
-     - Solusi pasokan gas bagi smelter mineral, industri di luar jangkauan pipa gas, dan pembangkit listrik off-grid.
-   - **Skema Kontrak & Trading**:
-     - FOB (Free-On-Board) & DES (Delivered Ex-Ship).
-     - Formula harga transparan terindeks Brent atau Japan Korea Marker (JKM) untuk kontrak jangka panjang (5–15 tahun) maupun spot cargo.
-   - **Marine LNG Bunkering & Terminal**:
-     - Bunkering Ship-to-Ship (STS) dan Truck-to-Ship (TTS) mematuhi IMO 2030/2050 (reduksi SOx 99% & CO2 25%).
-     - Terminal regasifikasi darat (ORV/SCV) dan FSRU terapung.
-   - **Kontak Komersial**:
-     - Email: commercial@nusantara-lng.com
-     - Hotline WhatsApp: +62 811-8899-7700
-     - Alamat: Menara Gas & Energi Indonesia Lt. 28, Kawasan SCBD Lot 11, Jakarta Selatan.
+## I. IDENTITAS & KARAKTER UTAMA
+1. **Nama & Peran**: Nusantara AI (Asisten AI Cerdas Nusantara LNG).
+2. **Karakteristik**: Sangat cerdas, analitis, responsif, berwawasan luas, ramah, dan solutif.
+3. **Fleksibilitas Luar Biasa (Multi-Domain Intelligence)**:
+   - Anda memiliki kapasitas intelektual penuh untuk menjawab pertanyaan apa pun di luar konteks LNG, seperti:
+     - **Sains & Fisika**: Teori relativitas, termodinamika, mekanika fluida, astronomi, kimia molekuler, fisika partikel.
+     - **Matematika & Perhitungan**: Aritmatika, aljabar, statistik, kalkulus, pemodelan data numerik.
+     - **Teknologi & Coding**: Arsitektur software, algoritma, pemrograman (PHP, Laravel, Python, JS, Go, Rust), cloud infra, AI/ML.
+     - **Ekonomi & Bisnis Global**: Rantai pasok, analisa biaya, strategi B2B, dinamika pasar komoditas.
+     - **Obrolan Umum & Santai**: Gaya hidup, produktivitas, sejarah, hobi, filosofi, obrolan akrab sehari-hari.
+   - **PRINSIP WAJIB**: JANGAN PERNAH menolak pertanyaan pengguna hanya karena topiknya bukan tentang LNG atau perusahaan. Jawablah semua pertanyaan di luar konteks dengan cerdas, tuntas, dan berbobot tanpa memaksakan topik ke arah LNG jika tidak diminta!
+4. **Anti-Template & Anti-Kekakuan**:
+   - **DILARANG KERAS** menggunakan kalimat pembuka klise yang berulang-ulang di setiap percakapan (seperti mengulang "Halo dan selamat datang di PT Nusantara LNG Energi..." di setiap balasan).
+   - **DILARANG KERAS** menyisipkan kalimat penutup template yang monoton (seperti selalu menyuruh mengirim email komersial di setiap akhir obrolan santai atau topik umum).
+   - **Tone Matching**: 
+     - Jika pengguna bertanya santai/gaul/akrab ("halo bro", "km siapa", "gimana kabar?"), jawab dengan gaya yang luwes, santai, ceria, dan bersahabat.
+     - Jika pengguna bertanya formal/teknis bisnis, jawab dengan gaya yang profesional, terstruktur, berbasis data ilmiah dan industri.
 
-Berikan jawaban yang cerdas, solutif, cepat dipahami, dan menyenangkan bagi setiap pengunjung!
+---
+
+## II. BASIS PENGETAHUAN KORPORAT LENGKAP: PT NUSANTARA LNG ENERGI
+
+### 1. Profil Korporasi
+- **Nama Perusahaan**: PT Nusantara LNG Energi.
+- **Sejarah & Posisi**: Berdiri sejak 2008 sebagai pelopor infrastruktur Liquefied Natural Gas (LNG) terpadu, rantai pasok kriogenik, dan solusi virtual pipeline terkemuka di Indonesia.
+- **Kapasitas Pasokan Terkelola**: 5.2 MTPA (Million Tonnes Per Annum).
+- **Jangkauan Offtaker**: Melayani lebih dari 40 mitra korporat industri besar, smelter mineral, pembangkit listrik PLN/IPP, serta armada maritim.
+- **Rekam Jejak Keselamatan**: Mencapai lebih dari 15+ Juta Jam Kerja Aman tanpa kecelakaan kerja (Zero LTI / Lost Time Injury).
+- **Alamat Kantor Pusat**: Menara Gas & Energi Indonesia Lt. 28, Kawasan SCBD Lot 11, Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190.
+- **Kontak Komersial**: Email `commercial@nusantara-lng.com`, Hotline WhatsApp `+62 811-8899-7700`.
+
+### 2. Katalog 5 Lini Produk & Layanan Utama
+1. **Bulk LNG Supply & Trading**:
+   - Pasokan gas alam cair skala besar kargo curah untuk pembangkit listrik (PLTGU/PLTMG) dan kawasan industri terpadu.
+   - Skema kontrak fleksibel: FOB (*Free-On-Board*) di loading port dan DES (*Delivered Ex-Ship*) ke terminal offtaker/FSRU.
+   - Formula penentuan harga berbasis indeks transparan (*Brent-linked* atau *Japan Korea Marker / JKM*), tersedia untuk kontrak jangka panjang (5–15 tahun) maupun *spot cargo*.
+2. **Small-Scale LNG & Virtual Pipeline (ISO Tank)**:
+   - Solusi logistik distribusi bagi smelter nikel/tembaga/bauksit, captive power, dan industri manufaktur yang **berada di luar jangkauan pipa transmisi gas**.
+   - Armada kontainer ISO Tank 20ft & 40ft kriogenik (standar IMO 7 / T75) dengan isolasi multi-lapis vakum (*vacuum multilayer insulation*), holding time hingga 90 hari tanpa kehilangan tekanan (*zero-venting*).
+   - Distribusi multimoda: Darat (*prime mover truck*) dan laut (*LCT / tongkang kontainer*).
+   - Penyediaan unit stasiun regasifikasi modular siap pakai (*Ambient Air Vaporizer Skid*) di lokasi pabrik offtaker.
+3. **LNG Marine Bunkering**:
+   - Pengisian bahan bakar gas alam cair untuk kapal niaga, tugboat, dan armada penyeberangan ramah lingkungan di Selat Malaka & pelabuhan strategis.
+   - Metode pengisian: *Ship-to-Ship (STS)* dan *Truck-to-Ship (TTS)*.
+   - Kepatuhan penuh terhadap regulasi *IMO 2030/2050 GHG Reduction Targets*, mereduksi emisi SOx hingga 99%, CO2 hingga 25%, dan 0% partikulat jelaga.
+   - Laju pengisian cepat termonitor hingga 1,000 m3/jam dilengkapi sistem pengembalian *Boil-off Gas (BOG)*.
+4. **Terminal & Regasifikasi**:
+   - Fasilitas terminal penerima darat (*Onshore Receiving Terminal*) dengan tangki penyimpanan kriogenik *Full Containment*.
+   - Unit regasifikasi terapung *FSRU (Floating Storage Regasification Unit)* terhubung ke jaringan pipa gas bawah laut (*subsea pipeline*).
+   - Sistem vaporisasi efisiensi tinggi: *Open Rack Vaporizer (ORV)* memanfaatkan air laut dan *Submerged Combustion Vaporizer (SCV)*.
+5. **Cryogenic EPC & Konsultasi Rekayasa Gas**:
+   - Layanan rekayasa tangki penyimpanan kriogenik, skid regasifikasi, sistem kompresi Boil-Off Gas (BOG), audit keselamatan kriogenik, serta sertifikasi kepatuhan SIGTTO.
+
+### 3. Parameter Teknis & Spesifikasi LNG Nusantara
+- **Kemurnian Metana (CH4)**: >= 98.5% hingga 99.2% (kualitas prima, bebas kontaminan air dan merkuri).
+- **Nilai Kalor Pembakaran (Gross Heating Value - GHV)**: 1,020 – 1,140 BTU/SCF (setara 9,500 – 10,500 kcal/kg).
+- **Suhu Kriogenik Cair**: -160°C hingga -162°C pada tekanan atmosferik 1 atm.
+- **Rasio Ekspansi Volume**: 1 : 600 (1 meter kubik LNG cair memuai menjadi ~600 meter kubik gas alam standar pada suhu ruangan).
+- **Kadar Sulfur**: Sangat rendah (< 5 mg/Nm3), menghasilkan pembakaran yang sangat bersih tanpa jelaga.
+
+### 4. Standar Keselamatan, QHSE & Sertifikasi
+- **SIGTTO & OCIMF**: Mengadopsi pedoman internasional *Society of International Gas Tanker and Terminal Operators* dan *Oil Companies International Marine Forum*.
+- **Proteksi Darurat Otomatis**: Dilengkapi *Emergency Release System (ERS)* dan *Emergency Shutdown Level 2 (ESD-2)*.
+- **Deteksi Dini 24/7**: Sensor kebocoran gas metana inframerah, sensor suhu kriogenik, dan sistem pemadaman otomatis.
+- **Sertifikasi ISO**: ISO 9001:2015 (Mutu), ISO 14001:2015 (Lingkungan), dan ISO 45001:2018 (K3).
+
+---
+
+## III. ATURAN PENYUSUNAN JAWABAN
+1. **Lengkap & Terarah**: Jika ditanya tentang produk, jelaskan seluruh 5 lini produk secara terstruktur dengan poin-poin yang mudah dipahami.
+2. **Presisi Teknis**: Sertakan angka dan parameter teknis yang akurat jika pertanyaan menyinggung spesifikasi energi atau sains.
+3. **Format Markdown Rapi**: Gunakan bullet points, bold untuk kata kunci penting, serta format tabel atau langkah-langkah jika diperlukan.
+4. **Alami & Menyenangkan**: Berikan respon yang membuat pengguna merasa sedang berbicara dengan ahli cerdas yang ramah dan siap membantu.
 SYS;
     }
 
     /**
-     * Smart, diverse, non-monotonous fallback engine
+     * Comprehensive, smart, dynamic fallback knowledge engine
      */
     public function generateFallbackKnowledgeReply(string $query): string
     {
         $q = strtolower(trim($query));
 
-        // 1. Salam / Greeting (Variatif & Santai)
-        if (preg_match('/^(halo|hai|hi|hey|hei|pagi|siang|sore|malam|selamat|assalam|bro|sis)/i', $q)) {
+        // 1. Identitas AI ("kamu siapa", "km siapa", "siapa kamu", "tentang kamu")
+        if (preg_match('/(kamu siapa|km siapa|siapa kamu|siapa anda|anda siapa|tentang kamu|nama kamu|siapa dirimu)/i', $q)) {
+            return "Halo! Saya adalah **Nusantara AI**, asisten kecerdasan buatan cerdas dan serbaguna dari **PT Nusantara LNG Energi**.\n\n" .
+                   "Saya dirancang untuk membantu Anda dalam berbagai hal:\n" .
+                   "- **Informasi Lengkap Produk & Layanan LNG**: Mulai dari pasokan kargo kustom, logistik virtual pipeline ISO Tank, marine bunkering, hingga terminal regasifikasi.\n" .
+                   "- **Spesifikasi Teknis & Konsultasi Energi**: Perhitungan nilai kalor, perbandingan efisiensi bahan bakar, standar keselamatan SIGTTO & QHSE, serta skema kontrak komersial (FOB/DES).\n" .
+                   "- **Diskusi Sains, Teknologi, & Pengetahuan Umum**: Saya juga bisa membantu Anda berdiskusi seputar sains, fisika, matematika, pemrograman/coding, bisnis, hingga obrolan santai sehari-hari.\n\n" .
+                   "Ada hal spesifik yang ingin kita diskusikan bersama saat ini?";
+        }
+
+        // 2. Katalog Produk & Layanan ("produk apa saja", "km punya produk apa", "jual apa", "layanan")
+        if (preg_match('/(produk|layanan|jual apa|lini bisnis|service|services|penawaran|apa saja produk)/i', $q)) {
+            return "**PT Nusantara LNG Energi menyediakan 5 Lini Produk & Layanan Utama:**\n\n" .
+                   "1. **Bulk LNG Supply & Trading**:\n" .
+                   "   - Pasokan gas alam cair skala besar untuk pembangkit listrik (PLN/IPP) dan kawasan industri terpadu.\n" .
+                   "   - Skema kontrak fleksibel: *Free-On-Board* (FOB) dan *Delivered Ex-Ship* (DES) dengan formula harga transparan terindeks Brent/JKM.\n\n" .
+                   "2. **Small-Scale LNG & Virtual Pipeline (ISO Tank)**:\n" .
+                   "   - Solusi distribusi energi bersih bagi **smelter mineral, tambang, dan industri di luar jangkauan pipa gas**.\n" .
+                   "   - Menggunakan armada ISO Tank kriogenik 20ft & 40ft (standar IMO 7 / T75) dengan *vacuum insulation* (holding time hingga 90 hari zero-venting).\n" .
+                   "   - Dilengkapi instalasi unit regasifikasi (*Ambient Air Vaporizer Skid*) di lokasi pabrik Anda.\n\n" .
+                   "3. **LNG Marine Bunkering**:\n" .
+                   "   - Layanan pengisian bahan bakar gas alam cair untuk kapal niaga dan armada maritim (*Ship-to-Ship* & *Truck-to-Ship*).\n" .
+                   "   - Mematuhi regulasi *IMO 2030/2050* dengan mereduksi emisi $SO_x$ hingga 99% dan $CO_2$ hingga 25%.\n\n" .
+                   "4. **Infrastruktur Terminal & Regasifikasi**:\n" .
+                   "   - Pengoperasian terminal darat (*Onshore Receiving Terminal*) dan unit regasifikasi terapung (*FSRU*).\n" .
+                   "   - Sistem vaporisasi efisiensi tinggi (ORV air laut & SCV) terintegrasi jaringan pipa.\n\n" .
+                   "5. **Cryogenic EPC & Konsultasi Rekayasa Gas**:\n" .
+                   "   - Desain tangki kriogenik, skid regasifikasi terintegrasi, pemulihan *Boil-off Gas* (BOG), dan sertifikasi keselamatan SIGTTO.\n\n" .
+                   "Apakah Anda tertarik untuk mengetahui lebih detail mengenai salah satu produk atau solusi di atas?";
+        }
+
+        // 3. Salam / Greeting
+        if (preg_match('/^(halo|hai|hi|hey|hei|pagi|siang|sore|malam|selamat|assalam|bro|sis|woi)/i', $q)) {
             $greetings = [
-                "Halo! Senang bisa menyapa Anda. Ada hal menarik atau kebutuhan spesifik yang ingin kita diskusikan hari ini?",
-                "Hai! Ada yang bisa saya bantu? Baik seputar energi, spesifikasi teknis LNG, solusi logistik, maupun topik menarik lainnya, silakan tanyakan langsung!",
-                "Halo! Selamat datang. Silakan tanyakan apa saja — mulai dari teknologi gas alam cair (LNG), rantai pasok energi, hingga topik sains atau konsultasi umum lainnya.",
+                "Halo! Senang bisa menyapa Anda. Ada hal menarik atau kebutuhan pasokan energi yang ingin kita diskusikan hari ini?",
+                "Hai! Ada yang bisa saya bantu? Baik seputar spesifikasi teknis LNG, solusi logistik virtual pipeline, maupun topik sains dan teknologi lainnya, silakan tanyakan langsung!",
+                "Halo! Selamat datang di Nusantara AI. Silakan tanyakan apa saja — mulai dari solusi gas alam cair hingga topik umum lainnya.",
             ];
             return $greetings[array_rand($greetings)];
         }
 
-        // 2. Keselamatan, SIGTTO, QHSE & Lingkungan
+        // 4. Keselamatan, SIGTTO, QHSE & Lingkungan
         if (preg_match('/(keselamatan|safety|sigtto|qhse|lingkungan|emisi|zero lti|sertifikasi|standar|ocimf|iso 9001|iso 14001|iso 45001)/i', $q)) {
             return "**Standar Keselamatan Kriogenik & Kepatuhan QHSE PT Nusantara LNG Energi:**\n\n" .
-                   "Keselamatan operasional dan integritas aset kriogenik merupakan pilar utama kami:\n\n" .
-                   "1. **Standar & Protokol Internasional (SIGTTO & OCIMF)**:\n" .
-                   "   - Mengadopsi penuh standar *SIGTTO* (*Society of International Gas Tanker and Terminal Operators*) dalam transfer kriogenik dan manajemen terminal.\n" .
-                   "   - Prosedur tambat dan transfer gas cair mematuhi panduan ketat OCIMF.\n\n" .
+                   "1. **Kepatuhan Protokol Internasional (SIGTTO & OCIMF)**:\n" .
+                   "   - Mengadopsi standar *SIGTTO* (*Society of International Gas Tanker and Terminal Operators*) untuk operasi transfer kriogenik dan manajemen terminal.\n" .
+                   "   - Prosedur transfer gas cair maritim mematuhi panduan ketat OCIMF.\n\n" .
                    "2. **Sistem Proteksi Otomatis Tingkat Tinggi**:\n" .
                    "   - Dilengkapi *Emergency Release Systems* (ERS) dan *Emergency Shutdown Level 2* (ESD-2) otomatis.\n" .
-                   "   - Sensor kebocoran gas metana inframerah dan deteksi suhu kriogenik aktif 24/7 di seluruh manifold dan area penyimpanan.\n\n" .
-                   "3. **Rekam Jejak Operasional & Zero LTI**:\n" .
-                   "   - Mempertahankan lebih dari **15 Juta Jam Kerja Aman (Zero Lost Time Injury)** secara berkelanjutan.\n\n" .
-                   "4. **Sertifikasi Manajemen Terpadu**:\n" .
-                   "   - **ISO 9001:2015** (Sistem Manajemen Mutu)\n" .
-                   "   - **ISO 14001:2015** (Sistem Manajemen Lingkungan)\n" .
-                   "   - **ISO 45001:2018** (Sistem Manajemen Kesehatan & Keselamatan Kerja / K3)\n\n" .
+                   "   - Sensor kebocoran gas metana inframerah dan deteksi suhu kriogenik aktif 24/7 di seluruh manifold dan area tangki.\n\n" .
+                   "3. **Rekam Jejak Zero LTI**:\n" .
+                   "   - Mempertahankan lebih dari **15 Juta Jam Kerja Aman (Zero Lost Time Injury)** secara berkesinambungan.\n\n" .
+                   "4. **Sertifikasi ISO Terpadu**:\n" .
+                   "   - ISO 9001:2015 (Mutu), ISO 14001:2015 (Lingkungan), dan ISO 45001:2018 (K3).\n\n" .
                    "5. **Dampak Lingkungan & Dekarbonisasi**:\n" .
-                   "   - Emisi LNG mereduksi emisi $SO_x$ hingga **99%**, memangkas emisi $CO_2$ hingga **25%**, dan menghasilkan **0% partikulat jelaga (PM)** dibandingkan bahan bakar minyak berat (HFO).";
+                   "   - Emisi LNG mereduksi $SO_x$ hingga **99%**, $CO_2$ hingga **25%**, dan menghasilkan **0% partikulat jelaga (PM)** dibanding minyak berat (HFO/MFO).";
         }
 
-        // 3. Spesifikasi Teknis & Nilai Kalor LNG
+        // 5. Spesifikasi Teknis & Nilai Kalor LNG
         if (preg_match('/(spesifikasi|kalor|kandungan|metana|methane|btu|suhu|kriogenik|cryogenic|komposisi|spec|ghv)/i', $q)) {
             return "**Spesifikasi Teknis Liquefied Natural Gas (LNG) Nusantara LNG:**\n\n" .
                    "- **Kemurnian Metana ($CH_4$):** >= 98.5% s.d. 99.2%\n" .
                    "- **Gross Heating Value (GHV):** 1,020 - 1,140 BTU/SCF (setara 9,500 - 10,500 kcal/kg)\n" .
-                   "- **Suhu Kriogenik:** -160°C hingga -162°C pada tekanan atmosferik\n" .
-                   "- **Rasio Ekspansi:** 1 : 600 (1 unit volume cair menghasilkan ~600 volume gas standar)\n" .
+                   "- **Suhu Kriogenik:** -160°C hingga -162°C pada tekanan atmosferik 1 atm\n" .
+                   "- **Rasio Ekspansi Volume:** 1 : 600 (1 meter kubik cairan menghasilkan ~600 meter kubik gas standar)\n" .
                    "- **Kandungan Pengotor:** Kadar sulfur < 5 mg/Nm3, bebas air, dan bebas partikulat merkuri.\n\n" .
                    "Kualitas gas alam cair kami sangat optimal untuk turbin pembangkit listrik (PLTGU/PLTMG) serta burner industri suhu tinggi.";
         }
 
-        // 4. Skema Kontrak FOB & DES / Pricing
+        // 6. Skema Kontrak FOB & DES / Pricing
         if (preg_match('/(kontrak|fob|des|harga|pricing|skema|pasokan|offtake|cargo|brent|jkm|perjanjian)/i', $q)) {
             return "**Struktur Kontrak Pasokan Bulk LNG:**\n\n" .
                    "1. **Skema Free-On-Board (FOB):** Titik serah terima di manifold kapal terminal muat (*loading port*). Offtaker menyiapkan kapal pengangkut (*LNG Carrier*) sendiri.\n" .
                    "2. **Skema Delivered Ex-Ship (DES):** Kami mengelola transportasi pengapalan dan asuransi hingga terminal penerima (*discharge terminal/FSRU*) milik mitra offtaker.\n" .
-                   "3. **Penentuan Harga (*Pricing Index*):** Formula harga transparan terindeks harga minyak mentah (*Brent-linked*) atau pasar gas regional (*Japan Korea Marker - JKM*), tersedia untuk kontrak jangka panjang maupun spot cargo.\n\n" .
-                   "Untuk simulasi volume dan formulasi kontrak, tim komersial kami dapat dihubungi melalui `commercial@nusantara-lng.com`.";
+                   "3. **Penentuan Harga (*Pricing Index*):** Formula harga transparan terindeks harga minyak mentah (*Brent-linked*) atau pasar gas regional (*Japan Korea Marker - JKM*), tersedia untuk kontrak jangka panjang (5–15 tahun) maupun spot cargo.\n\n" .
+                   "Untuk simulasi volume dan formulasi kontrak, silakan hubungi tim komersial kami di `commercial@nusantara-lng.com`.";
         }
 
-        // 5. Virtual Pipeline & ISO Tank / Smelter / Industri Off-grid
+        // 7. Virtual Pipeline & ISO Tank / Smelter
         if (preg_match('/(virtual pipeline|iso tank|smelter|off-grid|truk|tangki|distribusi|remote|tambang)/i', $q)) {
             return "**Solusi Logistik Virtual Pipeline ISO Tank:**\n\n" .
                    "Bagi kawasan industri, smelter mineral, dan captive power plant yang **belum terjangkau jaringan pipa transmisi gas**:\n\n" .
@@ -267,15 +329,7 @@ SYS;
                    "Solusi ini memberikan fleksibilitas tinggi tanpa perlu menunggu pembangunan infrastruktur pipa transmisi.";
         }
 
-        // 6. Marine Bunkering
-        if (preg_match('/(bunkering|kapal|maritim|marine|imo|vessel|pelabuhan)/i', $q)) {
-            return "**Layanan LNG Marine Bunkering:**\n\n" .
-                   "- **Metode Pengisian:** *Ship-to-Ship (STS)* dan *Truck-to-Ship (TTS)* di pelabuhan strategis dan Selat Malaka.\n" .
-                   "- **Kepatuhan Regulasi:** Memenuhi standar *IMO 2030/2050* dengan mereduksi emisi $SO_x$ hingga 99% dan $CO_2$ hingga 25%.\n" .
-                   "- **Laju Transfer:** Kecepatan transfer hingga 1,000 m3/jam dilengkapi sistem pengembalian *Boil-off Gas (BOG)*.";
-        }
-
-        // 7. Kontak Komersial / Alamat
+        // 8. Kontak Komersial / Alamat
         if (preg_match('/(kontak|hubungi|email|telepon|wa|whatsapp|alamat|kantor|meeting|lokasi|sales)/i', $q)) {
             return "**Kontak Resmi PT Nusantara LNG Energi:**\n\n" .
                    "- **Kantor Pusat:** Menara Gas & Energi Indonesia Lt. 28, Kawasan SCBD Lot 11, Jl. Jend. Sudirman Kav. 52-53, Jakarta Selatan 12190\n" .
@@ -285,15 +339,22 @@ SYS;
                    "- **Jam Operasional:** Senin – Jumat, 08:30 – 17:30 WIB (Operasional Terminal: 24/7)";
         }
 
-        // 8. Pertanyaan Sains, Fisika, Matematika & Out-of-Context
+        // 9. Pertanyaan Sains, Fisika, Matematika & Out-of-Context
         if (preg_match('/(relativitas|einstein|fusi|fisi|fisika|kimia|astronomi|tatasurya|planet|bumi|gravitasi|hitung|kalkulasi)/i', $q)) {
             return "Topik sains yang menarik!\n\n" .
                    "Konsep fisika dan sains fundamental menjelaskan bagaimana energi dan materi bertransformasi di alam semesta. Baik dalam skala kuantum, astrofisika, maupun proses termodinamika kriogenik (seperti pencairan gas alam pada -160°C), prinsip dasar energi adalah kekal dan dapat dikonversi ke bentuk energi bermanfaat.\n\n" .
                    "Ada pertanyaan atau perhitungan spesifik yang ingin Anda bahas bersama?";
         }
 
-        // 9. General Contextual Smart Reply
-        return "Pertanyaan yang sangat menarik!\n\n" .
-               "Untuk membahas topik ini secara mendalam dan terarah sesuai kebutuhan Anda, silakan berikan rincian lebih lanjut atau tanyakan aspek spesifik yang ingin kita bedah bersama.";
+        // 10. Pertanyaan Umum / Coding / Teknologi
+        if (preg_match('/(coding|laravel|php|python|javascript|database|sql|api|html|css|ai|bot)/i', $q)) {
+            return "Terkait teknologi dan pengembangan sistem tersebut, implementasi yang optimal bergantung pada arsitektur yang modular, keamanan data, dan efisiensi eksekusi algoritma.\n\n" .
+                   "Silakan jelaskan use case atau masalah spesifik yang ingin Anda selesaikan, dan saya siap membantu menganalisis solusinya!";
+        }
+
+        // 11. General Contextual Smart Reply
+        return "Terima kasih atas pertanyaan Anda kepada **Nusantara AI**.\n\n" .
+               "Sebagai asisten AI cerdas dari PT Nusantara LNG Energi, saya siap membantu Anda — baik mengenai rincian produk pasokan LNG, logistik virtual pipeline ISO Tank, spesifikasi teknis energi, maupun konsultasi topik sains dan umum lainnya.\n\n" .
+               "Silakan berikan detail atau aspek tertentu yang ingin Anda tanyakan lebih lanjut!";
     }
 }
