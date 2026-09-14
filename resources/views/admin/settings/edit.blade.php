@@ -287,6 +287,44 @@
             </div>
         </div>
 
+        <!-- Section 6: AI Chatbot Configuration (Google Gemini) -->
+        <div class="space-y-6">
+            <div class="border-b border-neutral-800 pb-3">
+                <h3 class="text-xs uppercase tracking-widest2 font-bold text-white">
+                    6. AI Chatbot Configuration (Google Gemini)
+                </h3>
+                <p class="text-[10px] text-neutral-400 mt-0.5">Konfigurasi API Google Gemini untuk Asisten AI B2B LNG di website.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="gemini_api_key" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
+                        Google Gemini API Key
+                    </label>
+                    <input type="password" 
+                           id="gemini_api_key" 
+                           name="gemini_api_key" 
+                           value="{{ old('gemini_api_key', $settings['gemini_api_key'] ?? '') }}" 
+                           placeholder="AQ.Ab8... atau AIzaSy..." 
+                           class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors font-mono">
+                    <p class="text-[10px] text-neutral-500 mt-1">Kosongkan untuk menggunakan default server .env</p>
+                </div>
+
+                <div>
+                    <label for="gemini_model" class="block text-[11px] uppercase tracking-wider font-semibold text-neutral-300 mb-2">
+                        Gemini Model
+                    </label>
+                    <input type="text" 
+                           id="gemini_model" 
+                           name="gemini_model" 
+                           value="{{ old('gemini_model', $settings['gemini_model'] ?? 'gemini-3.6-flash') }}" 
+                           placeholder="gemini-3.6-flash" 
+                           class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors font-mono">
+                    <p class="text-[10px] text-neutral-500 mt-1">Model default: gemini-3.6-flash / gemini-3.5-flash / gemini-flash-lite-latest</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="pt-6 border-t border-neutral-800 flex items-center justify-end">
             <button type="submit" class="px-8 py-3.5 bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest2 font-bold transition-colors">
