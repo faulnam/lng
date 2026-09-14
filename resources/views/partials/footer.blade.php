@@ -5,19 +5,19 @@
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-14 border-b border-neutral-900 gap-6">
             <a href="{{ url('/') }}" class="flex items-center gap-3 tracking-widest2 uppercase font-bold text-white group">
                 <div class="w-8 h-8 bg-white text-black flex items-center justify-center font-bold text-xs tracking-tighter">
-                    M
+                    N
                 </div>
                 <div>
-                    <div class="text-sm font-extrabold tracking-[0.25em]">METRIX</div>
-                    <div class="text-[9px] text-neutral-400 tracking-widest font-normal">INTERIOR ARCHITECTURE</div>
+                    <div class="text-sm font-extrabold tracking-[0.22em]">NUSANTARA LNG</div>
+                    <div class="text-[9px] text-neutral-400 tracking-widest font-normal">INTEGRATED CLEAN ENERGY &amp; CRYOGENICS</div>
                 </div>
             </a>
 
             <!-- Social Links -->
             <div class="flex items-center space-x-5 text-neutral-400">
                 @if($ig = \App\Models\SiteSetting::get('social_instagram'))
-                    <a href="{{ $ig }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Instagram">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <a href="{{ $ig }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                 @endif
                 @if($fb = \App\Models\SiteSetting::get('social_facebook'))
@@ -26,8 +26,8 @@
                     </a>
                 @endif
                 @if($pin = \App\Models\SiteSetting::get('social_pinterest'))
-                    <a href="{{ $pin }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Pinterest">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.291 1.199-.334 1.357-.056.208-.182.253-.419.152-1.564-.728-2.541-3.014-2.541-4.853 0-3.955 2.874-7.587 8.286-7.587 4.349 0 7.73 3.099 7.73 7.242 0 4.322-2.724 7.801-6.507 7.801-1.271 0-2.466-.661-2.875-1.442l-.782 2.981c-.283 1.087-1.049 2.45-1.562 3.284C9.584 23.839 10.77 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/></svg>
+                    <a href="{{ $pin }}" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="X Twitter">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                 @endif
                 @if($yt = \App\Models\SiteSetting::get('social_youtube'))
@@ -38,14 +38,14 @@
             </div>
         </div>
 
-        <!-- Middle Row: 3-4 Column Navigation & Details -->
+        <!-- Middle Row: 4 Column Navigation & Details -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-14 border-b border-neutral-900 text-xs">
             
-            <!-- Column 1: Newsletter -->
+            <!-- Column 1: Energy Newsletter -->
             <div class="space-y-4">
-                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Sign up to stay up to date</h4>
+                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Energy Market Intelligence</h4>
                 <p class="text-neutral-400 text-[11px] leading-relaxed">
-                    Subscribe to our newsletter to be the first to know about new projects and design insights.
+                    Subscribe to our quarterly LNG market reports, offtake updates, and decarbonization briefings.
                 </p>
                 <form action="{{ url('/newsletter/subscribe') }}" method="POST" class="space-y-3">
                     @csrf
@@ -53,7 +53,7 @@
                         <input type="email" 
                                name="email" 
                                required 
-                               placeholder="Email Address" 
+                               placeholder="Corporate Email Address" 
                                class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors placeholder:text-neutral-600">
                         <button type="submit" 
                                 class="w-full bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest2 py-3 font-semibold transition-colors">
@@ -63,52 +63,51 @@
                 </form>
             </div>
 
-            <!-- Column 2: Jakarta Office -->
+            <!-- Column 2: Jakarta Headquarters -->
             <div class="space-y-4">
-                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Jakarta Office</h4>
+                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Headquarters</h4>
                 <p class="text-neutral-400 text-[11px] leading-relaxed whitespace-pre-line">
-                    {{ \App\Models\SiteSetting::get('company_address', "PT. Metrix Indonesia\nJl. Puri Indah Raya Blok I\nKomp. Ruko Puri Blok A No. 18\nPuri Indah Kembangan\nJakarta Barat 11610") }}
+                    {{ \App\Models\SiteSetting::get('company_address', "PT Nusantara LNG Energi\nMenara Gas & Energi Indonesia, 28th Floor\nKawasan SCBD Lot 11, Jl. Jend. Sudirman Kav. 52-53\nJakarta Selatan 12190, Indonesia") }}
                 </p>
-                <a href="{{ \App\Models\SiteSetting::get('company_directions_url', 'https://maps.google.com/?q=PT.+Metrix+Indonesia') }}" 
+                <a href="{{ \App\Models\SiteSetting::get('company_directions_url', 'https://maps.google.com/?q=SCBD+Jakarta') }}" 
                    target="_blank" 
                    rel="noopener noreferrer" 
                    class="inline-block text-[11px] uppercase tracking-widest font-semibold text-white border-b border-white hover:text-accent hover:border-accent transition-colors pb-0.5">
-                    Get Directions &rarr;
+                    View on Maps &rarr;
                 </a>
             </div>
 
-            <!-- Column 3: Contact Details -->
+            <!-- Column 3: Commercial & Inquiries -->
             <div class="space-y-4">
-                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Contact Us</h4>
+                <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Commercial &amp; Offtake</h4>
                 <ul class="space-y-2 text-neutral-400 text-[11px]">
-                    @if($p1 = \App\Models\SiteSetting::get('company_phone_1', '+62 21 5801 6187'))
-                        <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $p1) }}" class="hover:text-white transition-colors">{{ $p1 }}</a></li>
+                    @if($p1 = \App\Models\SiteSetting::get('company_phone_1', '+62 21 5289 7700'))
+                        <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $p1) }}" class="hover:text-white transition-colors">Tel: {{ $p1 }}</a></li>
                     @endif
-                    @if($p2 = \App\Models\SiteSetting::get('company_phone_2', '+62 21 7501 6148'))
-                        <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $p2) }}" class="hover:text-white transition-colors">{{ $p2 }}</a></li>
+                    @if($p2 = \App\Models\SiteSetting::get('company_phone_2', '+62 21 5289 7701'))
+                        <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', $p2) }}" class="hover:text-white transition-colors">Tel: {{ $p2 }}</a></li>
                     @endif
-                    @if($wa = \App\Models\SiteSetting::get('company_whatsapp', '+628170887720'))
+                    @if($wa = \App\Models\SiteSetting::get('company_whatsapp', '+6281188997700'))
                         <li><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $wa) }}" target="_blank" class="hover:text-white transition-colors">WA: {{ $wa }}</a></li>
                     @endif
-                    @if($emInfo = \App\Models\SiteSetting::get('company_email_info', 'info@the-metrix.com'))
-                        <li class="pt-2"><a href="mailto:{{ $emInfo }}" class="text-white hover:text-accent transition-colors">{{ $emInfo }}</a></li>
+                    @if($emMkt = \App\Models\SiteSetting::get('company_email_marketing', 'commercial@nusantara-lng.com'))
+                        <li class="pt-2"><a href="mailto:{{ $emMkt }}" class="text-white hover:text-accent transition-colors">{{ $emMkt }}</a></li>
                     @endif
-                    @if($emMkt = \App\Models\SiteSetting::get('company_email_marketing', 'marketing1@the-metrix.com'))
-                        <li><a href="mailto:{{ $emMkt }}" class="text-neutral-400 hover:text-white transition-colors">{{ $emMkt }}</a></li>
+                    @if($emInfo = \App\Models\SiteSetting::get('company_email_info', 'info@nusantara-lng.com'))
+                        <li><a href="mailto:{{ $emInfo }}" class="text-neutral-400 hover:text-white transition-colors">{{ $emInfo }}</a></li>
                     @endif
                 </ul>
             </div>
 
-            <!-- Column 4: Quick Links -->
+            <!-- Column 4: Quick Links (5 Core Structure) -->
             <div class="space-y-4">
                 <h4 class="text-white uppercase tracking-widest2 font-semibold text-xs">Quick Links</h4>
                 <ul class="space-y-2 text-[11px] uppercase tracking-wider text-neutral-400">
+                    <li><a href="{{ url('/') }}" class="hover:text-white transition-colors">Home</a></li>
                     <li><a href="{{ url('/about-us') }}" class="hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="{{ url('/services') }}" class="hover:text-white transition-colors">Services</a></li>
-                    <li><a href="{{ url('/clients') }}" class="hover:text-white transition-colors">Clients</a></li>
-                    <li><a href="{{ url('/awards-publications') }}" class="hover:text-white transition-colors">Awards & Publications</a></li>
-                    <li><a href="{{ url('/career') }}" class="hover:text-white transition-colors">Career</a></li>
-                    <li><a href="{{ url('/our-blog') }}" class="hover:text-white transition-colors">Our Blog</a></li>
+                    <li><a href="{{ url('/services') }}" class="hover:text-white transition-colors">Products &amp; Solutions</a></li>
+                    <li><a href="{{ url('/our-blog') }}" class="hover:text-white transition-colors">Energy Insights</a></li>
+                    <li><a href="{{ url('/contact-us') }}" class="hover:text-white transition-colors">Contact Commercial Desk</a></li>
                 </ul>
             </div>
 
@@ -116,7 +115,7 @@
 
         <!-- Bottom Row: Copyright -->
         <div class="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-neutral-500 gap-4">
-            <p>{{ \App\Models\SiteSetting::get('footer_copyright', 'Copyright © 2026 PT. Metrix Indonesia All right reserved.') }}</p>
+            <p>{{ \App\Models\SiteSetting::get('footer_copyright', 'Copyright © 2026 PT Nusantara LNG Energi. All rights reserved.') }}</p>
             <div class="flex items-center space-x-6 text-[10px] uppercase tracking-widest">
                 <a href="{{ url('/admin/login') }}" class="text-neutral-600 hover:text-neutral-300 transition-colors">Admin Portal</a>
             </div>

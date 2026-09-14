@@ -59,27 +59,27 @@ class ChatbotController extends Controller
     }
 
     /**
-     * Get initial quick suggestions
+     * Get initial quick suggestions for LNG energy inquiries
      */
     public function getSuggestions(): JsonResponse
     {
         return response()->json([
             'suggestions' => [
                 [
-                    'label' => 'Tahapan & Alur Proyek',
-                    'prompt' => 'Bagaimana tahapan konsultasi dan alur pengerjaan proyek interior di Metrix?',
+                    'label' => 'Spesifikasi & Nilai Kalor LNG',
+                    'prompt' => 'Apa spesifikasi teknis gas alam cair (LNG) Nusantara LNG, termasuk kemurnian metana dan nilai kalornya?',
                 ],
                 [
-                    'label' => 'Konsep Desain Ruang Tamu',
-                    'prompt' => 'Apa rekomendasi konsep desain interior untuk ruang tamu modern Japandi?',
+                    'label' => 'Mekanisme Kontrak FOB & DES',
+                    'prompt' => 'Jelaskan skema kontrak pasokan bulk LNG (FOB vs DES) dan mekanisme penentuan harga terindeks.',
                 ],
                 [
-                    'label' => 'Layanan Komersial & Kantor',
-                    'prompt' => 'Jelaskan layanan desain interior untuk kantor dan ruang komersial.',
+                    'label' => 'Virtual Pipeline & ISO Tank',
+                    'prompt' => 'Bagaimana solusi logistik virtual pipeline ISO tank untuk menyuplai gas ke kawasan industri atau smelter off-grid?',
                 ],
                 [
-                    'label' => 'Jadwal Konsultasi & Survey',
-                    'prompt' => 'Bagaimana cara menjadwalkan konsultasi atau survei lokasi dengan tim arsitek?',
+                    'label' => 'Standar Keselamatan & QHSE',
+                    'prompt' => 'Apa saja standar keselamatan kriogenik, sertifikasi SIGTTO, dan kepatuhan lingkungan yang diterapkan Nusantara LNG?',
                 ],
             ]
         ]);

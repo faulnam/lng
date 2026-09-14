@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('meta_title', ($project->meta_title ?: $project->title) . ' — ' . \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture'))
+@section('meta_title', ($project->meta_title ?: $project->title) . ' — ' . \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi'))
 @section('meta_description', $project->meta_description ?: strip_tags(Str::limit($project->description, 160)))
 
 @section('content')
@@ -8,7 +8,7 @@
     <!-- 1. Hero Cover Header -->
     <section class="relative bg-black text-white pt-36 pb-24 md:pt-48 md:pb-36 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-1000 scale-100" 
-             style="background-image: url('{{ $project->cover_image ? (str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image)) : 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?q=80&w=1920&auto=format&fit=crop' }}');">
+             style="background-image: url('{{ $project->cover_image ? (str_starts_with($project->cover_image, 'http') ? $project->cover_image : asset('storage/' . $project->cover_image)) : '/images/lng/carrier.jpg' }}');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/40"></div>
 
@@ -34,23 +34,23 @@
         </div>
     </section>
 
-    <!-- 2. Project Information Bar & Overview -->
+    <!-- 2. Technical Information Bar & Overview -->
     <section class="py-16 md:py-20 bg-white border-b border-neutral-200">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
                 <!-- Left Details (7 cols: Narrative & Description) -->
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="eyebrow text-accent font-semibold">Project Overview</div>
+                    <div class="eyebrow text-accent font-semibold">Technical Overview</div>
                     <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                        Spatial Narrative &amp; Craft
+                        Supply Framework &amp; Operations
                     </h2>
                     <div class="text-neutral-body text-xs md:text-sm leading-relaxed space-y-4 prose max-w-none">
                         @if($project->description)
                             {!! $project->description !!}
                         @else
                             <p>
-                                Meticulously crafted interior architecture combining thoughtful circulation, bespoke material palettes, and theatrical ambient lighting to provide an unforgettable sensory journey.
+                                Engineered cryogenic infrastructure and reliable gas supply operations delivering dependable natural gas energy for utility offtakers and heavy manufacturing facilities.
                             </p>
                         @endif
                     </div>
@@ -59,41 +59,41 @@
                 <!-- Right Metadata Sidebar (5 cols: Project Specs) -->
                 <div class="lg:col-span-5 bg-neutral-bg p-8 border border-neutral-200 space-y-6">
                     <h3 class="text-xs uppercase tracking-widest2 font-bold text-black border-b border-neutral-200 pb-3">
-                        Project Specifications
+                        Technical Specifications
                     </h3>
 
                     <div class="space-y-4 text-xs divide-y divide-neutral-200">
                         @if($project->client)
                             <div class="pt-3 first:pt-0 flex justify-between">
-                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Client:</span>
+                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Offtaker / Partner:</span>
                                 <span class="font-medium text-black text-right">{{ $project->client }}</span>
                             </div>
                         @endif
 
                         @if($project->location)
                             <div class="pt-3 flex justify-between">
-                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Location:</span>
+                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Hub / Terminal Location:</span>
                                 <span class="font-medium text-black text-right">{{ $project->location }}</span>
                             </div>
                         @endif
 
                         @if($project->size)
                             <div class="pt-3 flex justify-between">
-                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Project Size:</span>
+                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Capacity / Volume:</span>
                                 <span class="font-medium text-black text-right">{{ $project->size }}</span>
                             </div>
                         @endif
 
                         @if($project->year)
                             <div class="pt-3 flex justify-between">
-                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Year Completed:</span>
+                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Operational Since:</span>
                                 <span class="font-medium text-black text-right">{{ $project->year }}</span>
                             </div>
                         @endif
 
                         @if($project->service)
                             <div class="pt-3 flex justify-between">
-                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Category:</span>
+                                <span class="font-semibold text-neutral-500 uppercase tracking-wider text-[11px]">Business Line:</span>
                                 <a href="{{ url('/portfolio-cat/' . $project->service->slug) }}" class="font-semibold text-accent hover:underline text-right">
                                     {{ $project->service->title }}
                                 </a>
@@ -110,8 +110,8 @@
     <section class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             <div class="space-y-2">
-                <div class="eyebrow">Visual Documentation</div>
-                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Project Gallery</h2>
+                <div class="eyebrow">Infrastructure Visuals</div>
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Operational Gallery</h2>
             </div>
 
             <!-- Gallery Grid (1 full cover image + 2 col images) -->
@@ -148,7 +148,7 @@
                 <a href="{{ url('/portfolio/' . $prevProject->slug) }}" class="group flex items-center gap-3 text-left">
                     <span class="text-xl group-hover:-translate-x-1 transition-transform">&larr;</span>
                     <div>
-                        <div class="text-[10px] uppercase tracking-widest text-neutral-400">Previous Project</div>
+                        <div class="text-[10px] uppercase tracking-widest text-neutral-400">Previous Line</div>
                         <div class="text-xs md:text-sm font-bold text-white group-hover:text-accent transition-colors">{{ $prevProject->title }}</div>
                     </div>
                 </a>
@@ -157,13 +157,13 @@
             @endif
 
             <a href="{{ url('/services') }}" class="text-xs uppercase tracking-widest2 text-neutral-400 hover:text-white border-b border-neutral-600 pb-1 hidden md:block">
-                All Projects
+                All Products &amp; Lines
             </a>
 
             @if($nextProject)
                 <a href="{{ url('/portfolio/' . $nextProject->slug) }}" class="group flex items-center gap-3 text-right">
                     <div>
-                        <div class="text-[10px] uppercase tracking-widest text-neutral-400">Next Project</div>
+                        <div class="text-[10px] uppercase tracking-widest text-neutral-400">Next Line</div>
                         <div class="text-xs md:text-sm font-bold text-white group-hover:text-accent transition-colors">{{ $nextProject->title }}</div>
                     </div>
                     <span class="text-xl group-hover:translate-x-1 transition-transform">&rarr;</span>
@@ -174,43 +174,13 @@
         </div>
     </section>
 
-    <!-- 5. Sidebar / Bottom Info: About Us Blurb & Selected Awards -->
-    @if(isset($awards) && $awards->count())
-        <section class="py-20 md:py-24 bg-neutral-bg border-b border-neutral-200">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
-                <div class="space-y-2 text-center">
-                    <div class="eyebrow">Recognition</div>
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Selected Accolades</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach($awards as $award)
-                        <div class="bg-white p-6 border border-neutral-200 space-y-3">
-                            <div class="eyebrow text-accent text-[10px]">
-                                {{ $award->published_date ? $award->published_date->format('Y') : 'Award' }}
-                            </div>
-                            <h3 class="text-sm font-bold text-black leading-snug">
-                                {{ $award->title }}
-                            </h3>
-                            @if($award->description)
-                                <p class="text-xs text-neutral-body line-clamp-3 leading-relaxed">
-                                    {{ $award->description }}
-                                </p>
-                            @endif
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-    <!-- 6. Related Projects -->
+    <!-- 5. Related Products & Solutions -->
     @if(isset($relatedProjects) && $relatedProjects->count())
         <section class="py-20 md:py-28 bg-white">
             <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
                 <div class="space-y-2">
-                    <div class="eyebrow">More Portfolios</div>
-                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">You May Also Like</h2>
+                    <div class="eyebrow">Related Solutions</div>
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Explore Other Business Lines</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">

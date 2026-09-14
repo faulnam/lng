@@ -49,7 +49,10 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about');
 // Clients
 Route::get('/clients', [ClientController::class, 'index'])->name('clients');
 
-// Services (2-Level Hierarchy)
+// Products & LNG Business Lines (2-Level Hierarchy)
+Route::get('/products', [ServiceController::class, 'index'])->name('products.index');
+Route::get('/products/{parent}', [ServiceController::class, 'show'])->name('products.show');
+Route::get('/products/{parent}/{child}', [ServiceController::class, 'showChild'])->name('products.child');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{parent}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/services/{parent}/{child}', [ServiceController::class, 'showChild'])->name('services.child');
@@ -63,10 +66,13 @@ Route::get('/awards-publications', [AwardController::class, 'index'])->name('awa
 Route::get('/awards-publications/{slug}', [AwardController::class, 'show'])->name('awards.show');
 
 // Our Blog & Insights
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.main');
 Route::get('/our-blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/our-blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.direct');
 
 // Contact Us
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.direct');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
 

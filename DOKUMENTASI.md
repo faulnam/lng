@@ -1,52 +1,42 @@
-Judul Proyek
+# Dokumentasi Sistem Informasi Company Profile PT Nusantara LNG Energi
 
-Sistem Informasi Company Profile dan Manajemen Portofolio Interior Design Terpadu
+## Judul Proyek
+Sistem Informasi Company Profile dan Manajemen Lini Bisnis PT Nusantara LNG Energi Terpadu
 
+## Deskripsi Singkat
+Sistem Informasi Company Profile dan Manajemen Lini Bisnis PT Nusantara LNG Energi merupakan platform digital korporat B2B yang dirancang untuk industri energi gas alam cair (LNG), logistik rantai pasok kriogenik (*virtual pipeline*), dan infrastruktur regasifikasi gas bumi. Platform ini memfasilitasi komunikasi resmi dengan calon mitra bisnis (*industrial & utility offtakers*), investor institusional, dan pemangku kepentingan industri. Sistem ini menyediakan akun operasional produksi dan akun demo interaktif dengan fitur pembersihan otomatis konten uji coba setiap 3 menit.
 
-Deskripsi Singkat
+## Overview Lengkap Proyek
+Platform ini menghadirkan pengalaman visual monokromatis elegan dengan 6 navigasi halaman utama yang disederhanakan: Home, About, Products, Blog, Detail Blog, dan Contact. Calon mitra dapat meninjau spesifikasi teknis LNG, jangkauan armada ISO tank kriogenik, fasilitas terminal regasifikasi, sertifikasi kepatuhan industri (SKK Migas, SIGTTO, ISO 9001/14001/45001), membaca publikasi riset pasar energi, dan mengajukan *commercial inquiry* secara langsung. Pada area internal, panel administrasi (CMS) memungkinkan tim manajemen untuk memperbarui data katalog produk LNG, publikasi wawasan pasar energi, slide presentasi korporat, pesan masuk, subscriber buletin, dan identitas perusahaan.
 
-Sistem Informasi Company Profile dan Manajemen Portofolio Interior Design Terpadu merupakan platform digital elegan dan profesional yang dirancang untuk industri arsitektur dan desain interior mewah. Platform ini mengintegrasikan etalase portofolio proyek interaktif katalog layanan bertingkat showcase penghargaan publikasi artikel wawasan lowongan karir serta asisten chatbot cerdas. Sistem ini menyediakan dua akun demo interaktif yaitu Demo Super Admin dan Demo Editor dengan kata sandi password. Setiap data atau konten baru yang dibuat dan dimanipulasi melalui akun demo akan secara otomatis terhapus dari basis data dalam waktu 3 menit setelah pembuatan sehingga integritas dan kebersihan data utama tetap terjaga.
+## Daftar Akun Demo & Admin
 
+### Akun Produksi (Default)
+- **Super Admin**: `admin@nusantara-lng.com` *(Password: `qwertyu123`)*
+- **Content Editor**: `editor@nusantara-lng.com` *(Password: `qwertyu123`)*
 
-Overview Lengkap Proyek
+### Akun Demo (Auto-Delete 3 Menit)
+- **Demo Super Admin**: `demo_admin@nusantara-lng.com` *(Password: `password`)*
+- **Demo Editor**: `demo_editor@nusantara-lng.com` *(Password: `password`)*
 
-Platform ini dibangun untuk menghadirkan pengalaman visual kelas atas bagi calon klien rekanan bisnis dan masyarakat luas yang ingin mengeksplorasi portofolio proyek interior desain arsitektur dan layanan penataan ruang. Pengunjung dapat melihat proyek unggulan memfilter portofolio berdasarkan kategori ruang membaca artikel wawasan terbaru melihat daftar publikasi penghargaan serta mengirim pesan konsultasi atau melamar lowongan kerja secara langsung. Pada area internal sistem menyediakan panel administrasi konten terpusat dengan pembagian dua tingkat hak akses pengguna. Super Admin memiliki wewenang penuh dalam mengelola seluruh data proyek kategori layanan galeri foto artikel berita lowongan karir pengaturan identitas situs statistik perusahaan inbox pesan masuk daftar subscriber serta manajemen akun pengguna. Editor memiliki hak akses terfokus untuk membuat dan memperbarui konten portofolio proyek layanan artikel dan media promosi.
+## Key Features
+- **6 Struktur Halaman Utama Publik**: Home, About Us, Products / Lini Bisnis, Blog & Market Insights, Detail Blog, dan Contact Us.
+- **Katalog Produk & Lini Bisnis LNG 2-Level**: Bulk LNG Supply, Cryogenic Logistics & ISO Fleet, Marine Bunkering, Regasification Terminals, Small-Scale LNG Hubs, and Cryogenic EPC.
+- **Tampilan Spesifikasi Teknis**: Nilai kalor (BTU/SCF), kemurnian metana (CH₄), titik didih kriogenik, dan sertifikasi keselamatan.
+- **Asisten AI Chatbot Spesialis Energi (Google Gemini)**: Chatbot responsif yang dikustomisasi khusus untuk FAQ produk LNG, kontrak FOB/DES, dan infrastruktur kriogenik.
+- **Manajemen Pesan Commercial Desk**: Formulir pesan kontak B2B terintegrasi dengan panel inbox admin.
+- **Portal Artikel & Riset Energi**: Kategori artikel terstruktur (Regulasi Migas, Analisis Pasar LNG, Dekarbonisasi Industri, Berita Korporat).
+- **Showcase Sertifikasi & Mitra Strategis**: Logo strip untuk PLN, PGN, SKK Migas, SIGTTO, GIIGNL, dan standar ISO.
+- **Panel Pengaturan Identitas & Statistik Operasional**: Kapasitas produksi MTPA, jam kerja aman zero LTI, jumlah terminal aktif, dan jumlah offtaker.
+- **Kontrol Hak Akses Pengguna (RBAC)**: Pemisahan peran Super Administrator dan Content Editor.
+- **Pembersihan Otomatis Data Konten Demo**: Fitur proteksi data demo yang terhapus otomatis setelah 3 menit.
 
-Daftar Akun Demo
-Akun Demo Super Admin demo_admin@the-metrix.com password
-Akun Demo Editor demo_editor@the-metrix.com password
-
-
-Key Features
-
-Portal Profil Perusahaan dan Galeri Portofolio Desain Interior
-Katalog Layanan Hirarki Dua Tingkat Kategori dan Sub Layanan
-Filter Portofolio Berdasarkan Kategori dan Detail Proyek
-Manajemen Galeri Foto Proyek Multi Gambar dengan Pengurutan
-Showcase Penghargaan dan Publikasi Media Desain Berpaginasi
-Daftar Lowongan Pekerjaan Karir Interaktif dan Formulir Lamaran
-Publikasi Artikel Wawasan dan Berita Desain Berdasarkan Kategori
-Grid Logo Klien dan Mitra Rekanan Industri
-Slider Banner Hero Dinamis untuk Berbagai Halaman
-Koleksi Testimoni dan Ulasan Klien
-Formulir Kontak Konsultasi dan Manajemen Pesan Masuk
-Sistem Berlangganan Newsletter dan Ekspor Data Pelanggan
-Panel Pengaturan Identitas Situs Statistik dan Media Sosial
-Editor Copywriting Konten Halaman Statis
-Asisten Chatbot Cerdas Berbasis Kecerdasan Buatan Google Gemini
-Peta Situs XML Dinamis untuk Optimasi Mesin Pencari
-Manajemen Pengguna Admin dan Hak Akses Berbasis Peran
-Pembersihan Otomatis Data Konten Demo Setiap 3 Menit
-
-
-Pilih Teknologi
-
-Bahasa Pemrograman PHP 8.2
-Framework Backend Laravel 11
-Basis Data Relasional MySQL
-Autentikasi Pengguna Session Based Auth Laravel
-Desain Antarmuka Tailwind CSS Standalone
-Interaktivitas Antarmuka Alpine JS dan Vanilla JS
-Editor Teks Kaya Quill JS
-Integrasi Kecerdasan Buatan Google Gemini API
-Otomatisasi Pembersihan Laravel Scheduler dan Eloquent Event Dispatcher
+## Teknologi yang Digunakan
+- **Bahasa Pemrograman**: PHP 8.3
+- **Framework Backend**: Laravel 11
+- **Basis Data**: MySQL 8
+- **Autentikasi**: Laravel Session-Based Authentication & Role Middleware
+- **Antarmuka (Frontend)**: Tailwind CSS Standalone CLI, Alpine.js, Vanilla JavaScript
+- **Editor Teks**: Quill.js
+- **Kecerdasan Buatan**: Google Gemini API
+- **Otomatisasi**: Laravel Task Scheduler & Eloquent Events

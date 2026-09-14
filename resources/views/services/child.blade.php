@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('meta_title', $child->title . ' — ' . $parent->title . ' — ' . \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture'))
-@section('meta_description', $child->excerpt ?: 'Explore ' . $child->title . ' projects designed by Metrix Interior Architecture.')
+@section('meta_title', $child->title . ' — ' . $parent->title . ' — ' . \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi'))
+@section('meta_description', $child->excerpt ?: 'Explore ' . $child->title . ' supply infrastructure by PT Nusantara LNG Energi.')
 
 @section('content')
 
     <!-- Hero Banner -->
     <section class="relative bg-neutral-900 text-white pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-60 scale-105 transform transition-transform duration-1000" 
-             style="background-image: url('{{ $child->image ? (str_starts_with($child->image, 'http') ? $child->image : asset('storage/' . $child->image)) : 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop' }}');">
+             style="background-image: url('{{ $child->image ? (str_starts_with($child->image, 'http') ? $child->image : asset('storage/' . $child->image)) : '/images/lng/iso_tanks.jpg' }}');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-4">
             <div class="eyebrow-light flex items-center justify-center gap-2">
-                <a href="{{ url('/services') }}" class="hover:underline">Services</a>
+                <a href="{{ url('/services') }}" class="hover:underline">Products &amp; Solutions</a>
                 <span>&bull;</span>
                 <a href="{{ url('/services/' . $parent->slug) }}" class="hover:underline">{{ $parent->title }}</a>
                 <span>&bull;</span>
@@ -56,10 +56,10 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-neutral-200 pb-6">
                 <div>
                     <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                        {{ $child->title }} Projects
+                        {{ $child->title }} Operations
                     </h2>
                     <p class="text-neutral-body text-xs mt-1">
-                        Showing {{ $projects->total() }} completed projects
+                        Showing {{ $projects->total() }} infrastructure and supply operations
                     </p>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     @include('partials.project-card', ['project' => $project])
                 @empty
                     <div class="col-span-3 text-center py-16 text-neutral-400 text-sm">
-                        No projects currently listed under {{ $child->title }}.
+                        No operations currently listed under {{ $child->title }}.
                     </div>
                 @endforelse
             </div>

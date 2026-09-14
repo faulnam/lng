@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Admin Dashboard') — Metrix Interior CMS</title>
+    <title>@yield('title', 'Admin Dashboard') — Nusantara LNG CMS</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,9 +46,9 @@
             <div class="h-16 flex items-center justify-between px-6 border-b border-neutral-800">
                 <a href="{{ url('/admin') }}" class="flex items-center gap-3">
                     <div class="w-7 h-7 bg-white text-black font-bold flex items-center justify-center text-xs tracking-tighter">
-                        M
+                        N
                     </div>
-                    <span class="font-extrabold tracking-[0.2em] text-xs text-white">METRIX CMS</span>
+                    <span class="font-extrabold tracking-[0.18em] text-xs text-white">NUSANTARA CMS</span>
                 </a>
                 <button @click="sidebarOpen = false" class="lg:hidden text-neutral-400 hover:text-white">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -71,49 +71,49 @@
                 <a href="{{ url('/admin/projects') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/projects*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    <span>Projects & Portfolio</span>
+                    <span>Products &amp; Lines</span>
                 </a>
 
                 <a href="{{ url('/admin/services') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/services*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
-                    <span>Services (2-Level)</span>
+                    <span>Product Categories (2-Level)</span>
                 </a>
 
                 <a href="{{ url('/admin/clients') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/clients*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span>Clients & Logos</span>
+                    <span>Strategic Offtakers &amp; Logos</span>
                 </a>
 
                 <a href="{{ url('/admin/awards') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/awards*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                    <span>Awards & Publications</span>
+                    <span>Accreditations &amp; Milestones</span>
                 </a>
 
                 <a href="{{ url('/admin/job-vacancies') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/job-vacancies*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    <span>Job Vacancies</span>
+                    <span>Career Vacancies</span>
                 </a>
 
                 <a href="{{ url('/admin/blog-posts') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/blog-posts*') || request()->is('admin/blog-categories*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
-                    <span>Blog & Insights</span>
+                    <span>Energy Insights &amp; Articles</span>
                 </a>
 
                 <a href="{{ url('/admin/hero-slides') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/hero-slides*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    <span>Hero Slides</span>
+                    <span>Hero Banners</span>
                 </a>
 
                 <a href="{{ url('/admin/testimonials') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/testimonials*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                    <span>Testimonials</span>
+                    <span>Offtaker Endorsements</span>
                 </a>
 
                 <div class="pt-5 px-3 pb-2 text-[10px] uppercase tracking-widest text-neutral-500 font-semibold">Site Configuration</div>
@@ -121,7 +121,7 @@
                 <a href="{{ url('/admin/settings') }}" 
                    class="flex items-center gap-3 px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/settings*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span>Site Settings (Stats & Info)</span>
+                    <span>Site Settings (Stats &amp; Info)</span>
                 </a>
 
                 <a href="{{ url('/admin/page-contents') }}" 
@@ -134,7 +134,7 @@
                    class="flex items-center justify-between px-3 py-2.5 rounded-none text-neutral-300 hover:bg-neutral-800 hover:text-white transition-colors {{ request()->is('admin/messages*') ? 'bg-neutral-800 text-white font-semibold' : '' }}">
                     <div class="flex items-center gap-3">
                         <svg class="w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        <span>Inbox Messages</span>
+                        <span>Commercial Inquiries</span>
                     </div>
                     @php $unreadCount = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
                     @if($unreadCount > 0)

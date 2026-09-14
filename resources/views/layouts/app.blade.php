@@ -6,29 +6,29 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SEO Primary Meta Tags -->
-    <title>@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'Metrix Interior Architecture — Jakarta Interior Design Consultant'))</title>
-    <meta name="title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'Metrix Interior Architecture — Jakarta Interior Design Consultant'))">
-    <meta name="description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'Award-Winning Interior Architecture & Design Firm in Jakarta, Indonesia. Specializing in hospitality, retail, restaurant, and workplace design.'))">
+    <title>@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'PT Nusantara LNG Energi — Integrated Liquefied Natural Gas Supply & Cryogenic Logistics'))</title>
+    <meta name="title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'PT Nusantara LNG Energi — Integrated Liquefied Natural Gas Supply & Cryogenic Logistics'))">
+    <meta name="description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'PT Nusantara LNG Energi provides world-class liquefied natural gas (LNG) bulk supply, cryogenic ISO tank virtual pipelines, regasification terminals, and marine bunkering solutions.'))">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:site_name" content="{{ \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture') }}">
-    <meta property="og:title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'Metrix Interior Architecture'))">
-    <meta property="og:description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'Award-Winning Interior Architecture Firm in Jakarta, Indonesia.'))">
-    <meta property="og:image" content="@yield('meta_image', asset('images/og-cover.jpg'))">
+    <meta property="og:site_name" content="{{ \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi') }}">
+    <meta property="og:title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'PT Nusantara LNG Energi'))">
+    <meta property="og:description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'Integrated LNG Supply & Cryogenic Infrastructure in Indonesia.'))">
+    <meta property="og:image" content="@yield('meta_image', asset('images/lng/carrier.jpg'))">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'Metrix Interior Architecture'))">
-    <meta name="twitter:description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'Award-Winning Interior Architecture Firm in Jakarta, Indonesia.'))">
-    <meta name="twitter:image" content="@yield('meta_image', asset('images/og-cover.jpg'))">
+    <meta name="twitter:title" content="@yield('meta_title', \App\Models\SiteSetting::get('site_title', 'PT Nusantara LNG Energi'))">
+    <meta name="twitter:description" content="@yield('meta_description', \App\Models\SiteSetting::get('meta_description_default', 'Integrated LNG Supply & Cryogenic Infrastructure in Indonesia.'))">
+    <meta name="twitter:image" content="@yield('meta_image', asset('images/lng/carrier.jpg'))">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='65' x='20' font-size='60' fill='%23fff' font-family='sans-serif' font-weight='bold'>M</text></svg>">
+    <!-- Favicon (Stylized N Emblem) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='65' x='22' font-size='56' fill='%23fff' font-family='sans-serif' font-weight='bold'>N</text></svg>">
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,26 +59,26 @@
     @endif
 
     @if(session('error'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 6000)" 
-             class="fixed bottom-6 right-6 z-50 bg-red-900 text-white px-6 py-4 rounded-none shadow-2xl flex items-center gap-4 text-xs tracking-wider uppercase border border-red-700 transition-all">
-            <svg class="w-4 h-4 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" 
+             class="fixed bottom-6 right-6 z-50 bg-red-950 text-red-200 px-6 py-4 rounded-none shadow-2xl flex items-center gap-4 text-xs tracking-wider uppercase border border-red-800 transition-all">
+            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             <span>{{ session('error') }}</span>
-            <button @click="show = false" class="text-red-300 hover:text-white ml-2 text-sm">&times;</button>
+            <button @click="show = false" class="text-neutral-400 hover:text-white ml-2 text-sm">&times;</button>
         </div>
     @endif
 
-    <!-- Global Header -->
+    <!-- 1. Global Navigation Header -->
     @include('partials.header')
 
-    <!-- Main Content Area -->
+    <!-- 2. Main Page Content Container -->
     <main class="flex-grow">
         @yield('content')
     </main>
 
-    <!-- Global Footer -->
+    <!-- 3. Global Footer -->
     @include('partials.footer')
 
-    <!-- AI Interior Consultant Chatbot -->
+    <!-- 4. Interactive AI Chatbot Widget (Powered by Gemini) -->
     @include('partials.chatbot')
 
     <!-- Swiper.js JS (via CDN) -->

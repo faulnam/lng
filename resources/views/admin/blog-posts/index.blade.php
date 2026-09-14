@@ -79,7 +79,7 @@
                             </td>
 
                             <td class="py-3 px-4 text-neutral-400 text-[11px]">
-                                <div>{{ $post->author ?: 'Metrix Editorial' }}</div>
+                                <div>{{ $post->author ?: 'Nusantara Energy Insights' }}</div>
                                 <div class="text-[10px] text-neutral-500">{{ $post->published_at ? $post->published_at->format('M d, Y') : '—' }}</div>
                             </td>
 

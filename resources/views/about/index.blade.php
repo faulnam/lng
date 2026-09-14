@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('meta_title', 'About Us — ' . \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture'))
+@section('meta_title', 'About Us — ' . \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi'))
 @section('meta_description', \App\Models\PageContent::get('about_who_we_are_text'))
 
 @section('content')
@@ -8,23 +8,23 @@
     <!-- 1. Hero Banner -->
     <section class="relative bg-neutral-900 text-white pt-36 pb-24 md:pt-48 md:pb-32 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-60 scale-105 transform transition-transform duration-1000" 
-             style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');">
+             style="background-image: url('/images/lng/terminal.jpg');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85"></div>
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-4">
-            <div class="eyebrow-light">About Us</div>
+            <div class="eyebrow-light">Corporate Profile</div>
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight uppercase">
-                Metrix Interior Architecture
+                PT Nusantara LNG Energi
             </h1>
             <div class="min-h-[40px] flex items-center justify-center text-neutral-300 text-xs md:text-sm max-w-2xl mx-auto"
                  x-data="{
                     text: '',
                     phrases: [
-                        '{{ addslashes(\App\Models\PageContent::get('home_hero_title', 'We are an Award-Winning interior design firm')) }}',
-                        'Over two decades of international architectural excellence.',
-                        'Conceiving bespoke spatial narratives across the globe.',
-                        'Elevating human experience through refined spatial geometry.'
+                        '{{ addslashes(\App\Models\PageContent::get('home_hero_title', 'Powering Global Industry with Integrated LNG & Cryogenic Energy Infrastructure')) }}',
+                        'Over 18 years of cryogenic engineering and operational safety excellence.',
+                        'Reliable natural gas supply connecting energy corridors across Asia Pacific.',
+                        'Accelerating sustainable industrial transition through cleaner energy.'
                     ],
                     phraseIndex: 0,
                     charIndex: 0,
@@ -57,7 +57,7 @@
                     }
                  }">
                 <p class="leading-relaxed">
-                    <span x-text="text">{{ \App\Models\PageContent::get('home_hero_title', 'We are an Award-Winning interior design firm') }}</span><span class="inline-block w-0.5 h-4 bg-white ml-1 align-middle animate-cursor"></span>
+                    <span x-text="text">{{ \App\Models\PageContent::get('home_hero_title', 'Powering Global Industry with Integrated LNG & Cryogenic Energy Infrastructure') }}</span><span class="inline-block w-0.5 h-4 bg-white ml-1 align-middle animate-cursor"></span>
                 </p>
             </div>
         </div>
@@ -76,7 +76,7 @@
                     </h2>
                     <div class="text-neutral-body text-xs md:text-sm leading-relaxed space-y-4">
                         <p>
-                            {{ \App\Models\PageContent::get('about_who_we_are_text', 'Metrix Interior Architecture is an established Jakarta-based interior design consultant with over two decades of international experience.') }}
+                            {{ \App\Models\PageContent::get('about_who_we_are_text', 'PT Nusantara LNG Energi is an established energy infrastructure and liquefied natural gas provider with over 18 years of operational excellence in cryogenic transport and gas distribution.') }}
                         </p>
                         <p>
                             {{ \App\Models\PageContent::get('home_hero_description') }}
@@ -86,16 +86,16 @@
 
                 <!-- Our Mission -->
                 <div class="space-y-6 lg:border-l lg:border-neutral-200 lg:pl-16">
-                    <div class="eyebrow text-accent font-semibold">Our Philosophy</div>
+                    <div class="eyebrow text-accent font-semibold">Strategic Vision</div>
                     <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">
-                        {{ \App\Models\PageContent::get('about_mission_title', 'Our Mission') }}
+                        {{ \App\Models\PageContent::get('about_mission_title', 'Our Strategic Mission') }}
                     </h2>
                     <div class="text-neutral-body text-xs md:text-sm leading-relaxed space-y-4">
                         <p>
-                            {{ \App\Models\PageContent::get('about_mission_text', 'To conceive timeless, functional, and visually evocative architectural interiors that elevate human experience.') }}
+                            {{ \App\Models\PageContent::get('about_mission_text', 'To deliver secure, competitive, and cleaner energy solutions through world-class cryogenic logistics, accelerating sustainable industrial growth and regional energy transition with zero-incident safety standards.') }}
                         </p>
                         <p>
-                            We believe that architectural excellence thrives at the intersection of discipline, creativity, and deep understanding of human movement within physical spaces.
+                            We believe that energy security and environmental sustainability must go hand-in-hand. By operating specialized cryogenic logistics, we unlock natural gas access for archipelagic regions where conventional pipelines are economically or geographically unfeasible.
                         </p>
                     </div>
                 </div>
@@ -110,18 +110,18 @@
              x-init="setTimeout(() => show = true, 200)">
         <div class="max-w-5xl mx-auto px-6 space-y-10">
             <div class="text-center space-y-2">
-                <div class="eyebrow">Expertise</div>
-                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Core Competencies</h2>
+                <div class="eyebrow">Technical Mastery</div>
+                <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Core Capabilities &amp; Standards</h2>
             </div>
 
             <div class="space-y-6">
                 @php
                     $skills = [
-                        ['name' => 'Interior Design', 'percent' => 100],
-                        ['name' => 'Furniture Design', 'percent' => 100],
-                        ['name' => '3D Architectural Visualization', 'percent' => 100],
-                        ['name' => 'Interior Styling & Material Curation', 'percent' => 100],
-                        ['name' => 'Interior Construction Management', 'percent' => 100],
+                        ['name' => 'Cryogenic Process Engineering & Liquefaction', 'percent' => 100],
+                        ['name' => 'Small-Scale LNG & Virtual Pipeline Logistics', 'percent' => 100],
+                        ['name' => 'Marine Bunkering & STS Transfer Operations', 'percent' => 100],
+                        ['name' => 'Coastal Terminal & FSRU Regasification', 'percent' => 100],
+                        ['name' => 'QHSE, SIGTTO Compliance & Process Safety', 'percent' => 100],
                     ];
                 @endphp
 
@@ -141,22 +141,22 @@
         </div>
     </section>
 
-    <!-- 4. 5 Service Highlights / Icon Boxes -->
+    <!-- 4. 5 Integrated Solution Highlights / Icon Boxes -->
     <section class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             <div class="text-center space-y-3 max-w-2xl mx-auto">
-                <div class="eyebrow">What We Do</div>
-                <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">Integrated Spatial Solutions</h2>
+                <div class="eyebrow">Integrated Portfolio</div>
+                <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">End-to-End LNG Value Chain</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
                 @php
                     $highlights = [
-                        ['title' => 'Retail Interior', 'desc' => 'High-impact retail flagship spaces that elevate luxury brand perception.'],
-                        ['title' => 'Commercial', 'desc' => 'Modern office headquarters engineered for collaborative productivity.'],
-                        ['title' => 'Restaurant & Bar', 'desc' => 'Immersive culinary atmospheres fusing acoustic, lighting, and layout harmony.'],
-                        ['title' => 'Hospitality', 'desc' => 'Resort, hotel, and lounge destinations delivering five-star guest journeys.'],
-                        ['title' => 'Residential', 'desc' => 'Bespoke private estates and penthouses reflecting personal elegance.'],
+                        ['title' => 'Bulk LNG Supply', 'desc' => 'Large-scale FOB/DES cargo offtake with price formulas indexed to global energy benchmarks.'],
+                        ['title' => 'Virtual Pipeline', 'desc' => 'Multimodal cryogenic ISO containers supplying off-grid smelters and industrial microgrids.'],
+                        ['title' => 'Marine Bunkering', 'desc' => 'Eco-friendly ship-to-ship LNG refueling complying with IMO 2030/2050 sulfur regulations.'],
+                        ['title' => 'Regas Terminals', 'desc' => 'FSRU management, coastal storage tank throughput, and high-pressure pipeline injection.'],
+                        ['title' => 'Cryogenic EPC', 'desc' => 'Turnkey cryogenic engineering, HAZOP risk modeling, and boil-off gas reliquefaction skids.'],
                     ];
                 @endphp
 
@@ -183,8 +183,8 @@
                 
                 <!-- Stat 1 -->
                 @php
-                    $partRaw = \App\Models\SiteSetting::get('associate_partners', '5');
-                    $partNum = (int) preg_replace('/[^0-9]/', '', $partRaw) ?: 5;
+                    $partRaw = \App\Models\SiteSetting::get('associate_partners', '8');
+                    $partNum = (int) preg_replace('/[^0-9]/', '', $partRaw) ?: 8;
                     $partSuf = preg_replace('/[0-9,]/', '', $partRaw) ?: '';
                 @endphp
                 <div class="pt-4 md:pt-0 px-4 space-y-2"
@@ -211,13 +211,13 @@
                     <div class="text-4xl md:text-5xl font-bold text-white tracking-tight">
                         <span x-text="count.toLocaleString() + suffix">{{ $partRaw }}</span>
                     </div>
-                    <div class="eyebrow-light text-[11px]">Associate Partners</div>
+                    <div class="eyebrow-light text-[11px]">Cryogenic Vessels &amp; Terminals</div>
                 </div>
 
                 <!-- Stat 2 -->
                 @php
-                    $clRaw = \App\Models\SiteSetting::get('total_clients', '60+');
-                    $clNum = (int) preg_replace('/[^0-9]/', '', $clRaw) ?: 60;
+                    $clRaw = \App\Models\SiteSetting::get('total_clients', '40+');
+                    $clNum = (int) preg_replace('/[^0-9]/', '', $clRaw) ?: 40;
                     $clSuf = preg_replace('/[0-9,]/', '', $clRaw) ?: '+';
                 @endphp
                 <div class="pt-4 md:pt-0 px-4 space-y-2"
@@ -244,14 +244,14 @@
                     <div class="text-4xl md:text-5xl font-bold text-white tracking-tight">
                         <span x-text="count.toLocaleString() + suffix">{{ $clRaw }}</span>
                     </div>
-                    <div class="eyebrow-light text-[11px]">Number of Clients</div>
+                    <div class="eyebrow-light text-[11px]">Industrial Offtakers</div>
                 </div>
 
                 <!-- Stat 3 -->
                 @php
-                    $tmRaw = \App\Models\SiteSetting::get('team_members_count', '60');
-                    $tmNum = (int) preg_replace('/[^0-9]/', '', $tmRaw) ?: 60;
-                    $tmSuf = preg_replace('/[0-9,]/', '', $tmRaw) ?: '';
+                    $tmRaw = \App\Models\SiteSetting::get('team_members_count', '150+');
+                    $tmNum = (int) preg_replace('/[^0-9]/', '', $tmRaw) ?: 150;
+                    $tmSuf = preg_replace('/[0-9,]/', '', $tmRaw) ?: '+';
                 @endphp
                 <div class="pt-4 md:pt-0 px-4 space-y-2"
                      x-data="{
@@ -277,14 +277,14 @@
                     <div class="text-4xl md:text-5xl font-bold text-white tracking-tight">
                         <span x-text="count.toLocaleString() + suffix">{{ $tmRaw }}</span>
                     </div>
-                    <div class="eyebrow-light text-[11px]">Team Members</div>
+                    <div class="eyebrow-light text-[11px]">Specialists &amp; Engineers</div>
                 </div>
 
                 <!-- Stat 4 -->
                 @php
-                    $dayRaw = \App\Models\SiteSetting::get('days_of_work', '9000+');
-                    $dayNum = (int) preg_replace('/[^0-9]/', '', $dayRaw) ?: 9000;
-                    $daySuf = preg_replace('/[0-9,]/', '', $dayRaw) ?: '+';
+                    $dayRaw = \App\Models\SiteSetting::get('days_of_work', '15M+');
+                    $dayNum = (int) preg_replace('/[^0-9]/', '', $dayRaw) ?: 15;
+                    $daySuf = preg_replace('/[0-9,]/', '', $dayRaw) ?: 'M+';
                 @endphp
                 <div class="pt-4 md:pt-0 px-4 space-y-2"
                      x-data="{
@@ -310,23 +310,23 @@
                     <div class="text-4xl md:text-5xl font-bold text-white tracking-tight">
                         <span x-text="count.toLocaleString() + suffix">{{ $dayRaw }}</span>
                     </div>
-                    <div class="eyebrow-light text-[11px]">Days of Dedicated Work</div>
+                    <div class="eyebrow-light text-[11px]">Safe Working Hours (Zero LTI)</div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- 6. Selected Projects (4 Cards) -->
+    <!-- 6. Selected Products & Solutions (4 Cards) -->
     <section class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div class="space-y-3">
                     <div class="eyebrow">Highlights</div>
-                    <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">Selected Projects</h2>
+                    <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">Featured Infrastructure &amp; Supply</h2>
                 </div>
                 <a href="{{ url('/services') }}" class="eyebrow text-black hover:text-accent font-semibold border-b border-black pb-1 inline-block">
-                    View Full Portfolio &rarr;
+                    View All Products &amp; Lines &rarr;
                 </a>
             </div>
 

@@ -64,7 +64,7 @@
                 <input type="text" 
                        id="author" 
                        name="author" 
-                       value="{{ old('author', 'Metrix Editorial') }}" 
+                       value="{{ old('author', 'Nusantara Energy Insights') }}" 
                        class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs px-4 py-3 focus:outline-none focus:border-white transition-colors">
             </div>
 

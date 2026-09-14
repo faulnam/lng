@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('meta_title', ($post->meta_title ?: $post->title) . ' — ' . \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture'))
+@section('meta_title', ($post->meta_title ?: $post->title) . ' — ' . \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi'))
 @section('meta_description', $post->meta_description ?: strip_tags(Str::limit($post->excerpt ?: $post->content, 160)))
 
 @section('content')
@@ -21,7 +21,7 @@
             </h1>
 
             <div class="flex items-center justify-center gap-4 text-xs uppercase tracking-wider text-neutral-400 pt-2">
-                <span>By {{ $post->author ?: 'Metrix Editorial' }}</span>
+                <span>By {{ $post->author ?: 'Nusantara LNG Editorial' }}</span>
                 <span>&bull;</span>
                 <span>{{ $post->published_at ? $post->published_at->format('F d, Y') : $post->created_at->format('F d, Y') }}</span>
             </div>
@@ -63,7 +63,7 @@
                             <a href="{{ url('/our-blog/' . $prevPost->slug) }}" class="group p-6 border border-neutral-200 hover:border-black transition-colors space-y-1 block">
                                 <div class="text-[10px] uppercase tracking-widest text-neutral-400 flex items-center gap-1">
                                     <span>&larr;</span>
-                                    <span>Previous Article</span>
+                                    <span>Previous Briefing</span>
                                 </div>
                                 <div class="text-xs md:text-sm font-bold text-black group-hover:text-accent transition-colors line-clamp-2">
                                     {{ $prevPost->title }}
@@ -76,7 +76,7 @@
                         @if($nextPost)
                             <a href="{{ url('/our-blog/' . $nextPost->slug) }}" class="group p-6 border border-neutral-200 hover:border-black transition-colors space-y-1 block text-right">
                                 <div class="text-[10px] uppercase tracking-widest text-neutral-400 flex items-center justify-end gap-1">
-                                    <span>Next Article</span>
+                                    <span>Next Briefing</span>
                                     <span>&rarr;</span>
                                 </div>
                                 <div class="text-xs md:text-sm font-bold text-black group-hover:text-accent transition-colors line-clamp-2">
@@ -94,7 +94,7 @@
                     <!-- Categories Box -->
                     <div class="bg-neutral-bg p-8 border border-neutral-200 space-y-4">
                         <h3 class="text-xs uppercase tracking-widest2 font-bold text-black border-b border-neutral-200 pb-3">
-                            Categories
+                            Publication Categories
                         </h3>
                         <ul class="space-y-2 text-xs">
                             @foreach($categories as $cat)
@@ -113,13 +113,13 @@
                     @if(isset($recentPosts) && $recentPosts->count())
                         <div class="bg-neutral-bg p-8 border border-neutral-200 space-y-6">
                             <h3 class="text-xs uppercase tracking-widest2 font-bold text-black border-b border-neutral-200 pb-3">
-                                Recent Articles
+                                Recent Publications
                             </h3>
                             <div class="space-y-4">
                                 @foreach($recentPosts as $rec)
                                     <div class="space-y-1">
                                         <div class="text-[10px] uppercase tracking-wider text-neutral-400">
-                                            {{ $rec->published_at ? $rec->published_at->format('M d, Y') : $rec->created_at->format('M d, Y') }}
+                                             {{ $rec->published_at ? $rec->published_at->format('M d, Y') : $rec->created_at->format('M d, Y') }}
                                         </div>
                                         <h4 class="text-xs font-bold text-black hover:text-accent transition-colors leading-snug">
                                             <a href="{{ url('/our-blog/' . $rec->slug) }}">

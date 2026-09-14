@@ -1,5 +1,5 @@
-<!-- Metrix AI Chatbot Widget (Ultra Clean Architectural Minimalist) -->
-<div x-data="metrixChatbot()" x-init="init()" class="relative font-sans text-[#111111]" x-cloak>
+<!-- Nusantara LNG AI Chatbot Widget (Ultra Clean Architectural Minimalist) -->
+<div x-data="nusantaraLngChatbot()" x-init="init()" class="relative font-sans text-[#111111]" x-cloak>
     
     <!-- Proactive Teaser Banner (Clean Minimalist Monochrome) -->
     <div x-show="showTeaser && !isOpen"
@@ -11,16 +11,16 @@
          x-transition:leave-end="opacity-0 translate-y-3"
          class="fixed bottom-24 right-6 z-50 max-w-[290px] bg-white text-black p-4 shadow-xl border border-neutral-300 flex items-start gap-3 select-none">
         
-        <!-- Square M Emblem (Identical to Header Logo) -->
+        <!-- Square N Emblem (Identical to Header Logo) -->
         <div class="w-7 h-7 bg-black text-white flex items-center justify-center font-bold text-xs tracking-tighter shrink-0">
-            M
+            N
         </div>
         <div class="flex-1 cursor-pointer" @click="openChat()">
             <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-black">
-                AI Consultant
+                LNG Energy Assistant
             </p>
             <p class="text-xs text-neutral-600 leading-snug mt-1 font-normal">
-                Butuh saran konsep atau estimasi renovasi interior? Tanya di sini.
+                Butuh data spesifikasi LNG, virtual pipeline, atau skema kontrak pasokan? Tanya di sini.
             </p>
         </div>
         <button @click.stop="dismissTeaser()" class="text-neutral-400 hover:text-black text-base p-0.5 leading-none transition-colors" title="Tutup">
@@ -32,7 +32,7 @@
     <button @click="toggleChat()"
             class="fixed bottom-6 right-6 z-50 w-13 h-13 md:w-14 md:h-14 bg-black text-white border border-black hover:bg-white hover:text-black shadow-2xl flex items-center justify-center transition-all duration-300 group focus:outline-none"
             :class="{ 'bg-white text-black': isOpen }"
-            aria-label="Konsultan AI Metrix">
+            aria-label="Asisten AI Nusantara LNG">
         
         <!-- Chat Icon (Closed) -->
         <svg x-show="!isOpen" class="w-5 h-5 transition-transform duration-200 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,20 +53,20 @@
          x-transition:leave="transition ease-in duration-150 transform"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 translate-y-4"
-         class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[410px] h-[580px] max-h-[calc(100vh-120px)] bg-white border border-neutral-300 shadow-2xl flex flex-col overflow-hidden">
+         class="fixed bottom-24 right-4 sm:right-6 z-50 w-[92vw] sm:w-[420px] h-[590px] max-h-[calc(100vh-120px)] bg-white border border-neutral-300 shadow-2xl flex flex-col overflow-hidden">
         
         <!-- Minimalist Header -->
         <div class="bg-black text-white px-5 py-4 flex items-center justify-between border-b border-black shrink-0">
             <div class="flex items-center gap-3">
                 <div class="w-7 h-7 bg-white text-black flex items-center justify-center font-bold text-xs tracking-tighter shrink-0">
-                    M
+                    N
                 </div>
                 <div>
-                    <h3 class="text-xs font-bold tracking-[0.25em] uppercase text-white leading-none">
-                        METRIX
+                    <h3 class="text-xs font-bold tracking-[0.22em] uppercase text-white leading-none">
+                        NUSANTARA LNG
                     </h3>
                     <p class="text-[9px] tracking-[0.2em] uppercase text-neutral-400 mt-1">
-                        Interior AI Consultant
+                        Corporate Energy AI Assistant
                     </p>
                 </div>
             </div>
@@ -99,15 +99,15 @@
             <!-- Welcome Info Card (Minimal Clean) -->
             <div class="bg-neutral-50 p-4 border border-neutral-200 space-y-3">
                 <div>
-                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Konsultasi Desain</span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">Pusat Informasi Energi B2B</span>
                     <p class="text-xs text-neutral-700 leading-relaxed mt-1">
-                        Selamat datang di <strong>Metrix Interior Architecture</strong>. Konsultasikan kebutuhan konsep desain, perencanaan tata ruang, furnitur custom, maupun estimasi pengerjaan proyek Anda.
+                        Selamat datang di <strong>PT Nusantara LNG Energi</strong>. Konsultasikan spesifikasi teknis gas alam cair (LNG), skema kontrak pasokan (FOB/DES), logistik virtual pipeline ISO tank, atau kebutuhan energi industri Anda.
                     </p>
                 </div>
                 
                 <!-- Quick Suggestions Chips (Clean Outline Style) -->
                 <div class="pt-2 border-t border-neutral-200">
-                    <p class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-2">Topik Pertanyaan:</p>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-neutral-500 mb-2">Topik Pertanyaan Populer:</p>
                     <div class="flex flex-col gap-1.5">
                         <template x-for="(sug, index) in suggestions" :key="index">
                             <button @click="sendPredefined(sug.prompt)" 
@@ -126,7 +126,7 @@
                     
                     <!-- Sender & Time Tag -->
                     <div class="flex items-center gap-1.5 mb-1 text-[9px] uppercase tracking-wider text-neutral-400 px-0.5">
-                        <span x-text="msg.role === 'user' ? 'Anda' : 'Metrix AI'"></span>
+                        <span x-text="msg.role === 'user' ? 'Anda' : 'Nusantara LNG AI'"></span>
                         <span>•</span>
                         <span x-text="msg.time"></span>
                     </div>
@@ -162,7 +162,7 @@
                  class="flex flex-col items-start space-y-1">
                 
                 <div class="text-[9px] uppercase tracking-wider text-neutral-400 px-0.5">
-                    Metrix AI • Memproses
+                    Nusantara LNG AI • Memproses
                 </div>
 
                 <div class="bg-neutral-50 border border-neutral-200 px-4 py-3 max-w-[90%] flex items-center gap-3">
@@ -189,9 +189,9 @@
         <div class="p-3 bg-white border-t border-neutral-200 shrink-0">
             <form @submit.prevent="sendMessage()" class="flex items-center gap-2">
                 <div class="flex-1 bg-white border border-neutral-300 focus-within:border-black transition-colors">
-                    <input type="text"
+                    <input type="text" 
                            x-model="userInput" 
-                           placeholder="Ketik pertanyaan konsultasi Anda..."
+                           placeholder="Ketik pertanyaan LNG atau konsultasi energi Anda..." 
                            class="w-full px-3 py-2.5 bg-transparent border-0 text-xs text-black placeholder:text-neutral-400 focus:outline-none"
                            :disabled="isThinking">
                 </div>
@@ -207,7 +207,7 @@
             
             <div class="flex items-center justify-between mt-2 px-0.5 text-[9px] uppercase tracking-wider text-neutral-400">
                 <span>Tekan Enter untuk mengirim</span>
-                <span>Metrix Interior Architecture</span>
+                <span>PT Nusantara LNG Energi</span>
             </div>
         </div>
     </div>
@@ -250,37 +250,37 @@
 
 <!-- Alpine.js Logic -->
 <script>
-function metrixChatbot() {
+function nusantaraLngChatbot() {
     return {
         isOpen: false,
         showTeaser: false,
         userInput: '',
         isThinking: false,
-        thinkingStatus: 'Sedang menganalisis konsep ruang...',
+        thinkingStatus: 'Sedang memproses data teknis LNG...',
         thinkingInterval: null,
         errorMessage: '',
         messages: [],
         suggestions: [
             {
-                label: 'Tahapan & Alur Proyek Interior',
-                prompt: 'Bagaimana tahapan konsultasi dan alur pengerjaan proyek interior di Metrix?'
+                label: 'Spesifikasi & Nilai Kalor LNG',
+                prompt: 'Apa spesifikasi teknis gas alam cair (LNG) Nusantara LNG, termasuk kemurnian metana dan nilai kalornya?'
             },
             {
-                label: 'Rekomendasi Konsep Desain',
-                prompt: 'Apa rekomendasi konsep desain interior untuk ruang tamu modern Japandi?'
+                label: 'Mekanisme Kontrak FOB & DES',
+                prompt: 'Jelaskan skema kontrak pasokan bulk LNG (FOB vs DES) dan mekanisme penentuan harga terindeks.'
             },
             {
-                label: 'Estimasi Custom Furniture & Fit-out',
-                prompt: 'Berapa perkiraan durasi dan alur pembuatan custom furniture dan fit-out?'
+                label: 'Virtual Pipeline & ISO Tank',
+                prompt: 'Bagaimana solusi logistik virtual pipeline ISO tank untuk menyuplai gas ke kawasan industri atau smelter off-grid?'
             },
             {
-                label: 'Jadwal Konsultasi & Survey Lokasi',
-                prompt: 'Bagaimana cara menjadwalkan konsultasi atau survei lokasi dengan tim arsitek Metrix?'
+                label: 'Standar Keselamatan & QHSE',
+                prompt: 'Apa saja standar keselamatan kriogenik, sertifikasi SIGTTO, dan kepatuhan lingkungan yang diterapkan Nusantara LNG?'
             }
         ],
 
         init() {
-            const saved = sessionStorage.getItem('metrix_chat_history');
+            const saved = sessionStorage.getItem('nusantara_lng_chat_history');
             if (saved) {
                 try {
                     this.messages = JSON.parse(saved);
@@ -384,9 +384,9 @@ function metrixChatbot() {
 
         startThinkingAnimation() {
             const statuses = [
-                'Sedang menganalisis kebutuhan ruang...',
-                'Menyiapkan rekomendasi arsitektur...',
-                'Menyusun rincian saran interior...'
+                'Sedang memproses data teknis LNG...',
+                'Menyiapkan rincian rantai pasok energi...',
+                'Menganalisis parameter logistik kriogenik...'
             ];
             let index = 0;
             this.thinkingStatus = statuses[0];
@@ -406,13 +406,13 @@ function metrixChatbot() {
         confirmClearChat() {
             if (confirm('Hapus seluruh riwayat percakapan?')) {
                 this.messages = [];
-                sessionStorage.removeItem('metrix_chat_history');
+                sessionStorage.removeItem('nusantara_lng_chat_history');
             }
         },
 
         saveHistory() {
             try {
-                sessionStorage.setItem('metrix_chat_history', JSON.stringify(this.messages));
+                sessionStorage.setItem('nusantara_lng_chat_history', JSON.stringify(this.messages));
             } catch(e) {}
         },
 

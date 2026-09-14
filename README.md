@@ -1,66 +1,70 @@
-# Sistem Informasi Company Profile dan Manajemen Portofolio Interior Design Terpadu
+# PT Nusantara LNG Energi — Corporate Company Profile & Energy Infrastructure Platform
 
-Sistem Informasi Company Profile dan Manajemen Portofolio Interior Design Terpadu adalah platform berbasis web modern yang dirancang untuk industri arsitektur dan desain interior mewah. Aplikasi ini mengintegrasikan portal profil interaktif untuk menampilkan portofolio proyek eksklusif, katalog layanan berjenjang 2 level, galeri foto dinamis, publikasi penghargaan dan berita desain, lowongan pekerjaan interaktif, integrasi chatbot AI cerdas berbasis Google Gemini, serta panel CMS administratif dengan kontrol akses berbasis peran (RBAC).
+Company profile korporat modern untuk **PT Nusantara LNG Energi**, penyedia solusi terintegrasi infrastruktur gas alam cair (LNG), rantai pasok kriogenik (*virtual pipeline*), terminal regasifikasi, dan *marine bunkering* di Indonesia dan Asia Pasifik. Platform ini dirancang khusus untuk memenuhi kebutuhan komunikasi strategis dengan mitra bisnis B2B (*offtakers* industri & utilitas listrik) dan calon investor institusional.
 
 ---
 
-## Akun Role Asli (Production / Default)
+## Struktur 6 Halaman Utama (Public Navigation)
 
-Berikut adalah daftar akun pengguna asli untuk setiap peran sistem:
+1. **Home (`/`)**: Hero positioning perusahaan LNG, counter statistik operasional (Kapasitas 5.2 MTPA, 18+ Tahun Operasi, 12 Terminal, 40+ Offtaker Strategis), showcase lini produk unggulan dengan spesifikasi teknis, logo mitra korporat & sertifikasi industri (PLN, PGN, SKK Migas, SIGTTO, ISO), serta testimoni institusional.
+2. **About (`/about-us` / `/about`)**: Profil korporat, visi-misi, pilar kompetensi rantai pasok kriogenik, standar kepatuhan QHSE berstandar internasional, serta ikhtisar rekam jejak operasional.
+3. **Products (`/products` / `/services`)**: Katalog lini produk dan solusi bisnis energi gas bumi terintegrasi (Bulk LNG, ISO Tank Fleet & Virtual Pipeline, Marine Bunkering, Regasification Terminals, Small-Scale LNG Hubs, Cryogenic EPC).
+4. **Blog / Market Insights (`/blog` / `/our-blog`)**: Publikasi artikel analisis pasar energi, regulasi migas nasional & internasional, wawasan dekarbonisasi industri, serta pengumuman resmi perusahaan.
+5. **Detail Blog (`/our-blog/{slug}`)**: Halaman artikel mendalam dengan meta kategori, estimasi waktu baca, sitasi, dan navigasi artikel terkait.
+6. **Contact (`/contact-us` / `/contact`)**: Informasi kantor pusat Energy Tower SCBD Jakarta, formulir *Commercial Inquiry* B2B, kontak *Investor Relations*, serta integrasi peta lokasi.
+
+---
+
+## Kredensial Pengguna Sistem (CMS Admin)
+
+Akses panel manajemen konten melalui URL `/admin/login`.
+
+### 1. Akun Role Asli (Production / Default)
 
 | Peran | Email | Password |
 |---|---|---|
-| Super Admin | `admin@the-metrix.com` | `qwertyu123` |
-| Editor | `editor@the-metrix.com` | `qwertyu123` |
+| Super Admin | `admin@nusantara-lng.com` *(atau `admin@the-metrix.com`)* | `qwertyu123` |
+| Content Editor | `editor@nusantara-lng.com` *(atau `editor@the-metrix.com`)* | `qwertyu123` |
 
----
-
-## Akun Role Demo (Fitur Auto Delete 3 Menit)
-
-Aplikasi ini dilengkapi dengan akun demo untuk pengujian interaktif setiap peran. Setiap data atau konten baru yang dibuat oleh akun demo akan secara otomatis terhapus dari sistem dalam waktu 3 menit setelah pembuatan.
+### 2. Akun Role Demo (Auto-Delete 3 Menit)
 
 | Peran Demo | Email Demo | Password Demo | Masa Berlaku Konten |
 |---|---|---|---|
-| Demo Super Admin | `demo_admin@the-metrix.com` | `password` | 3 Menit Otomatis Terhapus |
-| Demo Editor | `demo_editor@the-metrix.com` | `password` | 3 Menit Otomatis Terhapus |
+| Demo Super Admin | `demo_admin@nusantara-lng.com` *(atau `demo_admin@the-metrix.com`)* | `password` | 3 Menit Otomatis Terhapus |
+| Demo Editor | `demo_editor@nusantara-lng.com` *(atau `demo_editor@the-metrix.com`)* | `password` | 3 Menit Otomatis Terhapus |
 
 ---
 
-## Fitur Utama
+## Fitur Utama Platform
 
-- **Portal Profil Publik & Portofolio**: Menampilkan profil perusahaan arsitektur, proyek-proyek unggulan, dan detail proyek dengan galeri multi foto beresolusi tinggi.
-- **Katalog Layanan Bertingkat (2-Level Hierarchy)**: Layanan utama (Interior Design, Interior Styling, 3D Visualization) dan sub-layanan (Work Space, Public Space, Hospitality, Show Unit & Residence, Commercial & Retail, Restaurant & Bar).
-- **Showcase Penghargaan & Publikasi**: Menampilkan riwayat penghargaan dan publikasi media desain dengan sistem pagination.
-- **Modul Karir & Lowongan Kerja**: Pengumuman lowongan pekerjaan interaktif dengan format accordion dan tautan pengajuan lamaran.
-- **Blog & Wawasan Desain**: Publikasi artikel dan wawasan tren desain interior yang dikelompokkan berdasarkan kategori.
-- **Grid Logo Klien & Rekanan**: Etalase logo klien dan partner korporat yang responsif.
-- **Asisten AI Chatbot (Google Gemini)**: Chatbot interaktif cerdas untuk menjawab pertanyaan pengunjung terkait layanan dan konsultasi interior secara otomatis.
-- **Formulir Kontak & Inbox Admin**: Pengiriman formulir kontak yang tersimpan langsung ke inbox pesan admin dengan indikator status baca.
-- **Buletin Newsletter**: Formulir berlangganan buletin email berkala dengan fitur ekspor data subscriber ke CSV.
-- **Panel CMS Administratif**: Pengelolaan menyeluruh terhadap portofolio, layanan, blog, lowongan karir, slide banner, ulasan testimoni, pengaturan statistik, dan copywriting teks statis.
-- **Manajemen Pengguna & Role Akses**: Pemisahan hak akses antara Super Admin (akses penuh ke sistem dan user) dan Editor (fokus pada konten portofolio dan media).
-- **Pembersihan Otomatis Data Demo**: Mekanisme otomatis berbasis event listener dan cron schedule untuk menghapus konten uji coba demo setelah 3 menit.
+- **Corporate Positioning & Technical Product Specs**: Menampilkan spesifikasi teknis LNG (Gross Heating Value 1,020–1,150 BTU/SCF, CH₄ Purity ≥ 99.2%, Cryogenic Boiling Point -162°C, ISO Container pressure ratings).
+- **2-Level Products & Business Lines**: Struktur hierarki produk mencakup *Bulk & Wholesale LNG Supply*, *Virtual Pipeline & Cryogenic Logistics*, *Marine Bunkering & Small-Scale Distribution*, *Terminal Regasification*, dan *Cryogenic EPC*.
+- **Asisten AI B2B (Google Gemini)**: Chatbot interaktif yang diprogram khusus sebagai *Corporate Technical Specialist* untuk menjawab pertanyaan seputar spesifikasi teknis, mekanisme kontrak offtake (FOB/DES), perizinan SKK Migas, dan standar keselamatan kriogenik.
+- **Commercial Desk Inbox**: Formulir inquiry terhubung langsung ke dashboard admin dengan status pesan masuk dan notifikasi cepat.
+- **Manajemen Berita & Analisis Pasar Energi**: CMS lengkap untuk publikasi riset pasar gas bumi, siaran pers korporat, dan artikel dekarbonisasi.
+- **Dashboard CMS Terpadu**: Pengelolaan produk, slide hero, artikel, pesan masuk, subscriber newsletter, statistik perusahaan, dan pengaturan profil situs.
+- **Desain Monokromatis Presisi**: Mempertahankan 100% tata letak visual elegan, responsif, dan performa tinggi dari template dasar.
 
 ---
 
 ## Teknologi yang Digunakan (Tech Stack)
 
-- **Backend Framework**: PHP 8.2 & Laravel 11
+- **Backend Framework**: PHP 8.3 & Laravel 11
 - **Database**: MySQL 8
-- **Autentikasi & Otorisasi**: Laravel Session-Based Authentication & Role Middleware
-- **Frontend Styling**: Standalone Tailwind CSS CLI (Clean & Fast)
-- **Frontend Interactivity**: Alpine.js & Vanilla JavaScript
+- **Autentikasi & Otorisasi**: Laravel Session Auth & Role Middleware (Super Admin / Editor)
+- **Frontend**: Blade Templating, Standalone Tailwind CSS, Alpine.js, Vanilla JS
+- **Artificial Intelligence**: Google Gemini API (`gemini-2.5-flash` / `gemini-1.5-flash`)
 - **Rich Text Editor**: Quill.js
-- **Artificial Intelligence**: Google Gemini API (`gemini-3.5-flash-lite`)
-- **Automation**: Laravel Scheduler & Eloquent Event Listeners
+- **Automation**: Laravel Task Scheduling & Auto-cleanup Event Listeners
 
 ---
 
-## Panduan Instalasi & Menjalankan Proyek
+## Panduan Instalasi Lokal
 
-1. **Clone repository dan masuk ke direktori proyek**:
+1. **Clone repository**:
    ```bash
-   cd d:/laragonzo/www/interior
+   git clone https://github.com/faulnam/lng.git
+   cd lng
    ```
 
 2. **Install dependensi PHP**:
@@ -73,20 +77,14 @@ Aplikasi ini dilengkapi dengan akun demo untuk pengujian interaktif setiap peran
    cp .env.example .env
    php artisan key:generate
    ```
-   Pastikan konfigurasi database (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`) pada file `.env` sudah sesuai dengan database MySQL lokal Anda.
 
-4. **Jalankan Migrasi dan Seeder**:
+4. **Jalankan Migrasi & Database Seeder**:
    ```bash
-   php artisan migrate --seed
+   php artisan migrate:fresh --seed
    ```
 
-5. **Kompilasi Asset Tailwind CSS (Opsional / Standalone)**:
-   ```bash
-   ./tailwindcss-windows-x64.exe -i ./resources/css/app.css -o ./public/css/app.css --minify
-   ```
-
-6. **Jalankan Server Lokal**:
+5. **Jalankan Server Lokal**:
    ```bash
    php artisan serve
    ```
-   Aplikasi siap diakses melalui peramban web di `http://localhost:8000`. Panel admin dapat diakses di `http://localhost:8000/admin`.
+   Akses website di `http://localhost:8000` dan panel admin di `http://localhost:8000/admin`.

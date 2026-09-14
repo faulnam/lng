@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
-@section('meta_title', 'Services — ' . \App\Models\SiteSetting::get('company_name', 'Metrix Interior Architecture'))
-@section('meta_description', 'Explore our comprehensive interior architecture, bespoke styling, and 3D visualization services across commercial, hospitality, and residential sectors.')
+@section('meta_title', 'Products & Solutions — ' . \App\Models\SiteSetting::get('company_name', 'PT Nusantara LNG Energi'))
+@section('meta_description', 'Explore our comprehensive LNG product lines, bulk cargo supply, cryogenic ISO tank virtual pipelines, coastal regasification terminals, and marine bunkering solutions.')
 
 @section('content')
 
     <!-- Hero Banner -->
     <section class="relative bg-neutral-900 text-white pt-36 pb-20 md:pt-48 md:pb-28 overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center opacity-60 scale-105 transform transition-transform duration-1000" 
-             style="background-image: url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2000&auto=format&fit=crop');">
+             style="background-image: url('/images/lng/carrier.jpg');">
         </div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-4">
-            <div class="eyebrow-light">Capabilities & Expertise</div>
+            <div class="eyebrow-light">Products &amp; Business Lines</div>
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight uppercase">
-                Our Services
+                Products &amp; Solutions
             </h1>
             <div class="min-h-[40px] flex items-center justify-center text-neutral-300 text-xs md:text-sm max-w-xl mx-auto"
                  x-data="{
                     text: '',
                     phrases: [
-                        'From spatial master planning to intricate material curation.',
-                        'Transforming retail, hospitality, and corporate environments.',
-                        'End-to-end architectural consultation and bespoke execution.',
-                        'Mastering 3D visualization, styling, and turnkey fit-outs.'
+                        'Reliable large-scale bulk LNG offtake under FOB and DES contracts.',
+                        'Multimodal ISO tank virtual pipeline distribution across the archipelago.',
+                        'Low-emission maritime bunkering complying with IMO 2030/2050 standards.',
+                        'Turnkey coastal regasification terminal and FSRU infrastructure.'
                     ],
                     phraseIndex: 0,
                     charIndex: 0,
@@ -55,13 +55,13 @@
                     }
                  }">
                 <p class="leading-relaxed">
-                    <span x-text="text">From broad spatial master planning to intricate material finishes, we provide tailored end-to-end design and visualization services.</span><span class="inline-block w-0.5 h-4 bg-white ml-1 align-middle animate-cursor"></span>
+                    <span x-text="text">From bulk cargo shipping to virtual pipeline delivery, we provide tailored end-to-end cryogenic gas solutions.</span><span class="inline-block w-0.5 h-4 bg-white ml-1 align-middle animate-cursor"></span>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Services Overview & Categories List -->
+    <!-- Products Overview & Categories List -->
     <section class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-24">
             
@@ -100,7 +100,7 @@
                                     <a href="{{ url('/services/' . $service->slug . '/' . $child->slug) }}" 
                                        class="group p-6 bg-neutral-bg border border-neutral-200 hover:border-black transition-all flex flex-col justify-between h-44">
                                         <div class="space-y-2">
-                                            <div class="eyebrow text-[10px] text-accent">Sub-Category</div>
+                                            <div class="eyebrow text-[10px] text-accent">Lini Bisnis</div>
                                             <h3 class="text-sm font-bold text-black uppercase tracking-wider group-hover:text-accent transition-colors">
                                                 {{ $child->title }}
                                             </h3>
@@ -111,7 +111,7 @@
                                             @endif
                                         </div>
                                         <div class="text-[10px] uppercase tracking-widest font-semibold text-black flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                            <span>Explore Projects</span>
+                                            <span>Explore Solutions</span>
                                             <span>&rarr;</span>
                                         </div>
                                     </a>
@@ -120,7 +120,7 @@
                         @else
                             <!-- Single Category Showcase Card -->
                             <div class="relative aspect-[16/9] bg-neutral-900 overflow-hidden border border-neutral-200">
-                                <img src="{{ $service->image ? (str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image)) : 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1000&auto=format&fit=crop' }}" 
+                                <img src="{{ $service->image ? (str_starts_with($service->image, 'http') ? $service->image : asset('storage/' . $service->image)) : '/images/lng/terminal.jpg' }}" 
                                      alt="{{ $service->title }}" 
                                      class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center p-8 text-center">
@@ -145,7 +145,7 @@
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div class="space-y-2">
                         <div class="eyebrow">Portfolio Preview</div>
-                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Featured Works</h2>
+                        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">Key Infrastructure &amp; Solutions</h2>
                     </div>
                 </div>
 

@@ -20,13 +20,13 @@
             <!-- Stylized Minimalist Emblem -->
             <div :class="scrolled ? 'bg-black text-white' : 'bg-white text-black'" 
                  class="w-8 h-8 flex items-center justify-center font-bold text-xs tracking-tighter transition-colors duration-300">
-                M
+                N
             </div>
-            <span class="font-extrabold tracking-[0.25em] text-xs md:text-sm">METRIX</span>
+            <span class="font-extrabold tracking-[0.22em] text-xs md:text-sm">NUSANTARA LNG</span>
         </a>
 
-        <!-- Desktop Navigation Menu -->
-        <nav class="hidden lg:flex items-center space-x-7 text-[11px] uppercase tracking-widest font-medium">
+        <!-- Desktop Navigation Menu (Strict 5-Item Structure) -->
+        <nav class="hidden lg:flex items-center space-x-8 text-[11px] uppercase tracking-widest font-medium">
             <a href="{{ url('/') }}" 
                class="transition-colors duration-200 hover:text-accent {{ request()->is('/') ? 'text-accent font-semibold' : '' }}">
                 Home
@@ -34,22 +34,17 @@
 
             <a href="{{ url('/about-us') }}" 
                class="transition-colors duration-200 hover:text-accent {{ request()->is('about-us*') ? 'text-accent font-semibold' : '' }}">
-                About Us
+                About
             </a>
 
-            <a href="{{ url('/clients') }}" 
-               class="transition-colors duration-200 hover:text-accent {{ request()->is('clients*') ? 'text-accent font-semibold' : '' }}">
-                Clients
-            </a>
-
-            <!-- Services Dropdown (2-Level) -->
+            <!-- Products Dropdown (2-Level Hierarchy) -->
             <div class="relative" 
                  @mouseenter="servicesDropdown = true" 
                  @mouseleave="servicesDropdown = false; openSubmenu = null">
                 
                 <a href="{{ url('/services') }}" 
-                   class="inline-flex items-center gap-1 transition-colors duration-200 hover:text-accent py-2 {{ request()->is('services*') ? 'text-accent font-semibold' : '' }}">
-                    <span>Services</span>
+                   class="inline-flex items-center gap-1 transition-colors duration-200 hover:text-accent py-2 {{ request()->is('services*') || request()->is('products*') ? 'text-accent font-semibold' : '' }}">
+                    <span>Products</span>
                     <svg class="w-3 h-3 transition-transform duration-200" :class="servicesDropdown ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </a>
 
@@ -62,12 +57,12 @@
                      x-transition:leave-start="opacity-100 translate-y-0"
                      x-transition:leave-end="opacity-0 translate-y-2"
                      x-cloak
-                     class="absolute top-full left-0 mt-0 w-64 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
+                     class="absolute top-full left-0 mt-0 w-72 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
                     
                     @if(isset($navServices) && $navServices->count())
                         @foreach($navServices as $parentService)
                             @if($parentService->children->count())
-                                <!-- Parent with Children (e.g. Interior Design) -->
+                                <!-- Parent with Children -->
                                 <div class="relative" 
                                      @mouseenter="openSubmenu = '{{ $parentService->slug }}'" 
                                      @mouseleave="openSubmenu = null">
@@ -85,7 +80,7 @@
                                          x-transition:leave="transition ease-in duration-100"
                                          x-transition:leave-start="opacity-100 translate-x-0"
                                          x-transition:leave-end="opacity-0 translate-x-1"
-                                         class="absolute top-0 left-full ml-0.5 w-64 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
+                                         class="absolute top-0 left-full ml-0.5 w-72 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
                                         @foreach($parentService->children as $childService)
                                             <a href="{{ url('/services/' . $parentService->slug . '/' . $childService->slug) }}" 
                                                class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-700 hover:bg-neutral-50 hover:text-accent transition-colors">
@@ -95,7 +90,7 @@
                                     </div>
                                 </div>
                             @else
-                                <!-- Parent without Children (e.g. Interior Styling, 3D Visualization) -->
+                                <!-- Parent without Children -->
                                 <a href="{{ url('/services/' . $parentService->slug) }}" 
                                    class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50 hover:text-accent transition-colors">
                                     {{ $parentService->title }}
@@ -103,29 +98,19 @@
                             @endif
                         @endforeach
                     @else
-                        <a href="{{ url('/services') }}" class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50">All Services</a>
+                        <a href="{{ url('/services') }}" class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50">All Products & Lines</a>
                     @endif
                 </div>
             </div>
 
-            <a href="{{ url('/awards-publications') }}" 
-               class="transition-colors duration-200 hover:text-accent {{ request()->is('awards-publications*') ? 'text-accent font-semibold' : '' }}">
-                Awards & Publications
+            <a href="{{ url('/our-blog') }}" 
+               class="transition-colors duration-200 hover:text-accent {{ request()->is('our-blog*') || request()->is('blog*') ? 'text-accent font-semibold' : '' }}">
+                Blog
             </a>
 
             <a href="{{ url('/contact-us') }}" 
-               class="transition-colors duration-200 hover:text-accent {{ request()->is('contact-us*') ? 'text-accent font-semibold' : '' }}">
-                Contact Us
-            </a>
-
-            <a href="{{ url('/career') }}" 
-               class="transition-colors duration-200 hover:text-accent {{ request()->is('career*') ? 'text-accent font-semibold' : '' }}">
-                Career
-            </a>
-
-            <a href="{{ url('/our-blog') }}" 
-               class="transition-colors duration-200 hover:text-accent {{ request()->is('our-blog*') ? 'text-accent font-semibold' : '' }}">
-                Our Blog
+               class="transition-colors duration-200 hover:text-accent {{ request()->is('contact-us*') || request()->is('contact*') ? 'text-accent font-semibold' : '' }}">
+                Contact
             </a>
         </nav>
 
@@ -155,18 +140,17 @@
          class="lg:hidden bg-black text-white px-6 py-8 border-t border-neutral-800 space-y-4 max-h-[85vh] overflow-y-auto">
         
         <a href="{{ url('/') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Home</a>
-        <a href="{{ url('/about-us') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">About Us</a>
-        <a href="{{ url('/clients') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Clients</a>
+        <a href="{{ url('/about-us') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">About</a>
 
-        <!-- Mobile Services Accordion -->
+        <!-- Mobile Products Accordion -->
         <div x-data="{ mobileServicesOpen: false }" class="border-b border-neutral-800 py-2">
             <button @click="mobileServicesOpen = !mobileServicesOpen" class="w-full flex items-center justify-between text-xs uppercase tracking-widest2 hover:text-accent">
-                <span>Services</span>
+                <span>Products</span>
                 <svg class="w-4 h-4 transition-transform" :class="mobileServicesOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
 
             <div x-show="mobileServicesOpen" x-cloak class="pl-4 pt-3 space-y-3">
-                <a href="{{ url('/services') }}" @click="mobileMenuOpen = false" class="block text-[11px] uppercase tracking-wider text-neutral-400 hover:text-white">All Services</a>
+                <a href="{{ url('/services') }}" @click="mobileMenuOpen = false" class="block text-[11px] uppercase tracking-wider text-neutral-400 hover:text-white">All Products & Lines</a>
                 @if(isset($navServices) && $navServices->count())
                     @foreach($navServices as $pService)
                         <div x-data="{ subOpen: false }" class="space-y-2">
@@ -195,10 +179,8 @@
             </div>
         </div>
 
-        <a href="{{ url('/awards-publications') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Awards & Publications</a>
-        <a href="{{ url('/contact-us') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Contact Us</a>
-        <a href="{{ url('/career') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Career</a>
-        <a href="{{ url('/our-blog') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 hover:text-accent">Our Blog</a>
+        <a href="{{ url('/our-blog') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 border-b border-neutral-800 hover:text-accent">Blog</a>
+        <a href="{{ url('/contact-us') }}" @click="mobileMenuOpen = false" class="block text-xs uppercase tracking-widest2 py-2 hover:text-accent">Contact</a>
     </div>
 
 </header>

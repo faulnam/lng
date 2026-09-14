@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('meta_title', \App\Models\SiteSetting::get('site_title', 'Metrix Interior Architecture — Jakarta Interior Design Consultant'))
+@section('meta_title', \App\Models\SiteSetting::get('site_title', 'PT Nusantara LNG Energi — Integrated Liquefied Natural Gas Supply & Cryogenic Logistics'))
 @section('meta_description', \App\Models\SiteSetting::get('meta_description_default'))
 
 @section('content')
@@ -16,15 +16,15 @@
                          x-data="{
                             text: '',
                             phrases: [
-                                '{{ addslashes(\App\Models\PageContent::get('home_hero_title', 'We are an Award-Winning interior design firm')) }}',
-                                'Transforming spaces into timeless architectural narratives.',
-                                'Crafting bespoke luxury hospitality and commercial interiors.',
-                                'Jakarta-based interior architecture studio serving globally.'
+                                '{{ addslashes(\App\Models\PageContent::get('home_hero_title', 'Powering Global Industry with Integrated LNG & Cryogenic Energy Infrastructure')) }}',
+                                'Reliable cryogenic supply chains for domestic utilities and global offtakers.',
+                                'Pioneering virtual pipeline and ISO tank logistics across the archipelago.',
+                                'Integrated clean energy and coastal regasification infrastructure.'
                             ],
                             phraseIndex: 0,
                             charIndex: 0,
                             isDeleting: false,
-                            typeSpeed: 55,
+                            typeSpeed: 50,
                             deleteSpeed: 25,
                             pauseTime: 2200,
                             init() {
@@ -55,12 +55,12 @@
                             }
                          }">
                         <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black leading-tight">
-                            <span x-text="text">{{ \App\Models\PageContent::get('home_hero_title', 'We are an Award-Winning interior design firm') }}</span><span class="inline-block w-[3px] h-7 md:h-10 bg-black ml-1.5 align-middle animate-cursor"></span>
+                            <span x-text="text">{{ \App\Models\PageContent::get('home_hero_title', 'Powering Global Industry with Integrated LNG & Cryogenic Energy Infrastructure') }}</span><span class="inline-block w-[3px] h-7 md:h-10 bg-black ml-1.5 align-middle animate-cursor"></span>
                         </h1>
                     </div>
                     
                     <p class="text-neutral-body text-xs md:text-sm leading-relaxed max-w-2xl">
-                        {{ \App\Models\PageContent::get('home_hero_description', 'Metrix Interior Architecture is a Jakarta-based interior design consultant firm serving globally. Metrix specializes in retail interior design, commercial interior design, restaurant design, bar cafe interior design, hospitality interior architecture, and office interior design projects. Variety of our portfolios can be found in Indonesia, Malaysia, Singapore and United States.') }}
+                        {{ \App\Models\PageContent::get('home_hero_description', 'PT Nusantara LNG Energi is an integrated liquefied natural gas (LNG) infrastructure and energy logistics corporation. We specialize in bulk LNG supply, virtual pipeline ISO tank distribution, coastal regasification terminals, and marine LNG bunkering. Our dependable cryogenic supply chain powers major electric utilities, smelters, and heavy industries across Southeast Asia and global trade corridors.') }}
                     </p>
                 </div>
 
@@ -68,11 +68,11 @@
                 <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-neutral-200 pt-8 lg:pt-0 lg:pl-10">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-10">
                         
-                        <!-- Stat 1: Total Projects -->
+                        <!-- Stat 1: Total LNG Supply Capacity -->
                         @php
-                            $projRaw = \App\Models\SiteSetting::get('total_projects', '3,000+');
-                            $projNum = (int) preg_replace('/[^0-9]/', '', $projRaw) ?: 3000;
-                            $projSuf = preg_replace('/[0-9,]/', '', $projRaw) ?: '+';
+                            $projRaw = \App\Models\SiteSetting::get('total_projects', '5.2 MTPA');
+                            $projNum = (float) preg_replace('/[^0-9.]/', '', $projRaw) ?: 5.2;
+                            $projSuf = preg_replace('/[0-9.,]/', '', $projRaw) ?: ' MTPA';
                         @endphp
                         <div class="space-y-2" 
                              x-data="{
@@ -90,23 +90,23 @@
                                             this.count = this.target;
                                             clearInterval(timer);
                                         } else {
-                                            this.count = Math.floor(cur);
+                                            this.count = Math.round(cur * 10) / 10;
                                         }
                                     }, step);
                                 }
                              }">
                             <div class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black tracking-tight whitespace-nowrap">
-                                <span x-text="count.toLocaleString() + suffix">{{ $projRaw }}</span>
+                                <span x-text="count + suffix">{{ $projRaw }}</span>
                             </div>
                             <div class="eyebrow text-[11px] leading-snug">
-                                Total Projects Across the World
+                                Annual LNG Offtake Capacity
                             </div>
                         </div>
 
-                        <!-- Stat 2: Years Experience -->
+                        <!-- Stat 2: Years Experience & Safety -->
                         @php
-                            $expRaw = \App\Models\SiteSetting::get('years_experience', '20+');
-                            $expNum = (int) preg_replace('/[^0-9]/', '', $expRaw) ?: 20;
+                            $expRaw = \App\Models\SiteSetting::get('years_experience', '18+');
+                            $expNum = (int) preg_replace('/[^0-9]/', '', $expRaw) ?: 18;
                             $expSuf = preg_replace('/[0-9,]/', '', $expRaw) ?: '+';
                         @endphp
                         <div class="space-y-2"
@@ -134,7 +134,7 @@
                                 <span x-text="count.toLocaleString() + suffix">{{ $expRaw }}</span>
                             </div>
                             <div class="eyebrow text-[11px] leading-snug">
-                                Years Working Experience
+                                Years Operational Safety
                             </div>
                         </div>
 
@@ -145,12 +145,12 @@
         </div>
     </section>
 
-    <!-- 2. Hero Slider (Featured Projects Carousel) -->
+    <!-- 2. Hero Slider (Featured LNG Infrastructure Carousel) -->
     <section class="relative">
         @include('partials.hero-slider', ['slides' => $heroSlides])
     </section>
 
-    <!-- 3. Secondary Stats & Portfolio Button -->
+    <!-- 3. Secondary Stats & Products Action -->
     <section class="py-16 md:py-24 bg-white border-b border-neutral-100">
         <div class="max-w-7xl mx-auto px-6 md:px-12">
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
@@ -158,9 +158,9 @@
                 <!-- Secondary Stat Numbers with Animated Counters -->
                 <div class="grid grid-cols-2 gap-12 md:gap-20 text-center md:text-left">
                     @php
-                        $medRaw = \App\Models\SiteSetting::get('media_awards_count', '17+');
-                        $medNum = (int) preg_replace('/[^0-9]/', '', $medRaw) ?: 17;
-                        $medSuf = preg_replace('/[0-9,]/', '', $medRaw) ?: '+';
+                        $medRaw = \App\Models\SiteSetting::get('media_awards_count', '12');
+                        $medNum = (int) preg_replace('/[^0-9]/', '', $medRaw) ?: 12;
+                        $medSuf = preg_replace('/[0-9,]/', '', $medRaw) ?: '';
                     @endphp
                     <div x-data="{
                         count: 0,
@@ -186,14 +186,14 @@
                             <span x-text="count.toLocaleString() + suffix">{{ $medRaw }}</span>
                         </div>
                         <div class="eyebrow mt-2 text-[11px]">
-                            Media Published &amp; Awards
+                            Export Destinations &amp; Terminals
                         </div>
                     </div>
 
                     @php
-                        $cntRaw = \App\Models\SiteSetting::get('countries_served', '5');
-                        $cntNum = (int) preg_replace('/[^0-9]/', '', $cntRaw) ?: 5;
-                        $cntSuf = preg_replace('/[0-9,]/', '', $cntRaw) ?: '';
+                        $cntRaw = \App\Models\SiteSetting::get('countries_served', '40+');
+                        $cntNum = (int) preg_replace('/[^0-9]/', '', $cntRaw) ?: 40;
+                        $cntSuf = preg_replace('/[0-9,]/', '', $cntRaw) ?: '+';
                     @endphp
                     <div x-data="{
                         count: 0,
@@ -219,15 +219,15 @@
                             <span x-text="count.toLocaleString() + suffix">{{ $cntRaw }}</span>
                         </div>
                         <div class="eyebrow mt-2 text-[11px]">
-                            Total Countries Served Around The World
+                            Corporate &amp; Industrial Offtakers
                         </div>
                     </div>
                 </div>
 
-                <!-- View Portfolio Button -->
+                <!-- View Products Button -->
                 <div>
                     <a href="{{ url('/services') }}" class="btn-dark">
-                        View Our Portfolio
+                        Explore Our Products
                     </a>
                 </div>
 
@@ -235,42 +235,42 @@
         </div>
     </section>
 
-    <!-- 4. Recent Projects Section (3x3 Grid) -->
+    <!-- 4. Products / Business Lines Section (3x3 Grid) -->
     <section class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             
             <!-- Section Header -->
             <div class="space-y-3">
                 <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">
-                    {{ \App\Models\PageContent::get('home_recent_projects_eyebrow', 'Recent Projects') }}
+                    {{ \App\Models\PageContent::get('home_recent_projects_eyebrow', 'Products & Business Lines') }}
                 </h2>
                 <p class="text-neutral-body text-xs md:text-sm">
-                    {{ \App\Models\PageContent::get('home_recent_projects_subtitle', 'We are at the forefront of contemporary new trends in interior design.') }}
+                    {{ \App\Models\PageContent::get('home_recent_projects_subtitle', 'Engineered cryogenic solutions and flexible LNG supply agreements designed for utility and industrial offtakers.') }}
                 </p>
             </div>
 
-            <!-- 3x3 Project Grid -->
+            <!-- 3x3 Project / Product Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($recentProjects as $project)
                     @include('partials.project-card', ['project' => $project])
                 @empty
                     <div class="col-span-3 text-center py-12 text-neutral-400 text-sm">
-                        No recent projects available at this moment.
+                        No product lines available at this moment.
                     </div>
                 @endforelse
             </div>
 
-            <!-- Check Our Services Button -->
+            <!-- Check All Products Button -->
             <div class="text-center pt-8">
                 <a href="{{ url('/services') }}" class="btn-dark">
-                    Check Our Services
+                    View All Products &amp; Solutions
                 </a>
             </div>
 
         </div>
     </section>
 
-    <!-- 5. Latest Insights Section (Blog) -->
+    <!-- 5. Latest Insights Section (Energy Blog) -->
     <section class="py-20 md:py-28 bg-neutral-bg border-t border-neutral-200">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             
@@ -278,14 +278,14 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div class="space-y-3">
                     <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">
-                        {{ \App\Models\PageContent::get('home_latest_insights_eyebrow', 'Latest Insights') }}
+                        {{ \App\Models\PageContent::get('home_latest_insights_eyebrow', 'Energy Insights & Market Publications') }}
                     </h2>
                     <p class="text-neutral-body text-xs md:text-sm">
-                        {{ \App\Models\PageContent::get('home_latest_insights_subtitle', 'Stay inspired with our newest articles, project showcases, and design perspectives.') }}
+                        {{ \App\Models\PageContent::get('home_latest_insights_subtitle', 'Stay informed with our global gas market intelligence, regulatory analysis, and decarbonization outlooks.') }}
                     </p>
                 </div>
                 <a href="{{ url('/our-blog') }}" class="eyebrow text-black hover:text-accent font-semibold border-b border-black pb-1 inline-block self-start md:self-auto">
-                    View All Articles &rarr;
+                    View All Publications &rarr;
                 </a>
             </div>
 
@@ -294,7 +294,7 @@
                 @forelse($latestPosts as $post)
                     <article class="group bg-white border border-neutral-200 flex flex-col justify-between overflow-hidden">
                         <a href="{{ url('/our-blog/' . $post->slug) }}" class="block overflow-hidden aspect-[16/10] bg-neutral-900">
-                            <img src="{{ $post->cover_image ? (str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image)) : 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop' }}" 
+                            <img src="{{ $post->cover_image ? (str_starts_with($post->cover_image, 'http') ? $post->cover_image : asset('storage/' . $post->cover_image)) : '/images/lng/carrier.jpg' }}" 
                                  alt="{{ $post->title }}" 
                                  loading="lazy"
                                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -319,7 +319,7 @@
                             </div>
                             <div class="pt-4 border-t border-neutral-100 flex items-center justify-between text-[10px] uppercase tracking-wider text-neutral-400">
                                 <span>{{ $post->published_at ? $post->published_at->format('M d, Y') : $post->created_at->format('M d, Y') }}</span>
-                                <span class="group-hover:text-black font-semibold transition-colors">Read Article &rarr;</span>
+                                <span class="group-hover:text-black font-semibold transition-colors">Read Briefing &rarr;</span>
                             </div>
                         </div>
                     </article>
@@ -333,12 +333,12 @@
         </div>
     </section>
 
-    <!-- 6. Our Clients Section (Smooth Infinite Running Marquee Leftward with Right Fade Mask) -->
+    <!-- 6. Strategic Offtakers & Partners (Marquee Track) -->
     <section class="py-20 md:py-28 bg-white border-t border-neutral-200 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-12">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                    {{ \App\Models\PageContent::get('home_clients_eyebrow', 'Our Clients') }}
+                    {{ \App\Models\PageContent::get('home_clients_eyebrow', 'Strategic Offtakers & Industry Affiliations') }}
                 </h2>
                 <div class="w-12 h-0.5 bg-black mx-auto"></div>
             </div>
@@ -348,32 +348,32 @@
                 @if($clients->count() > 0)
                     <div class="animate-marquee flex items-center gap-8 md:gap-12">
                         
-                        <!-- First Track of Logos -->
+                        <!-- First Track of Logos / Partner Names -->
                         @foreach($clients as $client)
-                            <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-44 md:w-52 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
+                            <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-48 md:w-56 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
                                 @if($client->logo)
                                     <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
                                          alt="{{ $client->name }}" 
-                                         title="{{ $client->name }}"
+                                         title="{{ $client->name }}" 
                                          loading="lazy"
                                          class="max-h-10 max-w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
                                 @else
-                                    <span class="text-xs font-bold tracking-wider text-neutral-600 uppercase group-hover:text-black">{{ $client->name }}</span>
+                                    <span class="text-xs font-bold tracking-wider text-neutral-700 uppercase group-hover:text-black text-center">{{ $client->name }}</span>
                                 @endif
                             </div>
                         @endforeach
 
                         <!-- Duplicate Track of Logos for Seamless Infinite Continuous Loop -->
                         @foreach($clients as $client)
-                            <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-44 md:w-52 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
+                            <div class="flex-shrink-0 flex items-center justify-center p-4 h-20 w-48 md:w-56 border border-neutral-100 hover:border-neutral-400 bg-white transition-all shadow-sm group">
                                 @if($client->logo)
                                     <img src="{{ str_starts_with($client->logo, 'http') ? $client->logo : asset('storage/' . $client->logo) }}" 
                                          alt="{{ $client->name }}" 
-                                         title="{{ $client->name }}"
+                                         title="{{ $client->name }}" 
                                          loading="lazy"
                                          class="max-h-10 max-w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
                                 @else
-                                    <span class="text-xs font-bold tracking-wider text-neutral-600 uppercase group-hover:text-black">{{ $client->name }}</span>
+                                    <span class="text-xs font-bold tracking-wider text-neutral-700 uppercase group-hover:text-black text-center">{{ $client->name }}</span>
                                 @endif
                             </div>
                         @endforeach
@@ -381,30 +381,30 @@
                     </div>
                 @else
                     <div class="text-center py-6 text-neutral-400 text-xs">
-                        Clients will be listed here.
+                        Offtakers and partners will be listed here.
                     </div>
                 @endif
             </div>
 
-            <!-- View All Clients Link -->
+            <!-- View About Us Link -->
             <div class="text-center pt-4">
-                <a href="{{ url('/clients') }}" class="eyebrow text-black hover:text-accent font-semibold border-b border-black pb-1 inline-block">
-                    View Complete Client Roster &rarr;
+                <a href="{{ url('/about-us') }}" class="eyebrow text-black hover:text-accent font-semibold border-b border-black pb-1 inline-block">
+                    Learn More About Our Infrastructure &rarr;
                 </a>
             </div>
 
         </div>
     </section>
 
-    <!-- 7. Client Testimonials Section -->
+    <!-- 7. Partner & Offtaker Testimonials Section -->
     @if(isset($testimonials) && $testimonials->count())
         <section class="py-20 md:py-28 bg-neutral-bg border-t border-neutral-200">
             <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-16">
                 
                 <div class="text-center space-y-3 max-w-2xl mx-auto">
-                    <div class="eyebrow text-accent font-semibold">Client Endorsements</div>
+                    <div class="eyebrow text-accent font-semibold">Institutional Endorsements</div>
                     <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-black">
-                        What Our Partners Say
+                        What Our Offtakers &amp; Partners Say
                     </h2>
                     <div class="w-12 h-0.5 bg-black mx-auto"></div>
                 </div>

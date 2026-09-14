@@ -51,7 +51,7 @@
 
         <!-- Quick Reply Action -->
         <div class="pt-6 border-t border-neutral-800 flex items-center justify-between">
-            <a href="mailto:{{ $message->email }}?subject=Re:%20Interior%20Inquiry%20from%20Metrix%20Interior" class="px-6 py-3 bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest font-bold transition-colors">
+            <a href="mailto:{{ $message->email }}?subject=Re:%20LNG%20Commercial%20Inquiry%20from%20PT%20Nusantara%20LNG%20Energi" class="px-6 py-3 bg-white text-black hover:bg-neutral-200 text-xs uppercase tracking-widest font-bold transition-colors">
                 Reply via Email &rarr;
             </a>
 
