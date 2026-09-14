@@ -57,7 +57,7 @@
                      x-transition:leave-start="opacity-100 translate-y-0"
                      x-transition:leave-end="opacity-0 translate-y-2"
                      x-cloak
-                     class="absolute top-full left-0 mt-0 w-72 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
+                     class="absolute top-full right-0 mt-0 w-80 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
                     
                     @if(isset($navServices) && $navServices->count())
                         @foreach($navServices as $parentService)
@@ -67,12 +67,12 @@
                                      @mouseenter="openSubmenu = '{{ $parentService->slug }}'" 
                                      @mouseleave="openSubmenu = null">
                                     <a href="{{ url('/services/' . $parentService->slug) }}" 
-                                       class="flex items-center justify-between px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50 hover:text-accent transition-colors">
+                                       class="flex items-center justify-between px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50 hover:text-accent transition-colors font-medium">
                                         <span>{{ $parentService->title }}</span>
-                                        <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                        <svg class="w-3 h-3 text-gray-400 transform transition-transform duration-150" :class="openSubmenu === '{{ $parentService->slug }}' ? '-translate-x-1 text-accent' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                                     </a>
 
-                                    <!-- Level 2 Sub-Dropdown (Flyout) -->
+                                    <!-- Level 2 Sub-Dropdown (Flyout to Left to prevent viewport overflow) -->
                                     <div x-show="openSubmenu === '{{ $parentService->slug }}'"
                                          x-transition:enter="transition ease-out duration-150"
                                          x-transition:enter-start="opacity-0 translate-x-1"
@@ -80,10 +80,13 @@
                                          x-transition:leave="transition ease-in duration-100"
                                          x-transition:leave-start="opacity-100 translate-x-0"
                                          x-transition:leave-end="opacity-0 translate-x-1"
-                                         class="absolute top-0 left-full ml-0.5 w-72 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
+                                         class="absolute top-0 right-full mr-1 w-72 bg-white text-black shadow-2xl border border-gray-100 py-3 z-50">
+                                        <div class="px-5 py-1 text-[9px] uppercase tracking-widest text-neutral-400 font-bold border-b border-neutral-100 mb-2">
+                                            {{ $parentService->title }}
+                                        </div>
                                         @foreach($parentService->children as $childService)
                                             <a href="{{ url('/services/' . $parentService->slug . '/' . $childService->slug) }}" 
-                                               class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-700 hover:bg-neutral-50 hover:text-accent transition-colors">
+                                               class="block px-5 py-2 text-[11px] uppercase tracking-wider text-gray-700 hover:bg-neutral-50 hover:text-accent transition-colors">
                                                 {{ $childService->title }}
                                             </a>
                                         @endforeach
@@ -92,7 +95,7 @@
                             @else
                                 <!-- Parent without Children -->
                                 <a href="{{ url('/services/' . $parentService->slug) }}" 
-                                   class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50 hover:text-accent transition-colors">
+                                   class="block px-5 py-2.5 text-[11px] uppercase tracking-wider text-gray-800 hover:bg-neutral-50 hover:text-accent transition-colors font-medium">
                                     {{ $parentService->title }}
                                 </a>
                             @endif
