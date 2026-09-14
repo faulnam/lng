@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- SIG (Semen Indonesia Group) Logo -->
+  <g transform="translate(14, 18)">
+    <!-- Iconic Red SIG Diamond Structure -->
+    <path d="M0,22 L22,0 L44,22 L22,44 Z" fill="#E30613" />
+    <path d="M12,22 L22,12 L32,22 L22,32 Z" fill="#FFFFFF" />
+    <circle cx="22" cy="22" r="4" fill="#E30613" />
+  </g>
+  <text x="75" y="42" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="34" fill="#1F2937" letter-spacing="1">SIG</text>
+  <text x="76" y="58" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="9" fill="#9CA3AF" letter-spacing="2">SEMEN INDONESIA</text>
+</svg>

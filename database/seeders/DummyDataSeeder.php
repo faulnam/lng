@@ -62,14 +62,14 @@ class DummyDataSeeder extends Seeder
 
         // 2. Offtakers & Strategic Partners (Clients)
         $clients = [
-            ['name' => 'PT PLN Indonesia Power', 'logo' => null, 'website_url' => 'https://indonesiapower.co.id', 'order' => 1],
-            ['name' => 'PT Pertamina Gas Negara (PGN)', 'logo' => null, 'website_url' => 'https://pgn.co.id', 'order' => 2],
-            ['name' => 'PT Pupuk Indonesia', 'logo' => null, 'website_url' => 'https://pupuk-indonesia.com', 'order' => 3],
-            ['name' => 'Semen Indonesia Group (SIG)', 'logo' => null, 'website_url' => 'https://sig.id', 'order' => 4],
-            ['name' => 'Marubeni Energy Asia', 'logo' => null, 'website_url' => 'https://marubeni.com', 'order' => 5],
-            ['name' => 'Tokyo Gas Global Services', 'logo' => null, 'website_url' => 'https://tokyo-gas.co.jp', 'order' => 6],
-            ['name' => 'SKK Migas Certified', 'logo' => null, 'website_url' => 'https://skkmigas.go.id', 'order' => 7],
-            ['name' => 'SIGTTO & GIIGNL Member', 'logo' => null, 'website_url' => 'https://sigtto.org', 'order' => 8],
+            ['name' => 'PT PLN Indonesia Power', 'logo' => '/images/logos/pln.svg', 'website_url' => 'https://indonesiapower.co.id', 'order' => 1],
+            ['name' => 'PT Pertamina Gas Negara (PGN)', 'logo' => '/images/logos/pgn.svg', 'website_url' => 'https://pgn.co.id', 'order' => 2],
+            ['name' => 'PT Pupuk Indonesia', 'logo' => '/images/logos/pupuk.svg', 'website_url' => 'https://pupuk-indonesia.com', 'order' => 3],
+            ['name' => 'Semen Indonesia Group (SIG)', 'logo' => '/images/logos/sig.svg', 'website_url' => 'https://sig.id', 'order' => 4],
+            ['name' => 'Marubeni Energy Asia', 'logo' => '/images/logos/marubeni.svg', 'website_url' => 'https://marubeni.com', 'order' => 5],
+            ['name' => 'Tokyo Gas Global Services', 'logo' => '/images/logos/tokyogas.svg', 'website_url' => 'https://tokyo-gas.co.jp', 'order' => 6],
+            ['name' => 'SKK Migas Certified', 'logo' => '/images/logos/skkmigas.svg', 'website_url' => 'https://skkmigas.go.id', 'order' => 7],
+            ['name' => 'SIGTTO & GIIGNL Member', 'logo' => '/images/logos/sigtto.svg', 'website_url' => 'https://sigtto.org', 'order' => 8],
         ];
 
         foreach ($clients as $c) {

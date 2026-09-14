@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Tokyo Gas Global Services Logo -->
+  <g transform="translate(12, 16)">
+    <!-- Tokyo Gas Blue Flame / Sunburst -->
+    <circle cx="24" cy="24" r="22" fill="#0055A5" />
+    <path d="M24,7 L28,18 L39,18 L31,25 L34,36 L24,29 L14,36 L17,25 L9,18 L20,18 Z" fill="#FFFFFF" />
+  </g>
+  <text x="70" y="38" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="22" fill="#0055A5" letter-spacing="1">TOKYO GAS</text>
+  <text x="71" y="55" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="600" font-size="9" fill="#4B5563" letter-spacing="1.5">GLOBAL SERVICES</text>
+</svg>

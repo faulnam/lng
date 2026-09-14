@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- PLN Indonesia Power Logo -->
+  <g transform="translate(10, 10)">
+    <!-- Yellow Rectangle Emblem with Thunder & Waves -->
+    <rect x="0" y="0" width="50" height="60" rx="4" fill="#FFCC00" stroke="#005BAA" stroke-width="2.5"/>
+    <!-- Water / Energy waves -->
+    <path d="M8 44 C15 40 20 48 28 44 C36 40 40 46 44 44" stroke="#005BAA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M8 50 C15 46 20 54 28 50 C36 46 40 52 44 50" stroke="#005BAA" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Lightning Bolt (Red) -->
+    <polygon points="28,6 14,32 26,32 20,54 38,26 26,26" fill="#E31B23" stroke="#B01217" stroke-width="1"/>
+  </g>
+  <!-- Typography -->
+  <text x="75" y="38" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="28" fill="#005BAA" letter-spacing="1">PLN</text>
+  <text x="76" y="56" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="11" fill="#4B5563" letter-spacing="2">INDONESIA POWER</text>
+</svg>

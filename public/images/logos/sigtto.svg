@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- SIGTTO & GIIGNL International Gas Tanker & Terminal Operators -->
+  <g transform="translate(10, 14)">
+    <circle cx="24" cy="24" r="23" stroke="#003366" stroke-width="2.5" fill="#F0F7FF"/>
+    <!-- Gas Tanker / Ship Silhouette & Waves -->
+    <path d="M10,26 L38,26 L34,34 L14,34 Z" fill="#003366" />
+    <circle cx="20" cy="22" r="4" fill="#0080FF" />
+    <circle cx="28" cy="22" r="4" fill="#0080FF" />
+    <path d="M6,38 C14,35 18,41 26,38 C34,35 38,40 42,38" stroke="#0080FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+  <text x="68" y="36" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="20" fill="#003366" letter-spacing="1">SIGTTO &amp; GIIGNL</text>
+  <text x="69" y="52" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="600" font-size="8.5" fill="#4B5563" letter-spacing="1">GAS TANKER &amp; TERMINALS</text>
+</svg>

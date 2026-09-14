@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Marubeni Corporation Logo -->
+  <g transform="translate(10, 16)">
+    <!-- Red Japanese Hexagon / Circle Emblem -->
+    <circle cx="24" cy="24" r="23" fill="#E60012" />
+    <path d="M12,24 L19,13 L24,20 L29,13 L36,24 L30,35 L24,28 L18,35 Z" fill="#FFFFFF" />
+  </g>
+  <text x="70" y="44" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="25" fill="#E60012" letter-spacing="0.5">Marubeni</text>
+  <text x="71" y="58" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="600" font-size="9" fill="#4B5563" letter-spacing="2">ENERGY ASIA</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- SKK Migas Official Style Logo -->
+  <g transform="translate(10, 14)">
+    <!-- Shield / Oil Derrick Ribbon -->
+    <path d="M0,0 L16,0 C30,0 36,12 36,24 C36,36 30,48 16,48 L0,48 Z" fill="#E31B23" />
+    <path d="M12,10 L18,10 C24,10 26,16 26,24 C26,32 24,38 18,38 L12,38 Z" fill="#FFFFFF" />
+    <path d="M28,8 L48,8 L48,42 L28,42 Z" fill="#003366" />
+    <polygon points="34,16 42,16 42,34 34,34" fill="#FFCC00" />
+  </g>
+  <text x="72" y="38" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="900" font-size="22" fill="#E31B23" letter-spacing="1">SKK <tspan fill="#003366">MIGAS</tspan></text>
+  <text x="73" y="55" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="9" fill="#4B5563" letter-spacing="1.5">REPUBLIC OF INDONESIA</text>
+</svg>

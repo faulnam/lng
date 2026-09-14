@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Pupuk Indonesia Holding Company Logo -->
+  <g transform="translate(12, 16)">
+    <!-- Shield / Sprout emblem -->
+    <path d="M24,0 C38,0 48,10 48,24 C48,38 32,46 24,50 C16,46 0,38 0,24 C0,10 10,0 24,0 Z" fill="#008852" />
+    <path d="M24,8 C24,28 36,36 36,36 C36,36 26,38 20,28 C16,20 18,12 24,8 Z" fill="#FFC72C" />
+    <circle cx="24" cy="22" r="4" fill="#FFFFFF"/>
+  </g>
+  <text x="74" y="38" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="20" fill="#005830" letter-spacing="0.5">PUPUK INDONESIA</text>
+  <text x="75" y="55" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-weight="600" font-size="9.5" fill="#6B7280" letter-spacing="1.5">HOLDING COMPANY</text>
+</svg>
