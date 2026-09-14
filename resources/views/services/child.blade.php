@@ -13,12 +13,12 @@
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/45 to-black/85"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-4">
-            <div class="eyebrow-light flex items-center justify-center gap-2">
+            <div class="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider md:tracking-widest2 text-gray-300 font-medium flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 leading-relaxed">
                 <a href="{{ url('/services') }}" class="hover:underline">Products &amp; Solutions</a>
                 <span>&bull;</span>
                 <a href="{{ url('/services/' . $parent->slug) }}" class="hover:underline">{{ $parent->title }}</a>
                 <span>&bull;</span>
-                <span>{{ $child->title }}</span>
+                <span class="text-white">{{ $child->title }}</span>
             </div>
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight uppercase">
                 {{ $child->title }}

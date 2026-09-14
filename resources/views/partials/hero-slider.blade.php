@@ -17,13 +17,13 @@
                     <!-- Slide Content -->
                     <div class="relative z-10 max-w-5xl mx-auto px-6 md:px-12 text-center space-y-6 pt-16">
                         @if($slide->subtitle)
-                            <div class="eyebrow-light tracking-widest3 animate-fade-in">
+                            <div class="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider md:tracking-widest3 text-gray-300 font-medium animate-fade-in max-w-2xl mx-auto leading-relaxed">
                                 {{ $slide->subtitle }}
                             </div>
                         @endif
 
                         @if($slide->title)
-                            <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight uppercase">
+                            <h2 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight uppercase">
                                 {{ $slide->title }}
                             </h2>
                         @endif

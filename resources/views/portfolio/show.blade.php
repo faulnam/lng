@@ -14,9 +14,10 @@
 
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center space-y-4">
             @if($project->service)
-                <div class="eyebrow-light">
+                <div class="text-[9px] sm:text-[10px] md:text-xs uppercase tracking-wider md:tracking-widest2 text-gray-300 font-medium flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 leading-relaxed">
                     @if($project->service->parent)
-                        <a href="{{ url('/services/' . $project->service->parent->slug) }}" class="hover:underline">{{ $project->service->parent->title }}</a> &bull;
+                        <a href="{{ url('/services/' . $project->service->parent->slug) }}" class="hover:underline">{{ $project->service->parent->title }}</a>
+                        <span>&bull;</span>
                     @endif
                     <a href="{{ url('/portfolio-cat/' . $project->service->slug) }}" class="hover:underline">{{ $project->service->title }}</a>
                 </div>
